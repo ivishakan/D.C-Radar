@@ -394,6 +394,7 @@ export default function SidePanel({
                         0,
                         LEGISLATION_PREVIEW,
                       )}
+                      stateCode={entity.level === "federal" ? "US" : undefined}
                     />
                     <ShowAllLink
                       total={entity.legislation.length}

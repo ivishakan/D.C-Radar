@@ -48,7 +48,10 @@ export default async function LegislationPage({
         </div>
 
         {total > 0 ? (
-          <LegislationList legislation={entity.legislation} />
+          <LegislationList
+            legislation={entity.legislation}
+            stateCode={entity.level === "federal" ? "US" : undefined}
+          />
         ) : (
           <p className="text-sm text-muted">
             No legislation on file for {entity.name}.

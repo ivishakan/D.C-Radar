@@ -14,6 +14,7 @@ import {
 import { ENTITIES } from "@/lib/placeholder-data";
 import { DIMENSION_TAGS } from "@/lib/dimensions";
 import BillTimeline from "@/components/ui/BillTimeline";
+import BillExpanded from "@/components/panel/BillExpanded";
 
 interface LegislationTableProps {
   dimension: Dimension;
@@ -165,6 +166,7 @@ export default function LegislationTable({
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("recent");
   const [expanded, setExpanded] = useState(false);
+  const [openRowId, setOpenRowId] = useState<string | null>(null);
 
   const allRows = useMemo(() => buildRows(), []);
 
@@ -435,68 +437,80 @@ export default function LegislationTable({
         <>
           <div className="flex flex-col gap-3">
             {visible.map(({ bill, entity, target }) => {
-              const href = bill.legiscanUrl ?? bill.sourceUrl;
+              const rowId = `${entity.id}-${bill.id}`;
+              const isOpen = openRowId === rowId;
+              const stateCode =
+                entity.level === "federal" && entity.geoId === "840"
+                  ? "US"
+                  : undefined;
               return (
-              <div
-                key={`${entity.id}-${bill.id}`}
-                role="button"
-                tabIndex={0}
-                onClick={() => onNavigateToEntity(target)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    onNavigateToEntity(target);
-                  }
-                }}
-                className="cursor-pointer w-full text-left bg-bg/60 hover:bg-bg rounded-2xl p-5 transition-colors"
-              >
-                <div className="flex items-baseline gap-3">
-                  {href ? (
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="text-xs text-muted hover:text-ink underline underline-offset-2 decoration-transparent hover:decoration-current transition-colors"
+                <div
+                  key={rowId}
+                  className="bg-bg/60 hover:bg-bg rounded-2xl p-5 transition-colors"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setOpenRowId(isOpen ? null : rowId)}
+                      className="flex-1 min-w-0 text-left"
                     >
-                      {bill.billCode} ↗
-                    </a>
-                  ) : (
-                    <span className="text-xs text-muted">{bill.billCode}</span>
-                  )}
-                  <span className="text-xs text-muted ml-auto">
-                    {entity.name}
-                  </span>
-                </div>
-                <div className="text-sm font-medium text-ink tracking-tight mt-1">
-                  {bill.title}
-                </div>
-                {bill.impactTags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 mt-2">
-                    {bill.impactTags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-[11px] bg-black/[.04] text-muted px-2 py-0.5 rounded-full"
-                      >
-                        {IMPACT_TAG_LABEL[tag]}
-                      </span>
-                    ))}
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-xs text-muted">
+                          {bill.billCode}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onNavigateToEntity(target);
+                          }}
+                          className="text-xs text-muted hover:text-ink ml-auto"
+                        >
+                          {entity.name} →
+                        </button>
+                      </div>
+                      <div className="text-sm font-medium text-ink tracking-tight mt-1">
+                        {bill.title}
+                      </div>
+                      <p className="text-xs text-muted mt-1.5 leading-relaxed line-clamp-2">
+                        {bill.summary}
+                      </p>
+                      <BillTimeline stage={bill.stage} />
+                    </button>
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 12 12"
+                      fill="none"
+                      className={`flex-shrink-0 mt-1 text-muted transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                      aria-hidden
+                    >
+                      <path
+                        d="M3 4.5l3 3 3-3"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </div>
-                )}
-                <BillTimeline stage={bill.stage} />
-                <div className="text-[11px] text-muted mt-2 flex items-center gap-3">
-                  {bill.partyOrigin && (
-                    <span>
-                      {bill.partyOrigin === "B"
-                        ? "Bipartisan"
-                        : bill.partyOrigin === "D"
-                          ? "Democrat"
-                          : "Republican"}
-                    </span>
-                  )}
-                  <span>Updated {bill.updatedDate}</span>
+
+                  {/* Smooth expand */}
+                  <div
+                    className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]"
+                    style={{
+                      gridTemplateRows: isOpen ? "1fr" : "0fr",
+                    }}
+                  >
+                    <div className="overflow-hidden">
+                      {isOpen && (
+                        <BillExpanded bill={bill} stateCode={stateCode} />
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
               );
             })}
           </div>

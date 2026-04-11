@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { ENTITIES } from "@/lib/placeholder-data";
-import type { Entity, StanceType } from "@/types";
+import { STANCE_LABEL, type Entity, type StanceType } from "@/types";
 
 interface Bucket {
   key: StanceType;
@@ -14,31 +14,31 @@ interface Bucket {
 const BUCKETS: Bucket[] = [
   {
     key: "restrictive",
-    label: "Active Bans / Moratoriums",
+    label: STANCE_LABEL.restrictive,
     color: "var(--color-stance-restrictive)",
     textColor: "#1D1D1F",
   },
   {
     key: "concerning",
-    label: "Legislation Advancing",
+    label: STANCE_LABEL.concerning,
     color: "var(--color-stance-concerning)",
     textColor: "#1D1D1F",
   },
   {
     key: "review",
-    label: "Under Discussion",
+    label: STANCE_LABEL.review,
     color: "var(--color-stance-review)",
     textColor: "#1D1D1F",
   },
   {
     key: "none",
-    label: "No Action",
+    label: STANCE_LABEL.none,
     color: "var(--color-stance-none)",
     textColor: "#1D1D1F",
   },
   {
     key: "favorable",
-    label: "Favorable / Incentives",
+    label: STANCE_LABEL.favorable,
     color: "var(--color-stance-favorable)",
     textColor: "#1D1D1F",
   },

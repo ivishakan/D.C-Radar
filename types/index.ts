@@ -24,6 +24,19 @@ export type StanceType =
   | "concerning"
   | "none";
 
+/**
+ * Single label map used for both US states and countries. Replaces the
+ * older Restricting / Cautionary / Under Review / No Activity / Encouraging
+ * system — those were vague and didn't work equally for both contexts.
+ */
+export const STANCE_LABEL: Record<StanceType, string> = {
+  restrictive: "Active Restrictions",
+  concerning: "Legislative Process",
+  review: "Under Discussion",
+  none: "No Action",
+  favorable: "Innovation-Friendly",
+};
+
 export type GovLevel = "federal" | "state" | "bloc";
 
 export type ImpactTag =

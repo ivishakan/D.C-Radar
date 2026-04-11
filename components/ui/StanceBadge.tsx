@@ -1,17 +1,9 @@
-import type { StanceType } from "@/types";
+import { STANCE_LABEL, type StanceType } from "@/types";
 
 interface StanceBadgeProps {
   stance: StanceType;
   size?: "sm" | "md";
 }
-
-const LABELS: Record<StanceType, string> = {
-  restrictive: "Restricting",
-  concerning: "Cautionary",
-  review: "Under Review",
-  none: "No Activity",
-  favorable: "Encouraging",
-};
 
 const DOT_COLOR: Record<StanceType, string> = {
   restrictive: "var(--color-stance-restrictive)",
@@ -30,7 +22,7 @@ export default function StanceBadge({ stance, size = "md" }: StanceBadgeProps) {
         className={`${dot} rounded-full`}
         style={{ backgroundColor: DOT_COLOR[stance] }}
       />
-      <span>{LABELS[stance]}</span>
+      <span>{STANCE_LABEL[stance]}</span>
     </span>
   );
 }
