@@ -14,13 +14,24 @@ import {
   NEUTRAL_STROKE,
   type SetTooltip,
 } from "@/lib/map-utils";
-import type { Dimension } from "@/types";
+import { EU_FACILITIES } from "@/lib/datacenters";
+import type { DataCenter, Dimension } from "@/types";
+import DataCenterDots from "./DataCenterDots";
 
 interface EuropeMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
+  showDataCenters?: boolean;
+  onHoverFacility?: (
+    dc: DataCenter,
+    x: number,
+    y: number,
+    clusterSize: number,
+  ) => void;
+  onLeaveFacility?: () => void;
+  onSelectFacility?: (dc: DataCenter) => void;
 }
 
 const euProj = euProjection as unknown as ProjectionFunction;
@@ -48,6 +59,10 @@ export default function EuropeMap({
   selectedGeoId,
   setTooltip,
   dimension = "overall",
+  showDataCenters = false,
+  onHoverFacility,
+  onLeaveFacility,
+  onSelectFacility,
 }: EuropeMapProps) {
   return (
     <div
@@ -138,6 +153,14 @@ export default function EuropeMap({
               })
           }
         </Geographies>
+        {showDataCenters && onHoverFacility && onLeaveFacility && (
+          <DataCenterDots
+            facilities={EU_FACILITIES}
+            onHoverFacility={onHoverFacility}
+            onLeaveFacility={onLeaveFacility}
+            onSelectFacility={onSelectFacility}
+          />
+        )}
       </ComposableMap>
     </div>
   );

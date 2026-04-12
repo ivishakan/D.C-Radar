@@ -15,7 +15,7 @@ import {
   type SetTooltip,
 } from "@/lib/map-utils";
 import { US_FACILITIES } from "@/lib/datacenters";
-import type { Dimension } from "@/types";
+import type { DataCenter, Dimension } from "@/types";
 import DataCenterDots from "./DataCenterDots";
 
 interface USStatesMapProps {
@@ -25,6 +25,14 @@ interface USStatesMapProps {
   setTooltip: SetTooltip;
   dimension?: Dimension;
   showDataCenters?: boolean;
+  onHoverFacility?: (
+    dc: DataCenter,
+    x: number,
+    y: number,
+    clusterSize: number,
+  ) => void;
+  onLeaveFacility?: () => void;
+  onSelectFacility?: (dc: DataCenter) => void;
 }
 
 const usProj = usProjection as unknown as ProjectionFunction;
@@ -47,6 +55,9 @@ export default function USStatesMap({
   setTooltip,
   dimension = "overall",
   showDataCenters = false,
+  onHoverFacility,
+  onLeaveFacility,
+  onSelectFacility,
 }: USStatesMapProps) {
   return (
     <div
@@ -136,10 +147,13 @@ export default function USStatesMap({
               );
             })}
         </Geographies>
-        {showDataCenters && (
+        {showDataCenters && onHoverFacility && onLeaveFacility && (
           <DataCenterDots
             facilities={US_FACILITIES}
-            setTooltip={setTooltip}
+            onHoverFacility={onHoverFacility}
+            onLeaveFacility={onLeaveFacility}
+            onSelectFacility={onSelectFacility}
+            clusterDeg={0.55}
           />
         )}
       </ComposableMap>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import {
   AI_DIMENSIONS,
   DATACENTER_DIMENSIONS,
@@ -13,6 +13,8 @@ import { DIMENSION_COLOR, DIMENSION_TEXT } from "@/lib/dimensions";
 interface DimensionToggleProps {
   dimension: Dimension;
   onChange: (d: Dimension) => void;
+  lens: DimensionLens;
+  onLensChange: (l: DimensionLens) => void;
 }
 
 const LENS_LABEL: Record<DimensionLens, string> = {
@@ -20,27 +22,57 @@ const LENS_LABEL: Record<DimensionLens, string> = {
   ai: "AI Regulation",
 };
 
-function inferLens(d: Dimension): DimensionLens {
-  if (AI_DIMENSIONS.includes(d)) return "ai";
-  return "datacenter";
-}
+const LENS_BLURB: Record<DimensionLens, string> = {
+  datacenter:
+    "Where data center builds face opposition, setbacks, or energy constraints — and where governments roll out the welcome mat.",
+  ai: "How governments are scoping, restricting, or encouraging AI development across governance, consumer protection, and public services.",
+};
+
+// One-liner shown under the active dimension chip explaining what the map
+// coloring measures.
+const DIMENSION_BLURB: Record<Dimension, string> = {
+  overall:
+    "Each jurisdiction's net stance across all bills we're tracking — darker red is more restrictive, green is more permissive.",
+  // Data center lens
+  environmental:
+    "Weighted by bills touching water use, carbon emissions, environmental review, and protected land.",
+  energy:
+    "Weighted by bills addressing grid capacity, energy rates, and interconnection queuing for hyperscale facilities.",
+  community:
+    "Weighted by bills on noise, residential setbacks, local zoning, and community impact.",
+  "land-use":
+    "Weighted by bills on siting restrictions, protected land, and local government authority over data center approvals.",
+  // AI regulation lens
+  "ai-governance-dim":
+    "Weighted by bills on algorithmic transparency, AI safety, and general-purpose AI oversight.",
+  "ai-consumer":
+    "Weighted by bills on consumer data privacy, automated decision-making, and deepfake regulation.",
+  "ai-workforce":
+    "Weighted by bills on AI in hiring, employment decisions, workforce displacement, and gig work.",
+  "ai-public":
+    "Weighted by bills on AI in healthcare, education, criminal justice, and other public services.",
+  "ai-synthetic":
+    "Weighted by bills on synthetic media, deepfakes, election integrity, and child safety.",
+};
 
 export default function DimensionToggle({
   dimension,
   onChange,
+  lens,
+  onLensChange,
 }: DimensionToggleProps) {
-  // Lens is local — it decides which dimension chips to show. When the user
-  // switches lens, if the current dimension is not in the new lens, we
-  // reset to "overall" (which is valid under either lens).
-  const [lens, setLens] = useState<DimensionLens>(() => inferLens(dimension));
-
+  // Lens is now controlled by the page — the same state drives which
+  // dimension chips are shown here AND whether data-center dots render
+  // on the map. When the user switches lens, if the current dimension
+  // isn't valid for the new lens, we reset to "overall".
   const lensDimensions = useMemo<Dimension[]>(() => {
     return lens === "datacenter" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS;
   }, [lens]);
 
   const handleLensChange = (next: DimensionLens) => {
-    setLens(next);
-    const valid: Dimension[] = next === "datacenter" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS;
+    onLensChange(next);
+    const valid: Dimension[] =
+      next === "datacenter" ? DATACENTER_DIMENSIONS : AI_DIMENSIONS;
     if (dimension !== "overall" && !valid.includes(dimension)) {
       onChange("overall");
     }
@@ -52,7 +84,7 @@ export default function DimensionToggle({
       <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
         Lens
       </div>
-      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04] mb-5">
+      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04] mb-2">
         {(Object.keys(LENS_LABEL) as DimensionLens[]).map((l) => {
           const active = l === lens;
           return (
@@ -71,6 +103,9 @@ export default function DimensionToggle({
           );
         })}
       </div>
+      <p className="text-xs text-muted leading-relaxed max-w-prose mb-6">
+        {LENS_BLURB[lens]}
+      </p>
 
       {/* Dimension chips — Overall + current lens */}
       <div className="text-[13px] font-medium text-muted tracking-tight mb-3">
@@ -111,6 +146,20 @@ export default function DimensionToggle({
             </button>
           );
         })}
+      </div>
+
+      {/* Explainer for the active dimension — reserve enough vertical space
+          so the layout doesn't jump when the blurb length changes. */}
+      <div className="mt-4 min-h-[2.75rem]">
+        <p
+          key={dimension}
+          className="text-xs text-muted leading-relaxed max-w-prose"
+        >
+          <span className="font-medium text-ink tracking-tight">
+            {DIMENSION_LABEL[dimension]}.
+          </span>{" "}
+          {DIMENSION_BLURB[dimension]}
+        </p>
       </div>
     </div>
   );

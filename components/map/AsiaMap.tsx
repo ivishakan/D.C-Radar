@@ -14,13 +14,24 @@ import {
   NEUTRAL_STROKE,
   type SetTooltip,
 } from "@/lib/map-utils";
-import type { Dimension } from "@/types";
+import { ASIA_FACILITIES } from "@/lib/datacenters";
+import type { DataCenter, Dimension } from "@/types";
+import DataCenterDots from "./DataCenterDots";
 
 interface AsiaMapProps {
   onSelectEntity: (geoId: string) => void;
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
+  showDataCenters?: boolean;
+  onHoverFacility?: (
+    dc: DataCenter,
+    x: number,
+    y: number,
+    clusterSize: number,
+  ) => void;
+  onLeaveFacility?: () => void;
+  onSelectFacility?: (dc: DataCenter) => void;
 }
 
 const asiaProj = asiaProjection as unknown as ProjectionFunction;
@@ -28,11 +39,15 @@ const asiaProj = asiaProjection as unknown as ProjectionFunction;
 const WORLD_URL =
   "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
+// Asia + Oceania country ISO numeric codes. Includes Australia (36),
+// New Zealand (554), and Papua New Guinea (598) so the Pacific edge is
+// visible alongside East and Southeast Asia.
 const ASIA_CODES = new Set<number>([
-  4, 31, 50, 51, 64, 96, 104, 116, 144, 156, 158, 196, 268, 275, 296, 344, 356,
-  360, 364, 368, 376, 392, 398, 400, 408, 410, 414, 417, 418, 422, 446, 458,
-  462, 469, 496, 512, 524, 586, 608, 626, 634, 643, 682, 686, 702, 704, 706,
-  716, 760, 762, 764, 784, 792, 795, 860, 887,
+  4, 31, 36, 50, 51, 64, 96, 104, 116, 144, 156, 158, 196, 242, 268, 275, 296,
+  344, 356, 360, 364, 368, 376, 392, 398, 400, 408, 410, 414, 417, 418, 422,
+  446, 458, 462, 469, 496, 512, 524, 540, 548, 554, 586, 598, 608, 626, 634,
+  643, 682, 686, 702, 704, 706, 716, 760, 762, 764, 776, 784, 792, 795, 860,
+  882, 887,
 ]);
 
 const BLOB_STYLE = {
@@ -48,6 +63,10 @@ export default function AsiaMap({
   selectedGeoId,
   setTooltip,
   dimension = "overall",
+  showDataCenters = false,
+  onHoverFacility,
+  onLeaveFacility,
+  onSelectFacility,
 }: AsiaMapProps) {
   return (
     <div
@@ -138,6 +157,14 @@ export default function AsiaMap({
               })
           }
         </Geographies>
+        {showDataCenters && onHoverFacility && onLeaveFacility && (
+          <DataCenterDots
+            facilities={ASIA_FACILITIES}
+            onHoverFacility={onHoverFacility}
+            onLeaveFacility={onLeaveFacility}
+            onSelectFacility={onSelectFacility}
+          />
+        )}
       </ComposableMap>
     </div>
   );

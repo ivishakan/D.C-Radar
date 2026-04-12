@@ -1,81 +1,223 @@
 "use client";
 
+import { useMemo } from "react";
 import { Marker } from "react-simple-maps";
 import type { DataCenter, DataCenterStatus } from "@/types";
-import type { SetTooltip } from "@/lib/map-utils";
 
 interface DataCenterDotsProps {
   facilities: DataCenter[];
-  setTooltip: SetTooltip;
+  /** Called on mouse enter/move with the hovered facility (or cluster
+   *  representative) and screen coords. */
+  onHoverFacility: (
+    dc: DataCenter,
+    x: number,
+    y: number,
+    clusterSize: number,
+  ) => void;
+  onLeaveFacility: () => void;
+  /** Called on click — pins the facility in the side panel. */
+  onSelectFacility?: (dc: DataCenter) => void;
+  /** Lng/lat cell size for grid clustering. Default 1.2° ≈ 100 km. */
+  clusterDeg?: number;
 }
 
-function dotRadius(mw: number | undefined): number {
-  return Math.max(2, Math.sqrt(mw ?? 50) * 0.4);
+interface Cluster {
+  key: string;
+  facilities: DataCenter[];
+  repr: DataCenter;
+  lat: number;
+  lng: number;
+  totalMW: number;
+  dominantStatus: DataCenterStatus | "mixed";
 }
 
-function dotOpacity(status: DataCenterStatus): number {
-  if (status === "operational") return 0.6;
-  if (status === "under-construction") return 0.7;
-  return 0.45;
+// SF-style palette. Chosen to stand out against the stance choropleth
+// (which is warm reds / amber / mint green).
+export const DC_COLOR = {
+  operational: "#0A84FF", // systemBlue
+  "under-construction": "#FF9500", // systemOrange
+  proposed: "#5856D6", // systemIndigo
+  mixed: "#0A84FF",
+} as const;
+
+export type DcDotStatus = DataCenterStatus | "mixed";
+
+interface DcDotProps {
+  /** When omitted, the parent must wrap this in a <Marker> that
+   *  positions it. When present, renders at explicit screen coords. */
+  x?: number;
+  y?: number;
+  r: number;
+  status: DcDotStatus;
+  /** Cluster count: shows the number when > 1. */
+  count?: number;
+  onMouseEnter: (e: React.MouseEvent) => void;
+  onMouseMove: (e: React.MouseEvent) => void;
+  onMouseLeave: () => void;
+  onClick?: () => void;
+  interactive?: boolean;
 }
 
-function formatMW(mw: number | undefined): string {
-  if (!mw) return "unknown MW";
-  if (mw >= 1000) return `${(mw / 1000).toFixed(1)} GW`;
-  return `${Math.round(mw)} MW`;
+/**
+ * Single source of truth for the data-center dot visual: halo, body
+ * circle, and optional cluster number. Used by both the projected
+ * (countries / states) and the locally-projected (county) renderings
+ * so the dots look identical at every drill level.
+ */
+export function DcDot({
+  x,
+  y,
+  r,
+  status,
+  count = 1,
+  onMouseEnter,
+  onMouseMove,
+  onMouseLeave,
+  onClick,
+  interactive = true,
+}: DcDotProps) {
+  const color = DC_COLOR[status];
+  const isProposed = status === "proposed";
+  const isCluster = count > 1;
+  const positioned = typeof x === "number" && typeof y === "number";
+  const haloProps = positioned ? { cx: x, cy: y } : {};
+  const bodyProps = positioned ? { cx: x, cy: y } : {};
+  const textProps = positioned ? { x, y } : {};
+
+  return (
+    <>
+      <circle
+        {...haloProps}
+        r={r + 2.2}
+        fill={color}
+        opacity={0.18}
+        style={{ pointerEvents: "none" }}
+      />
+      <circle
+        {...bodyProps}
+        r={r}
+        fill={isProposed ? "#FFFFFF" : color}
+        stroke={isProposed ? color : "#FFFFFF"}
+        strokeWidth={isProposed ? 1.6 : 1.1}
+        style={{
+          cursor: interactive && onClick ? "pointer" : "default",
+          pointerEvents: "all",
+          transition: "r 140ms ease",
+        }}
+        onMouseEnter={onMouseEnter}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
+      />
+      {isCluster && (
+        <text
+          {...textProps}
+          textAnchor="middle"
+          dominantBaseline="central"
+          style={{
+            fontSize: "8px",
+            fontWeight: 600,
+            fontFamily:
+              "-apple-system, 'SF Pro Text', system-ui, sans-serif",
+            fill: isProposed ? color : "#FFFFFF",
+            pointerEvents: "none",
+            letterSpacing: "-0.02em",
+            transform: "translateY(-0.1px)",
+          }}
+        >
+          {count}
+        </text>
+      )}
+    </>
+  );
 }
 
-function shortLocation(location: string): string {
-  return location.split(",")[0]?.trim() || location;
-}
-
-function tooltipLabel(dc: DataCenter): string {
-  const parts = [
-    `${dc.operator} — ${shortLocation(dc.location)}`,
-    `${formatMW(dc.capacityMW)} · ${dc.status}`,
-  ];
-  if (dc.primaryUser && dc.primaryUser !== dc.operator) {
-    parts.push(`Used by ${dc.primaryUser.replace(/\s*#\w+/g, "").trim()}`);
+function clusterFacilities(facs: DataCenter[], cellDeg: number): Cluster[] {
+  const buckets = new Map<string, DataCenter[]>();
+  for (const f of facs) {
+    const key = `${Math.round(f.lat / cellDeg)}|${Math.round(f.lng / cellDeg)}`;
+    const bucket = buckets.get(key) ?? [];
+    bucket.push(f);
+    buckets.set(key, bucket);
   }
-  return parts.join(" · ");
+  const clusters: Cluster[] = [];
+  for (const [key, bucket] of buckets) {
+    let totalMW = 0;
+    let sumLat = 0;
+    let sumLng = 0;
+    let repr = bucket[0];
+    for (const f of bucket) {
+      const mw = f.capacityMW ?? 0;
+      totalMW += mw;
+      sumLat += f.lat;
+      sumLng += f.lng;
+      if ((f.capacityMW ?? 0) > (repr.capacityMW ?? 0)) repr = f;
+    }
+    const statuses = new Set(bucket.map((f) => f.status));
+    clusters.push({
+      key,
+      facilities: bucket,
+      repr,
+      lat: sumLat / bucket.length,
+      lng: sumLng / bucket.length,
+      totalMW,
+      dominantStatus: statuses.size === 1 ? bucket[0].status : "mixed",
+    });
+  }
+  // Biggest first so small dots render on top and aren't hidden.
+  clusters.sort((a, b) => b.totalMW - a.totalMW);
+  return clusters;
+}
+
+function clusterRadius(totalMW: number, count: number): number {
+  const base = Math.max(3.2, Math.log10((totalMW || 30) + 1) * 2.4);
+  const countBoost = count > 1 ? Math.min(2.4, Math.log2(count) * 0.7) : 0;
+  return Math.min(9, base + countBoost);
 }
 
 export default function DataCenterDots({
   facilities,
-  setTooltip,
+  onHoverFacility,
+  onLeaveFacility,
+  onSelectFacility,
+  clusterDeg = 1.2,
 }: DataCenterDotsProps) {
+  const clusters = useMemo(
+    () => clusterFacilities(facilities, clusterDeg),
+    [facilities, clusterDeg],
+  );
+
   return (
     <g>
-      {facilities.map((dc) => {
-        const r = dotRadius(dc.capacityMW);
-        const isProposed = dc.status === "proposed";
+      {clusters.map((c) => {
+        const r = clusterRadius(c.totalMW, c.facilities.length);
         return (
-          <Marker key={dc.id} coordinates={[dc.lng, dc.lat]}>
-            <circle
+          <Marker key={c.key} coordinates={[c.lng, c.lat]}>
+            <DcDot
               r={r}
-              fill={isProposed ? "none" : "#1D1D1F"}
-              stroke="#1D1D1F"
-              strokeWidth={isProposed ? 1.25 : 0.5}
-              style={{
-                opacity: dotOpacity(dc.status),
-                cursor: "pointer",
-                pointerEvents: "all",
-              }}
+              status={c.dominantStatus}
+              count={c.facilities.length}
               onMouseEnter={(e) =>
-                setTooltip({
-                  x: e.clientX,
-                  y: e.clientY,
-                  label: tooltipLabel(dc),
-                })
+                onHoverFacility(
+                  c.repr,
+                  e.clientX,
+                  e.clientY,
+                  c.facilities.length,
+                )
               }
               onMouseMove={(e) =>
-                setTooltip({
-                  x: e.clientX,
-                  y: e.clientY,
-                  label: tooltipLabel(dc),
-                })
+                onHoverFacility(
+                  c.repr,
+                  e.clientX,
+                  e.clientY,
+                  c.facilities.length,
+                )
               }
-              onMouseLeave={() => setTooltip(null)}
+              onMouseLeave={() => onLeaveFacility()}
+              onClick={
+                onSelectFacility ? () => onSelectFacility(c.repr) : undefined
+              }
+              interactive={!!onSelectFacility}
             />
           </Marker>
         );
