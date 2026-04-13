@@ -12,7 +12,15 @@ import {
 } from "@/lib/municipal-data";
 import { STATE_FIPS, type DataCenter, type MunicipalActionStatus } from "@/types";
 import { US_FACILITIES } from "@/lib/datacenters";
-import { DcDot } from "./DataCenterDots";
+import { DcDot, SIZE_BANDS } from "./DataCenterDots";
+
+function bandRadius(mw: number | undefined): number {
+  const v = mw ?? 0;
+  for (const b of SIZE_BANDS) {
+    if (v < b.max) return b.r;
+  }
+  return SIZE_BANDS[SIZE_BANDS.length - 1].r;
+}
 
 interface CountyMapProps {
   stateName: string;
@@ -414,10 +422,7 @@ function DataCenterDotsZoomed({
   return (
     <g>
       {points.map(({ dc, x, y }) => {
-        const r = Math.min(
-          9,
-          Math.max(3.2, Math.log10((dc.capacityMW ?? 30) + 1) * 2.4),
-        );
+        const r = bandRadius(dc.capacityMW);
         return (
           <g key={dc.id}>
             <DcDot

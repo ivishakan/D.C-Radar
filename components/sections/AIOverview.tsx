@@ -3,20 +3,19 @@
 import { useMemo, useState, Fragment } from "react";
 import newsSummaries from "@/data/news/summaries.json";
 
-type RegionKey = "all" | "na" | "eu" | "asia";
+type RegionKey = "na" | "eu" | "asia";
 
-const REGION_LABEL: Record<Exclude<RegionKey, "all">, string> = {
+const REGION_LABEL: Record<RegionKey, string> = {
   na: "North America",
   eu: "Europe",
   asia: "Asia-Pacific",
 };
 
-const TAB_ORDER: RegionKey[] = ["all", "na", "eu", "asia"];
+const TAB_ORDER: RegionKey[] = ["na", "eu", "asia"];
 const TAB_LABEL: Record<RegionKey, string> = {
-  all: "Global",
-  na: "North America",
-  eu: "Europe",
-  asia: "Asia-Pacific",
+  na: "NA",
+  eu: "EU",
+  asia: "AP",
 };
 
 function formatRelative(iso: string | undefined): string {
@@ -38,89 +37,51 @@ function formatRelative(iso: string | undefined): string {
   });
 }
 
-// ─── Topic-based highlight system ────────────────────────────────────
+// ─── Curated highlights ──────────────────────────────────────────────
 //
-// Three topic colors, each with narrow patterns that only fire on
-// genuinely meaningful phrases. The goal is clarity, not coverage —
-// a few well-placed highlights beat a wall of bold.
+// Hand-picked phrases that carry the key insight of each clause.
+// Matched by exact substring so only what matters gets colored.
 
 type Topic = "legislation" | "infrastructure" | "cooperation";
 
 const TOPIC_COLOR: Record<Topic, string> = {
-  legislation: "rgba(10, 132, 255, 0.22)",    // blue — bills, acts, laws
-  infrastructure: "rgba(255, 149, 0, 0.22)",  // amber — data centers, energy
-  cooperation: "rgba(88, 86, 214, 0.22)",     // indigo — summits, agreements
+  legislation: "rgba(10, 132, 255, 0.18)",
+  infrastructure: "rgba(255, 149, 0, 0.18)",
+  cooperation: "rgba(88, 86, 214, 0.18)",
 };
 
-interface TopicPattern {
+interface Highlight {
+  text: string;
   topic: Topic;
-  pattern: RegExp;
 }
 
-// Patterns are deliberately narrow. They match the language of policy
-// reporting, not general English.
-const TOPIC_PATTERNS: TopicPattern[] = [
-  // ── Legislation (blue) ──
-  // Named acts, bills, and frameworks — require a policy keyword at the end
-  // preceded by at least one capitalized word.
-  {
-    topic: "legislation",
-    pattern:
-      /\b(?:National|Federal|Digital|Personal|AI|Data|Generative)\s+(?:[A-Z][A-Za-z-]+\s+){0,5}(?:Act|Bill|Framework|Directive|Regulation|Order|Code|Law|Package|Guidelines|Rules|Amendments?)\b(?:\s*\([^)]+\))?/g,
-  },
-  // Specific short-form references: "Bill C-27", "AIDA", "COM(...)"
-  {
-    topic: "legislation",
-    pattern: /\b(?:Bill\s+[A-Z]-\d+(?:\/[A-Z]+)?|AIDA)\b/g,
-  },
-  // "enacted", "took effect", "approved" + context — the verdict phrases
-  {
-    topic: "legislation",
-    pattern:
-      /\b(?:enacted|took effect|entered into force|approved a landmark|enacting binding)\b/gi,
-  },
-
-  // ── Infrastructure (amber) ──
-  // Data center + action combos: moratorium, construction, freeze, capacity
-  {
-    topic: "infrastructure",
-    pattern:
-      /\bdata[- ]cent(?:er|re)s?\s+(?:moratorium|construction|freeze|capacity|rating|energy|efficiency|siting)\b/gi,
-  },
-  // Reverse: "moratorium bills", "sovereign AI data centres"
-  {
-    topic: "infrastructure",
-    pattern:
-      /\b(?:moratorium bills?|sovereign AI data cent(?:er|re)s?)\b/gi,
-  },
-  // Power figures: "100 MW", "1.2 GW"
-  {
-    topic: "infrastructure",
-    pattern: /\b\d+(?:\.\d+)?\s*(?:MW|GW|TWh|megawatt|gigawatt)s?\b/gi,
-  },
-
-  // ── Cooperation (indigo) ──
-  // Named summits, declarations, international agreements
-  {
-    topic: "cooperation",
-    pattern:
-      /\b(?:New Delhi|Paris|Hiroshima|Bletchley|Seoul)\s+(?:Declaration|Summit|Agreement|Statement)\b/g,
-  },
-  {
-    topic: "cooperation",
-    pattern: /\bAI (?:Impact |Safety |Action )?Summit\b/g,
-  },
-  // "alongside N nations/countries"
-  {
-    topic: "cooperation",
-    pattern: /\b(?:alongside|among)\s+\d+\s+(?:nations?|countries?)\b/gi,
-  },
-  // Trilogue, public consultation — procedural milestones
-  {
-    topic: "cooperation",
-    pattern: /\b(?:entered? trilogue|public consultation)\b/gi,
-  },
-];
+const CURATED: Record<string, Highlight[]> = {
+  na: [
+    { text: "establish a uniform federal standard and preempt conflicting state AI laws", topic: "legislation" },
+    { text: "data-center moratorium bills swept at least 12 state legislatures", topic: "infrastructure" },
+    { text: "freeze all AI data-center construction nationally", topic: "infrastructure" },
+    { text: "enacted new AI laws covering chatbots, content provenance, and frontier-model safety", topic: "legislation" },
+    { text: "pivoted to infrastructure-first policy", topic: "infrastructure" },
+    { text: "sovereign AI data centres exceeding 100 MW", topic: "infrastructure" },
+  ],
+  eu: [
+    { text: "delay and simplify key AI Act deadlines", topic: "legislation" },
+    { text: "entered trilogue, targeting a final deal by 28 April", topic: "cooperation" },
+    { text: "EU-wide Data Centre Rating Scheme", topic: "infrastructure" },
+    { text: "Data Centre Energy Efficiency Package", topic: "infrastructure" },
+    { text: "endorsed the New Delhi Declaration", topic: "cooperation" },
+    { text: "alongside 91 nations", topic: "cooperation" },
+  ],
+  asia: [
+    { text: "first country in the region to enforce a comprehensive AI law", topic: "legislation" },
+    { text: "establishing risk tiers, transparency mandates, and a national AI safety research institute", topic: "legislation" },
+    { text: "removes opt-in consent requirements to unlock data for AI training", topic: "legislation" },
+    { text: "bringing AI provisions into national law", topic: "legislation" },
+    { text: "mandate AI content labeling", topic: "legislation" },
+    { text: "Model AI Governance Framework for Agentic AI", topic: "legislation" },
+    { text: "without yet enacting binding legislation", topic: "cooperation" },
+  ],
+};
 
 interface HighlightSpan {
   start: number;
@@ -128,62 +89,54 @@ interface HighlightSpan {
   topic: Topic;
 }
 
-function findHighlights(text: string): HighlightSpan[] {
+function findHighlights(text: string, regionKey: string): HighlightSpan[] {
+  const highlights = CURATED[regionKey] ?? [];
   const spans: HighlightSpan[] = [];
-  for (const { topic, pattern } of TOPIC_PATTERNS) {
-    pattern.lastIndex = 0;
-    let m: RegExpExecArray | null;
-    while ((m = pattern.exec(text)) !== null) {
-      spans.push({ start: m.index, end: m.index + m[0].length, topic });
-      if (m[0].length === 0) pattern.lastIndex++;
+  for (const h of highlights) {
+    const idx = text.indexOf(h.text);
+    if (idx >= 0) {
+      spans.push({ start: idx, end: idx + h.text.length, topic: h.topic });
     }
   }
-  // Sort by start, then longest wins on overlap.
-  spans.sort((a, b) => a.start - b.start || b.end - a.end);
-  const merged: HighlightSpan[] = [];
-  for (const s of spans) {
-    const prev = merged[merged.length - 1];
-    if (prev && s.start < prev.end) {
-      if (s.end - s.start > prev.end - prev.start) {
-        merged[merged.length - 1] = s;
-      }
-    } else {
-      merged.push(s);
-    }
-  }
-  return merged;
+  spans.sort((a, b) => a.start - b.start);
+  return spans;
 }
 
-function renderHighlighted(text: string, keyPrefix: string) {
-  const spans = findHighlights(text);
+function renderHighlighted(
+  text: string,
+  regionKey: string,
+  keyPrefix: string,
+) {
+  const spans = findHighlights(text, regionKey);
   if (spans.length === 0) return text;
   const out: React.ReactNode[] = [];
   let cursor = 0;
-  let highlightIdx = 0;
+  let idx = 0;
   for (const span of spans) {
     if (span.start > cursor) {
       out.push(
-        <Fragment key={`${keyPrefix}-t-${highlightIdx}`}>
+        <Fragment key={`${keyPrefix}-t-${idx}`}>
           {text.slice(cursor, span.start)}
         </Fragment>,
       );
     }
-    const delay = 100 + highlightIdx * 80;
-    const color = TOPIC_COLOR[span.topic];
+    const delay = 80 + idx * 100;
     out.push(
-      <strong
-        key={`${keyPrefix}-h-${highlightIdx}`}
-        className="font-semibold text-ink highlight-sweep"
+      <mark
+        key={`${keyPrefix}-h-${idx}`}
+        className="highlight-sweep font-medium text-ink"
         style={{
           ["--sweep-delay" as string]: `${delay}ms`,
-          ["--sweep-color" as string]: color,
+          ["--sweep-color" as string]: TOPIC_COLOR[span.topic],
+          backgroundColor: "transparent",
+          color: "inherit",
         }}
       >
         {text.slice(span.start, span.end)}
-      </strong>,
+      </mark>,
     );
     cursor = span.end;
-    highlightIdx++;
+    idx++;
   }
   if (cursor < text.length) {
     out.push(
@@ -193,23 +146,28 @@ function renderHighlighted(text: string, keyPrefix: string) {
   return out;
 }
 
+// Split on sentence boundaries but protect common abbreviations
+// (Sen., Rep., Dr., Mr., Mrs., Ms., St., Jr., Sr., No., Vol., etc.)
+// so "Rep. Alexandria" doesn't become a line break.
 function splitSentences(text: string): string[] {
-  // Split on sentence-ending punctuation followed by space + capital letter,
-  // keeping the punctuation with its sentence.
-  return text
+  const ABBR =
+    /(?:Sen|Rep|Dr|Mr|Mrs|Ms|St|Jr|Sr|No|Vol|Inc|Corp|Ltd|Gov|Gen|Prof|Sgt|Cpl|vs|etc|approx|dept|est)\./gi;
+  const placeholder = "\u0000";
+  const safe = text.replace(ABBR, (m) => m.slice(0, -1) + placeholder);
+  return safe
     .split(/(?<=[.!?])\s+(?=[A-Z])/)
-    .map((s) => s.trim())
+    .map((s) => s.replace(new RegExp(placeholder, "g"), ".").trim())
     .filter(Boolean);
 }
 
 interface RegionalSummary {
-  key: Exclude<RegionKey, "all">;
+  key: RegionKey;
   label: string;
   sentences: string[];
 }
 
 export default function AIOverview() {
-  const [tab, setTab] = useState<RegionKey>("all");
+  const [activeTab, setActiveTab] = useState<RegionKey>("na");
 
   const regional = (newsSummaries.regional ?? {}) as Record<
     string,
@@ -218,22 +176,18 @@ export default function AIOverview() {
   const updated = formatRelative(newsSummaries.generatedAt);
 
   const allRegions: RegionalSummary[] = useMemo(() => {
-    const order: Array<Exclude<RegionKey, "all">> = ["na", "eu", "asia"];
-    return order
-      .map((k) => {
-        const summary = regional[k]?.summary;
-        if (!summary) return null;
-        return {
-          key: k,
-          label: REGION_LABEL[k],
-          sentences: splitSentences(summary),
-        };
-      })
-      .filter((r): r is RegionalSummary => r !== null);
+    return TAB_ORDER.map((k) => {
+      const summary = regional[k]?.summary;
+      if (!summary) return null;
+      return {
+        key: k,
+        label: REGION_LABEL[k],
+        sentences: splitSentences(summary),
+      };
+    }).filter((r): r is RegionalSummary => r !== null);
   }, [regional]);
 
-  const visibleRegions =
-    tab === "all" ? allRegions : allRegions.filter((r) => r.key === tab);
+  const visibleRegion = allRegions.find((r) => r.key === activeTab);
 
   return (
     <div className="bg-black/[.02] rounded-3xl p-8">
@@ -252,17 +206,17 @@ export default function AIOverview() {
           AI overview · Updated {updated}
         </div>
 
-        <div className="flex items-center gap-1 bg-black/[.04] rounded-full p-0.5">
+        <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04]">
           {TAB_ORDER.map((k) => {
-            const active = tab === k;
+            const active = activeTab === k;
             return (
               <button
                 key={k}
                 type="button"
-                onClick={() => setTab(k)}
-                className={`text-[11px] font-medium px-3 py-1.5 rounded-full tracking-tight transition-colors ${
+                onClick={() => setActiveTab(k)}
+                className={`text-xs font-medium px-4 py-1.5 rounded-full transition-all ${
                   active
-                    ? "bg-white text-ink shadow-[0_1px_2px_rgba(0,0,0,0.06)]"
+                    ? "bg-white text-ink shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
                     : "text-muted hover:text-ink"
                 }`}
               >
@@ -273,56 +227,26 @@ export default function AIOverview() {
         </div>
       </div>
 
-      {/* Legend — quick key for the three highlight topics */}
-      <div className="mt-4 flex items-center gap-4 text-[10px] text-muted tracking-tight">
-        <span className="flex items-center gap-1.5">
-          <span
-            className="inline-block w-2.5 h-2.5 rounded-sm"
-            style={{ backgroundColor: TOPIC_COLOR.legislation }}
-          />
-          Legislation
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span
-            className="inline-block w-2.5 h-2.5 rounded-sm"
-            style={{ backgroundColor: TOPIC_COLOR.infrastructure }}
-          />
-          Infrastructure
-        </span>
-        <span className="flex items-center gap-1.5">
-          <span
-            className="inline-block w-2.5 h-2.5 rounded-sm"
-            style={{ backgroundColor: TOPIC_COLOR.cooperation }}
-          />
-          Cooperation
-        </span>
-      </div>
-
-      {visibleRegions.length === 0 ? (
+      {!visibleRegion ? (
         <p className="text-sm text-muted mt-6">
           No overview available yet. Run scripts/sync/news.ts to generate one.
         </p>
       ) : (
-        <div key={tab} className="mt-6 flex flex-col gap-8 animate-fade-rise">
-          {visibleRegions.map((region) => (
-            <div key={region.key}>
-              {tab === "all" && (
-                <div className="text-[11px] font-semibold text-muted uppercase tracking-[0.08em] mb-3">
-                  {region.label}
-                </div>
-              )}
-              <div className="flex flex-col gap-3.5 max-w-3xl">
-                {region.sentences.map((s, i) => (
-                  <p
-                    key={`${region.key}-${i}`}
-                    className="text-[15px] text-ink/80 leading-[1.7]"
-                  >
-                    {renderHighlighted(s, `${region.key}-${i}`)}
-                  </p>
-                ))}
-              </div>
-            </div>
-          ))}
+        <div key={activeTab} className="mt-5 animate-fade-rise">
+          <div className="flex flex-col gap-3 max-w-3xl">
+            {visibleRegion.sentences.map((s, i) => (
+              <p
+                key={`${visibleRegion.key}-${i}`}
+                className="text-[15px] text-ink/75 leading-[1.75]"
+              >
+                {renderHighlighted(
+                  s,
+                  visibleRegion.key,
+                  `${visibleRegion.key}-${i}`,
+                )}
+              </p>
+            ))}
+          </div>
         </div>
       )}
     </div>

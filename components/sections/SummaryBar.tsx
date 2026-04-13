@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 import { ENTITIES } from "@/lib/placeholder-data";
-import { STANCE_LABEL, type Entity, type StanceType } from "@/types";
+import {
+  STANCE_LABEL,
+  type DimensionLens,
+  type Entity,
+  type StanceType,
+} from "@/types";
 
 interface Bucket {
   key: StanceType;
@@ -44,7 +49,11 @@ const BUCKETS: Bucket[] = [
   },
 ];
 
-export default function SummaryBar() {
+interface SummaryBarProps {
+  lens: DimensionLens;
+}
+
+export default function SummaryBar({ lens }: SummaryBarProps) {
   const [hovered, setHovered] = useState<StanceType | null>(null);
 
   const states = ENTITIES.filter(
@@ -58,7 +67,10 @@ export default function SummaryBar() {
     favorable: [],
     none: [],
   };
-  for (const s of states) grouped[s.stance].push(s);
+  for (const s of states) {
+    const stance = lens === "ai" ? s.stanceAI : s.stanceDatacenter;
+    grouped[stance].push(s);
+  }
 
   const restrictingCount =
     grouped.restrictive.length + grouped.concerning.length;
@@ -70,36 +82,41 @@ export default function SummaryBar() {
     : null;
   const activeStates = hovered ? grouped[hovered] : [];
 
+  const restrictionsLabel =
+    lens === "ai"
+      ? "states advancing AI regulation"
+      : "states with active or advancing data-center restrictions";
+  const incentivesLabel =
+    lens === "ai"
+      ? "states with light-touch AI policy"
+      : "states offering data-center incentives";
+
   return (
     <div className="relative">
       {/* Legend row */}
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8">
-        {BUCKETS.map((b) => {
-          const count = grouped[b.key].length;
-          return (
-            <div key={b.key} className="flex items-center gap-2">
-              <span
-                className="w-3 h-3 rounded-[4px] flex-shrink-0"
-                style={{ backgroundColor: b.color }}
-              />
-              <span className="text-sm font-medium text-ink tracking-tight">
-                {b.label}
-              </span>
-              <span className="text-sm text-muted">({count})</span>
-            </div>
-          );
-        })}
+        {BUCKETS.map((b) => (
+          <div key={b.key} className="flex items-center gap-2">
+            <span
+              className="w-3 h-3 rounded-[4px] flex-shrink-0"
+              style={{ backgroundColor: b.color }}
+            />
+            <span className="text-sm font-medium text-ink tracking-tight">
+              {b.label}
+            </span>
+          </div>
+        ))}
       </div>
 
       {/* Stats */}
       <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 mb-4 text-sm sm:text-base">
         <div className="text-muted leading-snug">
           <span className="font-semibold text-ink">{restrictingCount}</span> of{" "}
-          {totalStates} states restricting or considering restrictions
+          {totalStates} {restrictionsLabel}
         </div>
         <div className="text-muted leading-snug sm:text-right">
           <span className="font-semibold text-ink">{incentivesCount}</span>{" "}
-          states with incentives
+          {incentivesLabel}
         </div>
       </div>
 

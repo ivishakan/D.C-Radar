@@ -81,7 +81,7 @@ export default function BillExpanded({ bill, stateCode }: BillExpandedProps) {
       {sponsors.length > 0 && (
         <div>
           <div className="text-[11px] font-medium text-muted tracking-tight mb-2">
-            {isFederal ? "Sponsors & donor cross-reference" : "Sponsors"}
+            {isFederal ? "Sponsors & donors" : "Sponsors"}
           </div>
           {isFederal ? (
             <div className="flex flex-col gap-2">
@@ -111,7 +111,7 @@ export default function BillExpanded({ bill, stateCode }: BillExpandedProps) {
           onClick={(e) => e.stopPropagation()}
           className="self-start inline-flex items-center gap-1 text-xs font-medium text-ink hover:underline"
         >
-          View full bill →
+          Read full bill →
         </a>
       )}
     </div>
@@ -132,7 +132,7 @@ function SponsorRow({
       <div className="text-xs text-ink">
         {name}
         <span className="text-muted ml-2 text-[11px]">
-          no federal donor data
+          no donor data available
         </span>
       </div>
     );

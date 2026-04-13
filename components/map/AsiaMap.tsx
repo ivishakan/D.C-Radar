@@ -15,7 +15,7 @@ import {
   type SetTooltip,
 } from "@/lib/map-utils";
 import { ASIA_FACILITIES } from "@/lib/datacenters";
-import type { DataCenter, Dimension } from "@/types";
+import type { DataCenter, Dimension, DimensionLens } from "@/types";
 import DataCenterDots from "./DataCenterDots";
 
 interface AsiaMapProps {
@@ -23,6 +23,7 @@ interface AsiaMapProps {
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
+  lens?: DimensionLens;
   showDataCenters?: boolean;
   onHoverFacility?: (
     dc: DataCenter,
@@ -63,6 +64,7 @@ export default function AsiaMap({
   selectedGeoId,
   setTooltip,
   dimension = "overall",
+  lens = "datacenter",
   showDataCenters = false,
   onHoverFacility,
   onLeaveFacility,
@@ -115,7 +117,7 @@ export default function AsiaMap({
                   );
                 }
 
-                const fill = getEntityColorForDimension(ent, dimension);
+                const fill = getEntityColorForDimension(ent, dimension, lens);
                 const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
                 const strokeWidth = isSelected ? 4 : 1.5;
 
@@ -138,7 +140,7 @@ export default function AsiaMap({
                     key={geo.rsmKey}
                     geography={geo}
                     onMouseEnter={(e) =>
-                      setTooltip({ x: e.clientX, y: e.clientY, label: name })
+                      setTooltip({ x: e.clientX, y: e.clientY, label: name, geoId: id, region: "asia" })
                     }
                     onMouseLeave={() => setTooltip(null)}
                     onClick={() => onSelectEntity(id)}
@@ -158,7 +160,7 @@ export default function AsiaMap({
           }
         </Geographies>
         {showDataCenters && onHoverFacility && onLeaveFacility && (
-          <DataCenterDots
+          <DataCenterDots projection={asiaProjection as unknown as (c: [number, number]) => [number, number] | null}
             facilities={ASIA_FACILITIES}
             onHoverFacility={onHoverFacility}
             onLeaveFacility={onLeaveFacility}

@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { ENTITIES } from "@/lib/placeholder-data";
 import type { Entity, NewsItem } from "@/types";
 
@@ -19,6 +20,32 @@ const SCOPE_OPTIONS: { key: ScopeFilter; label: string }[] = [
   { key: "us-states", label: "US States" },
   { key: "international", label: "International" },
 ];
+
+type TopicFilter = "all" | "policy" | "data-centers" | "protests";
+
+const TOPIC_OPTIONS: { key: TopicFilter; label: string }[] = [
+  { key: "all", label: "All" },
+  { key: "policy", label: "Policy" },
+  { key: "data-centers", label: "Data Centers" },
+  { key: "protests", label: "Protests" },
+];
+
+// Topic is derived from headline + summary text — NewsItem doesn't carry
+// a category. Buckets are matched independently (a story can be both
+// Policy and Data Centers); the filter shows rows that match *any* of
+// the picked topic's keywords. Keep keyword lists narrow so the buckets
+// stay meaningful — broad lists collapse everything into "All".
+const TOPIC_KEYWORDS: Record<Exclude<TopicFilter, "all">, RegExp> = {
+  policy: /\b(bill|legislation|regulat|act\b|statute|law\b|laws\b|policy|executive order|rule\b|rules\b|framework|signed|vetoed|enacted|introduced|committee|congress|senate|house|parliament|directive|amendment)\b/i,
+  "data-centers": /\b(data\s?cent(?:er|re)s?|hyperscale|gigawatt|\d+\s?(?:m|g)w\b|campus|aws|google|microsoft|meta|oracle|amazon|equinix|stargate|cooling|grid|power\s+demand)\b/i,
+  protests: /\b(protest|rally|opposition|opposed|lawsuit|sued|court|moratorium|block(?:ed|ing)?|reject(?:ed)?|void(?:ed)?|halt(?:ed)?|den(?:y|ied|ying)|appeal(?:ed)?|ruling|challenge|injunction|ban\b|bans\b|restriction|outcry|backlash|residents)\b/i,
+};
+
+function matchesTopic(item: NewsItem, t: TopicFilter): boolean {
+  if (t === "all") return true;
+  const text = `${item.headline} ${item.summary ?? ""}`;
+  return TOPIC_KEYWORDS[t].test(text);
+}
 
 function matchesScope(entity: Entity, s: ScopeFilter): boolean {
   if (s === "all") return true;
@@ -46,7 +73,9 @@ function buildNewsRows(): NewsRow[] {
       rows.push({ item, entity });
     }
   }
-  return rows.sort((a, b) => b.item.date.localeCompare(a.item.date));
+  return rows.sort((a, b) =>
+    (b.item.date ?? "").localeCompare(a.item.date ?? ""),
+  );
 }
 
 const LAST_UPDATED_FMT = new Intl.DateTimeFormat("en-US", {
@@ -76,17 +105,86 @@ function formatShortDate(iso: string): string {
 function rowMatchesQuery(row: NewsRow, q: string): boolean {
   if (!q) return true;
   const needle = q.toLowerCase();
+  const fields = [row.item.headline, row.item.source, row.entity.name];
+  return fields.some((f) => f?.toLowerCase().includes(needle));
+}
+
+function LiveNewsCard({
+  item,
+  entityName,
+}: {
+  item: NewsItem;
+  entityName: string;
+}) {
+  const hasSummary = Boolean(item.summary);
+
   return (
-    row.item.headline.toLowerCase().includes(needle) ||
-    row.item.source.toLowerCase().includes(needle) ||
-    row.entity.name.toLowerCase().includes(needle)
+    <article className="break-inside-avoid mb-3 bg-white border border-black/[.06] rounded-2xl p-5 transition-colors hover:border-black/[.12]">
+      {/* Headline goes straight to the source article — no click-to-expand
+          indirection. The card is a display surface, not a toggle. */}
+      <a
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-start gap-2"
+      >
+        <h3 className="flex-1 min-w-0 text-sm font-medium text-ink tracking-tight leading-snug group-hover:underline underline-offset-2 decoration-black/20">
+          {item.headline}
+        </h3>
+        <svg
+          width="11"
+          height="11"
+          viewBox="0 0 11 11"
+          fill="none"
+          aria-hidden
+          className="mt-1 flex-shrink-0 text-muted/60 group-hover:text-ink transition-colors"
+        >
+          <path
+            d="M3 3H8V8M8 3L3 8"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </a>
+
+      {hasSummary && (
+        <p className="text-[13px] text-ink/75 leading-relaxed mt-2.5">
+          {item.summary}
+          {item.summarySource === "headline-only" && (
+            <span
+              className="ml-1.5 inline-block align-middle text-[10px] text-muted/80 px-1.5 py-0.5 rounded-full bg-bg/70 border border-black/[.05]"
+              title="Source article was paywalled or unreachable — summary derived from the headline alone"
+            >
+              from headline
+            </span>
+          )}
+        </p>
+      )}
+
+      <div className="text-[11px] text-muted mt-3 flex items-center gap-1.5 min-w-0">
+        <span className="font-medium text-ink/70 truncate max-w-[10rem] flex-shrink-0">
+          {item.source}
+        </span>
+        <span aria-hidden className="flex-shrink-0">·</span>
+        <span className="flex-shrink-0">{formatShortDate(item.date)}</span>
+        <span aria-hidden className="flex-shrink-0">·</span>
+        <span className="truncate">{entityName}</span>
+      </div>
+    </article>
   );
 }
 
-export default function LiveNews() {
-  const [expanded, setExpanded] = useState(false);
+interface LiveNewsProps {
+  /** Render every filtered story — used on the dedicated /news page. */
+  showAll?: boolean;
+}
+
+export default function LiveNews({ showAll = false }: LiveNewsProps = {}) {
   const [query, setQuery] = useState("");
   const [activeScope, setActiveScope] = useState<ScopeFilter>("all");
+  const [activeTopic, setActiveTopic] = useState<TopicFilter>("all");
 
   const allRows = useMemo(() => buildNewsRows(), []);
   const lastUpdated = useMemo(
@@ -112,20 +210,44 @@ export default function LiveNews() {
     return counts;
   }, [allRows]);
 
+  // Topic counts run against the scope-filtered set so the chip numbers
+  // reflect what would actually appear if you toggled to that topic
+  // (without also losing the active scope choice).
+  const topicCounts = useMemo<Record<TopicFilter, number>>(() => {
+    const scoped = activeScope === "all"
+      ? allRows
+      : allRows.filter((r) => matchesScope(r.entity, activeScope));
+    const counts: Record<TopicFilter, number> = {
+      all: scoped.length,
+      policy: 0,
+      "data-centers": 0,
+      protests: 0,
+    };
+    for (const r of scoped) {
+      if (matchesTopic(r.item, "policy")) counts.policy += 1;
+      if (matchesTopic(r.item, "data-centers")) counts["data-centers"] += 1;
+      if (matchesTopic(r.item, "protests")) counts.protests += 1;
+    }
+    return counts;
+  }, [allRows, activeScope]);
+
   const filtered = useMemo(() => {
     let rows = allRows;
     if (activeScope !== "all") {
       rows = rows.filter((r) => matchesScope(r.entity, activeScope));
+    }
+    if (activeTopic !== "all") {
+      rows = rows.filter((r) => matchesTopic(r.item, activeTopic));
     }
     const q = query.trim();
     if (q) {
       rows = rows.filter((r) => rowMatchesQuery(r, q));
     }
     return rows;
-  }, [allRows, activeScope, query]);
+  }, [allRows, activeScope, activeTopic, query]);
 
-  const hasMore = filtered.length > PREVIEW_COUNT;
-  const visible = expanded ? filtered : filtered.slice(0, PREVIEW_COUNT);
+  const hasMore = !showAll && filtered.length > PREVIEW_COUNT;
+  const visible = showAll ? filtered : filtered.slice(0, PREVIEW_COUNT);
 
   return (
     <div>
@@ -163,7 +285,7 @@ export default function LiveNews() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search headlines, sources, jurisdictions…"
+            placeholder="Search news…"
             className="flex-1 bg-transparent text-sm text-ink placeholder:text-muted focus:outline-none min-w-0"
           />
           {query && (
@@ -187,7 +309,7 @@ export default function LiveNews() {
       </div>
 
       {/* Scope row */}
-      <div className="mb-6">
+      <div className="mb-4">
         <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
           Scope
         </div>
@@ -200,10 +322,44 @@ export default function LiveNews() {
                 key={opt.key}
                 type="button"
                 onClick={() => setActiveScope(opt.key)}
-                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
                   active
-                    ? "bg-ink text-white"
-                    : "border border-black/[.06] text-muted hover:text-ink"
+                    ? "bg-ink text-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+                    : "border border-black/[.06] text-muted hover:text-ink hover:bg-black/[.02]"
+                }`}
+              >
+                <span>{opt.label}</span>
+                <span
+                  className={`text-[10px] ${active ? "text-white/70" : "text-muted"}`}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Topic row — derived from headline / summary keywords. A story
+          can match multiple topics so picking one doesn't subtract from
+          the others' counts. */}
+      <div className="mb-6">
+        <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
+          Topic
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {TOPIC_OPTIONS.map((opt) => {
+            const active = opt.key === activeTopic;
+            const count = topicCounts[opt.key];
+            return (
+              <button
+                key={opt.key}
+                type="button"
+                onClick={() => setActiveTopic(opt.key)}
+                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
+                  active
+                    ? "bg-ink text-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+                    : "border border-black/[.06] text-muted hover:text-ink hover:bg-black/[.02]"
                 }`}
               >
                 <span>{opt.label}</span>
@@ -230,42 +386,22 @@ export default function LiveNews() {
               keeps a card from being split between columns. */}
           <div className="columns-1 md:columns-2 gap-3 [column-fill:balance]">
             {visible.map(({ item, entity }) => (
-              <a
+              <LiveNewsCard
                 key={item.id}
-                href={item.url}
-                target={item.url && item.url !== "#" ? "_blank" : undefined}
-                rel={
-                  item.url && item.url !== "#"
-                    ? "noopener noreferrer"
-                    : undefined
-                }
-                className="block break-inside-avoid mb-3 bg-white border border-black/[.06] hover:border-black/20 rounded-2xl p-5 transition-colors"
-              >
-                <div className="text-sm font-medium text-ink tracking-tight leading-snug">
-                  {item.headline}
-                </div>
-                <div className="text-[11px] text-muted mt-2.5 flex items-center gap-1.5 min-w-0">
-                  <span className="font-medium text-ink/70 truncate max-w-[10rem] flex-shrink-0">{item.source}</span>
-                  <span aria-hidden className="flex-shrink-0">·</span>
-                  <span className="flex-shrink-0">{formatShortDate(item.date)}</span>
-                  <span aria-hidden className="flex-shrink-0">·</span>
-                  <span className="truncate">{entity.name}</span>
-                </div>
-              </a>
+                item={item}
+                entityName={entity.name}
+              />
             ))}
           </div>
 
           {hasMore && (
             <div className="mt-6 flex justify-center">
-              <button
-                type="button"
-                onClick={() => setExpanded((v) => !v)}
+              <Link
+                href="/news"
                 className="rounded-full border border-black/[.06] text-muted hover:text-ink px-5 py-2 text-xs font-medium transition-colors"
               >
-                {expanded
-                  ? "Show less"
-                  : `Show all ${filtered.length} stories →`}
-              </button>
+                Show all {filtered.length} stories →
+              </Link>
             </div>
           )}
         </>

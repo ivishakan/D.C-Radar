@@ -15,7 +15,7 @@ import {
   type SetTooltip,
 } from "@/lib/map-utils";
 import { ALL_FACILITIES } from "@/lib/datacenters";
-import type { DataCenter, Dimension } from "@/types";
+import type { DataCenter, Dimension, DimensionLens } from "@/types";
 import DataCenterDots from "./DataCenterDots";
 
 interface NorthAmericaMapProps {
@@ -28,6 +28,7 @@ interface NorthAmericaMapProps {
   selectedGeoId: string | null;
   setTooltip: SetTooltip;
   dimension?: Dimension;
+  lens?: DimensionLens;
   showDataCenters?: boolean;
   onHoverFacility?: (
     dc: DataCenter,
@@ -60,6 +61,7 @@ export default function NorthAmericaMap({
   selectedGeoId,
   setTooltip,
   dimension = "overall",
+  lens = "datacenter",
   showDataCenters = false,
   onHoverFacility,
   onLeaveFacility,
@@ -119,7 +121,7 @@ export default function NorthAmericaMap({
               const ent = getEntity(id, "na");
               if (!ent) return null;
               const isSelected = selectedGeoId === id;
-              const fill = getEntityColorForDimension(ent, dimension);
+              const fill = getEntityColorForDimension(ent, dimension, lens);
               const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
               const strokeWidth = isSelected ? 4 : 1.5;
               const base = {
@@ -144,7 +146,7 @@ export default function NorthAmericaMap({
                   key={geo.rsmKey}
                   geography={geo}
                   onMouseEnter={(e) =>
-                    setTooltip({ x: e.clientX, y: e.clientY, label: "Canada" })
+                    setTooltip({ x: e.clientX, y: e.clientY, label: "Canada", geoId: id, region: "na" })
                   }
                   onMouseLeave={() => setTooltip(null)}
                   onClick={() => onSelectEntity(id)}
@@ -204,7 +206,7 @@ export default function NorthAmericaMap({
                     />
                   );
                 }
-                const fill = getEntityColorForDimension(ent, dimension);
+                const fill = getEntityColorForDimension(ent, dimension, lens);
                 const stroke = isSelected ? "#FFFFFF" : NEUTRAL_STROKE;
                 const strokeWidth = isSelected ? 3 : 0.6;
                 const base = {
@@ -229,7 +231,7 @@ export default function NorthAmericaMap({
                     key={geo.rsmKey}
                     geography={geo}
                     onMouseEnter={(e) =>
-                      setTooltip({ x: e.clientX, y: e.clientY, label: name })
+                      setTooltip({ x: e.clientX, y: e.clientY, label: name, geoId: name, region: "na" })
                     }
                     onMouseLeave={() => setTooltip(null)}
                     onClick={() => onSelectUsState?.(name)}
@@ -246,7 +248,7 @@ export default function NorthAmericaMap({
         </Geographies>
 
         {showDataCenters && onHoverFacility && onLeaveFacility && (
-          <DataCenterDots
+          <DataCenterDots projection={naProjection as unknown as (c: [number, number]) => [number, number] | null}
             facilities={ALL_FACILITIES}
             onHoverFacility={onHoverFacility}
             onLeaveFacility={onLeaveFacility}

@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
-import { Marker } from "react-simple-maps";
+import { useEffect, useMemo, useState } from "react";
+import { useMapContext } from "react-simple-maps";
 import type { DataCenter, DataCenterStatus } from "@/types";
 
 interface DataCenterDotsProps {
@@ -19,6 +19,13 @@ interface DataCenterDotsProps {
   onSelectFacility?: (dc: DataCenter) => void;
   /** Lng/lat cell size for grid clustering. Default 1.2° ≈ 100 km. */
   clusterDeg?: number;
+  /**
+   * Optional projection override. Pass the same d3 projection your
+   * <ComposableMap> uses. When omitted we fall back to react-simple-maps'
+   * MapContext — but the context-derived projection has been unreliable
+   * under Turbopack/React 19 (returns non-iterables for some calls).
+   */
+  projection?: (coords: [number, number]) => [number, number] | null;
 }
 
 interface Cluster {
@@ -109,16 +116,18 @@ export function DcDot({
         onMouseLeave={onMouseLeave}
         onClick={onClick}
       />
-      {isCluster && (
+      {/* Cluster count is only readable on the medium / large bands.
+          On the small (4px) band we drop it entirely — the dot itself
+          is the signal, the number was unreadable noise. */}
+      {isCluster && r >= 7 && (
         <text
           {...textProps}
           textAnchor="middle"
           dominantBaseline="central"
           style={{
-            fontSize: "8px",
+            fontSize: r >= 10 ? "9px" : "8px",
             fontWeight: 600,
-            fontFamily:
-              "-apple-system, 'SF Pro Text', system-ui, sans-serif",
+            fontFamily: "inherit",
             fill: isProposed ? color : "#FFFFFF",
             pointerEvents: "none",
             letterSpacing: "-0.02em",
@@ -169,10 +178,21 @@ function clusterFacilities(facs: DataCenter[], cellDeg: number): Cluster[] {
   return clusters;
 }
 
-function clusterRadius(totalMW: number, count: number): number {
-  const base = Math.max(3.2, Math.log10((totalMW || 30) + 1) * 2.4);
-  const countBoost = count > 1 ? Math.min(2.4, Math.log2(count) * 0.7) : 0;
-  return Math.min(9, base + countBoost);
+// Three discrete size buckets keyed off cluster total MW. Discrete > continuous
+// because the eye reads "small / medium / large" instantly, but a continuous
+// log scale just looks like a uniformly noisy field. Bands match the legend
+// shown to the user (< 100 / 100-500 / 500+).
+export const SIZE_BANDS = [
+  { key: "sm" as const, label: "< 100 MW", max: 100, r: 4 },
+  { key: "md" as const, label: "100–500 MW", max: 500, r: 7 },
+  { key: "lg" as const, label: "500+ MW", max: Infinity, r: 11 },
+];
+
+function clusterRadius(totalMW: number): number {
+  for (const band of SIZE_BANDS) {
+    if (totalMW < band.max) return band.r;
+  }
+  return SIZE_BANDS[SIZE_BANDS.length - 1].r;
 }
 
 export default function DataCenterDots({
@@ -180,19 +200,50 @@ export default function DataCenterDots({
   onHoverFacility,
   onLeaveFacility,
   onSelectFacility,
-  clusterDeg = 1.2,
+  clusterDeg = 1.8,
+  projection: projectionProp,
 }: DataCenterDotsProps) {
   const clusters = useMemo(
     () => clusterFacilities(facilities, clusterDeg),
     [facilities, clusterDeg],
   );
 
+  // Gate on mount — projection output is float-sensitive, so server vs
+  // client renders can diverge by a trailing digit. The dots have no
+  // SEO/a11y value pre-hydration, so skip them until mounted.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Prefer the projection passed as a prop; fall back to MapContext only
+  // when no prop is supplied. Context-derived projection has been flaky
+  // under Turbopack/React 19 for reasons we don't fully understand —
+  // going direct via prop is the reliable path.
+  const ctx = useMapContext();
+  const projection = (projectionProp ??
+    (ctx as { projection?: (c: [number, number]) => [number, number] | null } | undefined)
+      ?.projection) as
+    | ((c: [number, number]) => [number, number] | null | undefined)
+    | undefined;
+
+  if (!mounted || typeof projection !== "function") return null;
+
   return (
     <g>
       {clusters.map((c) => {
-        const r = clusterRadius(c.totalMW, c.facilities.length);
+        let projected: [number, number] | null | undefined;
+        try {
+          projected = projection([c.lng, c.lat]);
+        } catch {
+          return null;
+        }
+        if (!projected || !Array.isArray(projected) || projected.length < 2) {
+          return null;
+        }
+        const [x, y] = projected;
+        if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+        const r = clusterRadius(c.totalMW);
         return (
-          <Marker key={c.key} coordinates={[c.lng, c.lat]}>
+          <g key={c.key} transform={`translate(${x}, ${y})`}>
             <DcDot
               r={r}
               status={c.dominantStatus}
@@ -219,7 +270,7 @@ export default function DataCenterDots({
               }
               interactive={!!onSelectFacility}
             />
-          </Marker>
+          </g>
         );
       })}
     </g>

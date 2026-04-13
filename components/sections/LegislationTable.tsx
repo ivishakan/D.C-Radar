@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import {
   CATEGORY_LABEL,
   IMPACT_TAG_LABEL,
@@ -19,6 +21,8 @@ import BillExpanded from "@/components/panel/BillExpanded";
 interface LegislationTableProps {
   dimension: Dimension;
   onNavigateToEntity: (target: ViewTarget) => void;
+  /** Render every filtered row — used on the dedicated /bills page. */
+  showAll?: boolean;
 }
 
 interface BillRow {
@@ -27,41 +31,41 @@ interface BillRow {
   target: ViewTarget;
 }
 
-// "data-center" is a virtual filter that merges siting + energy bills
-// into one chip (the underlying categories stay distinct in the data
-// for dimension scoring; this is purely a UI grouping).
 type CategoryFilter =
   | "all"
   | "data-center"
-  | Exclude<
-      LegislationCategory,
-      "data-center-siting" | "data-center-energy"
-    >;
+  | "governance"
+  | "public-services"
+  | "privacy";
 
 const CATEGORY_FILTERS: CategoryFilter[] = [
   "all",
   "data-center",
-  "ai-governance",
-  "synthetic-media",
-  "ai-healthcare",
-  "ai-workforce",
-  "ai-education",
-  "ai-government",
-  "data-privacy",
-  "ai-criminal-justice",
+  "governance",
+  "public-services",
+  "privacy",
 ];
 
 const CATEGORY_FILTER_LABEL: Record<CategoryFilter, string> = {
   all: "All",
   "data-center": "Data Centers",
-  "ai-governance": CATEGORY_LABEL["ai-governance"],
-  "synthetic-media": CATEGORY_LABEL["synthetic-media"],
-  "ai-healthcare": CATEGORY_LABEL["ai-healthcare"],
-  "ai-workforce": CATEGORY_LABEL["ai-workforce"],
-  "ai-education": CATEGORY_LABEL["ai-education"],
-  "ai-government": CATEGORY_LABEL["ai-government"],
-  "data-privacy": CATEGORY_LABEL["data-privacy"],
-  "ai-criminal-justice": CATEGORY_LABEL["ai-criminal-justice"],
+  governance: "Governance",
+  "public-services": "Public Services",
+  privacy: "Privacy",
+};
+
+const CATEGORY_GROUP: Record<CategoryFilter, LegislationCategory[]> = {
+  all: [],
+  "data-center": ["data-center-siting", "data-center-energy"],
+  governance: ["ai-governance"],
+  "public-services": [
+    "ai-healthcare",
+    "ai-education",
+    "ai-government",
+    "ai-workforce",
+    "ai-criminal-justice",
+  ],
+  privacy: ["data-privacy", "synthetic-media"],
 };
 
 function billMatchesCategoryFilter(
@@ -69,10 +73,7 @@ function billMatchesCategoryFilter(
   filter: CategoryFilter,
 ): boolean {
   if (filter === "all") return true;
-  if (filter === "data-center") {
-    return category === "data-center-siting" || category === "data-center-energy";
-  }
-  return category === filter;
+  return CATEGORY_GROUP[filter].includes(category);
 }
 
 type SortKey = "recent" | "oldest" | "stage" | "state";
@@ -84,13 +85,14 @@ const SORT_OPTIONS: { key: SortKey; label: string }[] = [
   { key: "state", label: "State" },
 ];
 
-type JurisdictionFilter = "all" | "us-federal" | "us-states" | "international";
+type JurisdictionFilter = "all" | "us-federal" | "us-states" | "europe" | "asia-pacific";
 
 const JURISDICTION_OPTIONS: { key: JurisdictionFilter; label: string }[] = [
   { key: "all", label: "All" },
   { key: "us-federal", label: "US Federal" },
   { key: "us-states", label: "US States" },
-  { key: "international", label: "International" },
+  { key: "europe", label: "Europe" },
+  { key: "asia-pacific", label: "Asia-Pacific" },
 ];
 
 function matchesJurisdiction(entity: Entity, j: JurisdictionFilter): boolean {
@@ -105,12 +107,13 @@ function matchesJurisdiction(entity: Entity, j: JurisdictionFilter): boolean {
   if (j === "us-states") {
     return entity.region === "na" && entity.level === "state";
   }
-  // international: anything that isn't US federal or a US state
-  return !(
-    entity.region === "na" &&
-    (entity.level === "state" ||
-      (entity.level === "federal" && entity.geoId === "840"))
-  );
+  if (j === "europe") {
+    return entity.region === "eu";
+  }
+  if (j === "asia-pacific") {
+    return entity.region === "asia";
+  }
+  return false;
 }
 
 const STAGE_ORDER: Record<Stage, number> = {
@@ -124,12 +127,12 @@ const STAGE_ORDER: Record<Stage, number> = {
 
 type StatusFilter = "all" | "proposed" | "voting" | "passed" | "dead";
 
-const STATUS_OPTIONS: { key: StatusFilter; label: string }[] = [
-  { key: "all", label: "All" },
-  { key: "proposed", label: "Proposed" },
-  { key: "voting", label: "About to vote" },
-  { key: "passed", label: "Passed into law" },
-  { key: "dead", label: "Dead or stalled" },
+const STATUS_OPTIONS: { key: StatusFilter; label: string; detail: string }[] = [
+  { key: "all", label: "All", detail: "" },
+  { key: "proposed", label: "Proposed", detail: "Filed + Committee" },
+  { key: "voting", label: "About to vote", detail: "Floor" },
+  { key: "passed", label: "Passed into law", detail: "Enacted" },
+  { key: "dead", label: "Dead or stalled", detail: "Dead + Carried Over" },
 ];
 
 function matchesStatus(stage: Stage, s: StatusFilter): boolean {
@@ -143,15 +146,16 @@ function matchesStatus(stage: Stage, s: StatusFilter): boolean {
 function rowMatchesQuery(row: BillRow, q: string): boolean {
   if (!q) return true;
   const needle = q.toLowerCase();
-  return (
-    row.bill.billCode.toLowerCase().includes(needle) ||
-    row.bill.title.toLowerCase().includes(needle) ||
-    row.bill.summary.toLowerCase().includes(needle) ||
-    row.entity.name.toLowerCase().includes(needle)
-  );
+  const fields = [
+    row.bill.billCode,
+    row.bill.title,
+    row.bill.summary,
+    row.entity.name,
+  ];
+  return fields.some((f) => f?.toLowerCase().includes(needle));
 }
 
-const PREVIEW_COUNT = 10;
+const PREVIEW_COUNT = 4;
 
 function buildRows(): BillRow[] {
   const rows: BillRow[] = [];
@@ -168,21 +172,25 @@ function buildRows(): BillRow[] {
   return rows;
 }
 
+function cmpDate(a: string | undefined, b: string | undefined): number {
+  return (b ?? "").localeCompare(a ?? "");
+}
+
 function compareRows(a: BillRow, b: BillRow, sort: SortKey): number {
   switch (sort) {
     case "recent":
-      return b.bill.updatedDate.localeCompare(a.bill.updatedDate);
+      return cmpDate(a.bill.updatedDate, b.bill.updatedDate);
     case "oldest":
-      return a.bill.updatedDate.localeCompare(b.bill.updatedDate);
+      return cmpDate(b.bill.updatedDate, a.bill.updatedDate);
     case "stage": {
       const delta = STAGE_ORDER[b.bill.stage] - STAGE_ORDER[a.bill.stage];
       if (delta !== 0) return delta;
-      return b.bill.updatedDate.localeCompare(a.bill.updatedDate);
+      return cmpDate(a.bill.updatedDate, b.bill.updatedDate);
     }
     case "state": {
-      const delta = a.entity.name.localeCompare(b.entity.name);
+      const delta = (a.entity.name ?? "").localeCompare(b.entity.name ?? "");
       if (delta !== 0) return delta;
-      return b.bill.updatedDate.localeCompare(a.bill.updatedDate);
+      return cmpDate(a.bill.updatedDate, b.bill.updatedDate);
     }
   }
 }
@@ -190,6 +198,7 @@ function compareRows(a: BillRow, b: BillRow, sort: SortKey): number {
 export default function LegislationTable({
   dimension,
   onNavigateToEntity,
+  showAll = false,
 }: LegislationTableProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all");
   const [activeJurisdiction, setActiveJurisdiction] =
@@ -197,7 +206,6 @@ export default function LegislationTable({
   const [activeStatus, setActiveStatus] = useState<StatusFilter>("all");
   const [query, setQuery] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("recent");
-  const [expanded, setExpanded] = useState(false);
   const [openRowId, setOpenRowId] = useState<string | null>(null);
 
   const allRows = useMemo(() => buildRows(), []);
@@ -263,12 +271,14 @@ export default function LegislationTable({
       all: rows.length,
       "us-federal": 0,
       "us-states": 0,
-      international: 0,
+      "europe": 0,
+      "asia-pacific": 0,
     };
     for (const r of rows) {
       if (matchesJurisdiction(r.entity, "us-federal")) counts["us-federal"] += 1;
       else if (matchesJurisdiction(r.entity, "us-states")) counts["us-states"] += 1;
-      else counts.international += 1;
+      else if (matchesJurisdiction(r.entity, "europe")) counts["europe"] += 1;
+      else counts["asia-pacific"] += 1;
     }
     return counts;
   }, [allRows, activeCategory, dimension]);
@@ -286,17 +296,45 @@ export default function LegislationTable({
     );
   }, [allRows, dimension]);
 
+  const categoryCounts = useMemo(() => {
+    const counts: Record<CategoryFilter, number> = {} as Record<CategoryFilter, number>;
+    for (const c of CATEGORY_FILTERS) {
+      counts[c] = c === "all"
+        ? dimensionFilteredRows.length
+        : dimensionFilteredRows.filter((r) => billMatchesCategoryFilter(r.bill.category, c)).length;
+    }
+    return counts;
+  }, [dimensionFilteredRows]);
+
   const visibleCategories = useMemo(() => {
     return CATEGORY_FILTERS.filter((c) => {
       if (c === "all") return true;
-      return dimensionFilteredRows.some((r) =>
-        billMatchesCategoryFilter(r.bill.category, c),
-      );
+      return categoryCounts[c] > 0;
     });
-  }, [dimensionFilteredRows]);
+  }, [categoryCounts]);
 
-  const hasMore = filtered.length > PREVIEW_COUNT;
-  const visible = expanded ? filtered : filtered.slice(0, PREVIEW_COUNT);
+  const statusCounts = useMemo(() => {
+    const base = activeCategory !== "all"
+      ? dimensionFilteredRows.filter((r) => billMatchesCategoryFilter(r.bill.category, activeCategory))
+      : dimensionFilteredRows;
+    const counts: Record<StatusFilter, number> = {
+      all: base.length,
+      proposed: 0,
+      voting: 0,
+      passed: 0,
+      dead: 0,
+    };
+    for (const r of base) {
+      if (matchesStatus(r.bill.stage, "proposed")) counts.proposed += 1;
+      else if (matchesStatus(r.bill.stage, "voting")) counts.voting += 1;
+      else if (matchesStatus(r.bill.stage, "passed")) counts.passed += 1;
+      else counts.dead += 1;
+    }
+    return counts;
+  }, [dimensionFilteredRows, activeCategory]);
+
+  const hasMore = !showAll && filtered.length > PREVIEW_COUNT;
+  const visible = showAll ? filtered : filtered.slice(0, PREVIEW_COUNT);
 
   return (
     <div>
@@ -328,7 +366,7 @@ export default function LegislationTable({
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search by bill code, title, summary, or state…"
+            placeholder="Search bills…"
             className="flex-1 bg-transparent text-sm text-ink placeholder:text-muted focus:outline-none min-w-0"
           />
           {query && (
@@ -365,10 +403,10 @@ export default function LegislationTable({
                 key={opt.key}
                 type="button"
                 onClick={() => setActiveJurisdiction(opt.key)}
-                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
                   active
-                    ? "bg-ink text-white"
-                    : "border border-black/[.06] text-muted hover:text-ink"
+                    ? "bg-ink text-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+                    : "border border-black/[.06] text-muted hover:text-ink hover:bg-black/[.02]"
                 }`}
               >
                 <span>{opt.label}</span>
@@ -392,18 +430,22 @@ export default function LegislationTable({
           <div className="flex flex-wrap gap-2">
             {visibleCategories.map((c) => {
               const active = c === activeCategory;
+              const count = categoryCounts[c];
               return (
                 <button
                   key={c}
                   type="button"
                   onClick={() => setActiveCategory(c)}
-                  className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                  className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
                     active
-                      ? "bg-ink text-white"
-                      : "border border-black/[.06] text-muted hover:text-ink"
+                      ? "bg-ink text-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+                      : "border border-black/[.06] text-muted hover:text-ink hover:bg-black/[.02]"
                   }`}
                 >
-                  {CATEGORY_FILTER_LABEL[c]}
+                  <span>{CATEGORY_FILTER_LABEL[c]}</span>
+                  <span className={`text-[10px] ${active ? "text-white/70" : "text-muted"}`}>
+                    {count}
+                  </span>
                 </button>
               );
             })}
@@ -419,18 +461,22 @@ export default function LegislationTable({
         <div className="flex flex-wrap gap-2">
           {STATUS_OPTIONS.map((opt) => {
             const active = opt.key === activeStatus;
+            const count = statusCounts[opt.key];
             return (
               <button
                 key={opt.key}
                 type="button"
                 onClick={() => setActiveStatus(opt.key)}
-                className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
                   active
-                    ? "bg-ink text-white"
-                    : "border border-black/[.06] text-muted hover:text-ink"
+                    ? "bg-ink text-white shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
+                    : "border border-black/[.06] text-muted hover:text-ink hover:bg-black/[.02]"
                 }`}
               >
-                {opt.label}
+                <span>{opt.label}</span>
+                <span className={`text-[10px] ${active ? "text-white/70" : "text-muted"}`}>
+                  {count}
+                </span>
               </button>
             );
           })}
@@ -446,7 +492,7 @@ export default function LegislationTable({
           <select
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value as SortKey)}
-            className="appearance-none rounded-full bg-black/[.04] text-ink text-xs font-medium pl-3 pr-7 py-1.5 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+            className="appearance-none rounded-full bg-black/[.04] hover:bg-black/[.06] text-ink text-xs font-medium pl-3 pr-7 py-1.5 cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] focus:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
           >
             {SORT_OPTIONS.map((opt) => (
               <option key={opt.key} value={opt.key}>
@@ -480,16 +526,31 @@ export default function LegislationTable({
       ) : (
         <>
           <div className="flex flex-col gap-3">
-            {visible.map(({ bill, entity, target }) => {
+            {visible.map(({ bill, entity, target }, idx) => {
               const rowId = `${entity.id}-${bill.id}`;
               const isOpen = openRowId === rowId;
               const stateCode =
                 entity.level === "federal" && entity.geoId === "840"
                   ? "US"
                   : undefined;
+              // Scroll-triggered stagger reveal — ported from agentation's
+              // diagram pattern. Delay caps at 300ms so long lists don't
+              // drag; `once: true` + margin: "-40px" fires just before
+              // the row reaches the viewport edge so motion completes as
+              // it enters view. Skipped entirely under reduced-motion via
+              // globals.css catch-all (transition-duration: 0.01ms).
+              const delay = Math.min(idx * 0.04, 0.3);
               return (
-                <div
+                <motion.div
                   key={rowId}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{
+                    duration: 0.4,
+                    delay,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
                   className="bg-bg/60 hover:bg-bg rounded-2xl p-5 transition-colors"
                 >
                   <div
@@ -547,22 +608,19 @@ export default function LegislationTable({
                       <BillExpanded bill={bill} stateCode={stateCode} />
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
 
           {hasMore && (
             <div className="mt-6 flex justify-center">
-              <button
-                type="button"
-                onClick={() => setExpanded((v) => !v)}
+              <Link
+                href="/bills"
                 className="rounded-full border border-black/[.06] text-muted hover:text-ink px-5 py-2 text-xs font-medium transition-colors"
               >
-                {expanded
-                  ? "Show less"
-                  : `Show all ${filtered.length} bills →`}
-              </button>
+                Show all {filtered.length} bills →
+              </Link>
             </div>
           )}
         </>

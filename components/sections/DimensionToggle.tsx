@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { motion } from "framer-motion";
 import {
   AI_DIMENSIONS,
   DATACENTER_DIMENSIONS,
@@ -82,23 +83,47 @@ export default function DimensionToggle({
     <div>
       {/* Lens toggle — Data Centers vs AI Regulation */}
       <div className="text-[13px] font-medium text-muted tracking-tight mb-2">
-        Lens
+        Focus
       </div>
-      <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04] mb-2">
+      {/* iOS-style segmented control — the white pill SLIDES between
+          options instead of cross-fading. `layoutId` shares the same
+          motion node across both buttons so framer interpolates its
+          position with a spring. The non-active button's text color
+          eases to ink on hover and on the way in. */}
+      <div
+        className="relative inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04] mb-2"
+        role="tablist"
+      >
         {(Object.keys(LENS_LABEL) as DimensionLens[]).map((l) => {
           const active = l === lens;
           return (
             <button
               key={l}
               type="button"
+              role="tab"
+              aria-selected={active}
               onClick={() => handleLensChange(l)}
-              className={`text-xs font-medium px-4 py-1.5 rounded-full transition-all ${
-                active
-                  ? "bg-white text-ink shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
-                  : "text-muted hover:text-ink"
+              className={`relative text-xs font-medium px-4 py-1.5 rounded-full transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
+                active ? "text-ink" : "text-muted hover:text-ink"
               }`}
+              style={{ transitionProperty: "color, transform" }}
             >
-              {LENS_LABEL[l]}
+              {active && (
+                <motion.span
+                  layoutId="lens-indicator"
+                  className="absolute inset-0 rounded-full bg-white"
+                  style={{
+                    boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 480,
+                    damping: 26,
+                    mass: 0.7,
+                  }}
+                />
+              )}
+              <span className="relative z-10">{LENS_LABEL[l]}</span>
             </button>
           );
         })}
@@ -136,10 +161,10 @@ export default function DimensionToggle({
               type="button"
               onClick={() => onChange(d)}
               style={activeStyle}
-              className={`inline-flex items-center rounded-full border px-4 py-2 text-xs font-medium transition-colors ${
+              className={`inline-flex items-center rounded-full border px-4 py-2 text-xs font-medium transition-all duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
                 active
                   ? "border-transparent"
-                  : "border-black/[.06] text-muted hover:text-ink"
+                  : "border-black/[.06] text-muted hover:text-ink hover:bg-black/[.02]"
               }`}
             >
               {DIMENSION_LABEL[d]}

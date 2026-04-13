@@ -3,6 +3,7 @@
 import { STANCE_LABEL, type Dimension, DIMENSION_LABEL } from "@/types";
 import { STANCE_HEX } from "@/lib/map-utils";
 import { DIMENSION_GRADIENT } from "@/lib/dimensions";
+import { SIZE_BANDS } from "@/components/map/DataCenterDots";
 
 interface MobileLegendProps {
   dimension: Dimension;
@@ -21,17 +22,17 @@ const STANCE_ORDER = [
 // Compact labels for the small legend chips — full STANCE_LABEL is
 // too verbose for a mobile pill.
 const SHORT_STANCE: Record<(typeof STANCE_ORDER)[number], string> = {
-  restrictive: "Strict",
-  concerning: "Process",
-  review: "Review",
-  none: "None",
-  favorable: "Open",
+  restrictive: "Restricted",
+  concerning: "Active",
+  review: "Reviewing",
+  none: "Inactive",
+  favorable: "Favorable",
 };
 
 function StanceRow() {
   return (
     <div>
-      <div className="text-[10px] font-semibold text-muted uppercase tracking-[0.07em] mb-2">
+      <div className="text-[11px] font-semibold text-muted tracking-tight mb-2">
         Stance
       </div>
       <div className="flex items-center justify-between gap-1">
@@ -57,7 +58,7 @@ function DimensionRow({ dimension }: { dimension: Dimension }) {
   const grad = DIMENSION_GRADIENT[dimension];
   return (
     <div>
-      <div className="text-[10px] font-semibold text-muted uppercase tracking-[0.07em] mb-2 truncate">
+      <div className="text-[11px] font-semibold text-muted tracking-tight mb-2 truncate">
         {DIMENSION_LABEL[dimension]}
       </div>
       <div
@@ -74,15 +75,42 @@ function DimensionRow({ dimension }: { dimension: Dimension }) {
   );
 }
 
+function SizeRow() {
+  return (
+    <div>
+      <div className="text-[11px] font-semibold text-muted tracking-tight mb-2">
+        Size by power
+      </div>
+      <div className="flex items-end justify-between gap-2">
+        {SIZE_BANDS.map((band) => (
+          <div
+            key={band.key}
+            className="flex items-center gap-1.5 flex-1 min-w-0"
+          >
+            <span
+              className="rounded-full bg-muted/30 flex-shrink-0"
+              style={{ width: band.r * 1.6, height: band.r * 1.6 }}
+              aria-hidden
+            />
+            <span className="text-[10px] text-muted truncate">
+              {band.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function DataCenterRow() {
   const items = [
     { color: "#0A84FF", label: "Operational", hollow: false },
-    { color: "#FF9500", label: "Under const.", hollow: false },
+    { color: "#FF9500", label: "Building", hollow: false },
     { color: "#5856D6", label: "Proposed", hollow: true },
   ];
   return (
     <div>
-      <div className="text-[10px] font-semibold text-muted uppercase tracking-[0.07em] mb-2">
+      <div className="text-[11px] font-semibold text-muted tracking-tight mb-2">
         Data centers
       </div>
       <div className="flex items-center justify-between gap-2">
@@ -130,7 +158,6 @@ export default function MobileLegend({
       style={{
         opacity: visibility,
         pointerEvents: visibility < 0.5 ? "none" : "auto",
-        fontFamily: "-apple-system, 'SF Pro Text', system-ui, sans-serif",
       }}
     >
       <div
@@ -146,6 +173,8 @@ export default function MobileLegend({
             <>
               <div className="h-px bg-black/[.05]" />
               <DataCenterRow />
+              <div className="h-px bg-black/[.05]" />
+              <SizeRow />
             </>
           )}
         </div>
