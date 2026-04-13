@@ -131,8 +131,6 @@ function StatusLoader() {
   );
 }
 
-type MarkerPos = { x: number; y: number; visible: boolean };
-
 export default function GlobePage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -144,12 +142,12 @@ export default function GlobePage() {
   const thetaOffset = useRef(0);
   const scaleRef = useRef(1);
   const scaleTargetRef = useRef(1);
+  const wheelTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
   const labelRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
   const [selectedFacility, setSelectedFacility] = useState<DataCenter | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const drawerOpenRef = useRef(false);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [statsReady, setStatsReady] = useState(false);
 
   const markers = useMemo(() => clusterFacilities(ALL_FACILITIES, 4), []);
@@ -193,10 +191,30 @@ export default function GlobePage() {
     const delta = -e.deltaY * ZOOM_SPEED;
     scaleTargetRef.current = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scaleTargetRef.current * (1 + delta)));
     isPausedRef.current = true;
-    clearTimeout((handleWheel as any)._t);
-    (handleWheel as any)._t = setTimeout(() => {
+    clearTimeout(wheelTimerRef.current);
+    wheelTimerRef.current = setTimeout(() => {
       if (!pointerDown.current) isPausedRef.current = false;
     }, 800);
+  }, []);
+
+  const lastPinchDist = useRef<number | null>(null);
+
+  const handleTouchMove = useCallback((e: TouchEvent) => {
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (lastPinchDist.current !== null) {
+        const delta = (dist - lastPinchDist.current) * 0.005;
+        scaleTargetRef.current = Math.max(MIN_SCALE, Math.min(MAX_SCALE, scaleTargetRef.current * (1 + delta)));
+      }
+      lastPinchDist.current = dist;
+    }
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    lastPinchDist.current = null;
   }, []);
 
   const handlePointerUp = useCallback(() => {
@@ -216,13 +234,19 @@ export default function GlobePage() {
     const container = containerRef.current;
     if (container) {
       container.addEventListener("wheel", handleWheel, { passive: false });
+      container.addEventListener("touchmove", handleTouchMove, { passive: false });
+      container.addEventListener("touchend", handleTouchEnd, { passive: true });
     }
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("pointerup", handlePointerUp);
-      if (container) container.removeEventListener("wheel", handleWheel);
+      if (container) {
+        container.removeEventListener("wheel", handleWheel);
+        container.removeEventListener("touchmove", handleTouchMove);
+        container.removeEventListener("touchend", handleTouchEnd);
+      }
     };
-  }, [handlePointerMove, handlePointerUp, handleWheel]);
+  }, [handlePointerMove, handlePointerUp, handleWheel, handleTouchMove, handleTouchEnd]);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -230,10 +254,6 @@ export default function GlobePage() {
     const width = canvas.offsetWidth;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const elevation = 0.02;
-
-    const cobeMarkers = markers.map((m) => ({
-      location: m.location, size: m.size, id: m.id,
-    }));
 
     const globe = createGlobe(canvas, {
       devicePixelRatio: dpr, width, height: width,
@@ -295,10 +315,7 @@ export default function GlobePage() {
     }
     animate();
 
-    setTimeout(() => {
-      canvas.style.opacity = "1";
-      setStatsReady(true);
-    }, 400);
+    setStatsReady(true);
 
     return () => {
       cancelAnimationFrame(animId);
@@ -335,11 +352,11 @@ export default function GlobePage() {
   }, []);
 
   return (
-    <div className="h-screen w-screen overflow-hidden bg-[#0a0a0c] relative flex font-sans">
-      <div className={`flex-1 relative flex items-center justify-center overflow-hidden transition-[padding] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${drawerOpen ? "pr-[380px]" : ""}`}>
+    <div className="h-dvh w-screen overflow-hidden bg-[#0a0a0c] relative flex font-sans touch-none">
+      <div className={`flex-1 relative flex items-center justify-center overflow-hidden transition-[padding] duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${drawerOpen ? "md:pr-[380px]" : ""}`}>
         <Link
           href="/#datacenters"
-          className="absolute top-6 left-6 z-20 inline-flex items-center gap-1.5 text-sm text-white/50 hover:text-white/80 transition-colors"
+          className="absolute top-3 left-3 md:top-6 md:left-6 z-20 inline-flex items-center gap-1.5 text-xs md:text-sm text-white/50 hover:text-white/80 transition-colors"
         >
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M7.5 2L3.5 6L7.5 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -347,16 +364,16 @@ export default function GlobePage() {
           TrackPolicy
         </Link>
 
-        <div className="absolute bottom-6 left-6 z-20 flex items-center gap-6">
+        <div className="absolute bottom-[max(0.75rem,env(safe-area-inset-bottom))] left-3 md:bottom-6 md:left-6 z-20 flex items-center gap-4 md:gap-6">
           <div>
-            <div className="text-[11px] text-white/40 tracking-tight">Facilities</div>
-            <div className="text-lg font-semibold text-white/90 tabular-nums">
+            <div className="text-[10px] md:text-[11px] text-white/40 tracking-tight">Facilities</div>
+            <div className="text-base md:text-lg font-semibold text-white/90 tabular-nums">
               <NumberFlow value={statsReady ? stats.total : 0} />
             </div>
           </div>
           <div>
-            <div className="text-[11px] text-white/40 tracking-tight">Total capacity</div>
-            <div className="text-lg font-semibold text-white/90 tabular-nums">
+            <div className="text-[10px] md:text-[11px] text-white/40 tracking-tight">Total capacity</div>
+            <div className="text-base md:text-lg font-semibold text-white/90 tabular-nums">
               <NumberFlow value={statsReady ? parseFloat((stats.totalMW / 1000).toFixed(1)) : 0} format={{ minimumFractionDigits: 1, maximumFractionDigits: 1 }} suffix=" GW" />
             </div>
           </div>
@@ -366,14 +383,14 @@ export default function GlobePage() {
         <div ref={containerRef} className="globe-markers-container w-full max-w-[720px] aspect-square relative">
           <canvas
             ref={canvasRef}
-            className="w-full h-full opacity-0 transition-opacity duration-700 cursor-grab"
+            className="w-full h-full cursor-grab"
             onPointerDown={handlePointerDown}
           />
 
           {markers.map((m) => {
             const name = stripConfidence(m.facility.operator) ?? "Unknown";
             const mw = formatMW(m.totalMW);
-            const isUnderConstruction = m.facility.status === "under-construction";
+            const markerColor = m.facility.status === "proposed" ? "bg-[#BF5AF2]" : m.facility.status === "under-construction" ? "bg-[#FF9500]" : "bg-[#0A84FF]";
             const isTop = topIds.has(m.id);
             return (
               <div
@@ -384,14 +401,11 @@ export default function GlobePage() {
                 onMouseLeave={() => { if (!pointerDown.current) isPausedRef.current = false; }}
                 onClick={() => handleSelectFacility(m.facility)}
               >
-                {isUnderConstruction ? (
-                  <div className="globe-marker-icon w-[14px] h-[14px] rounded-full bg-[#FF9500] border-2 border-white shadow-[0_1px_4px_rgba(0,0,0,0.35)]" />
-                ) : (
-                  <div className="globe-marker-icon w-[14px] h-[14px] rounded-full bg-[#0A84FF] border-2 border-white shadow-[0_1px_4px_rgba(0,0,0,0.35)]" />
-                )}
+                <div className={`globe-marker-icon w-[14px] h-[14px] rounded-full ${markerColor} border-2 border-white shadow-[0_1px_4px_rgba(0,0,0,0.35)]`} />
+                <div className="absolute -inset-3 md:hidden" />
                 <div
                   className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-2 pointer-events-none transition-all duration-150 ${
-                    isTop ? "opacity-100 scale-100" : "globe-marker-tooltip opacity-0 scale-95"
+                    isTop ? "hidden md:block opacity-100 scale-100" : "globe-marker-tooltip opacity-0 scale-95"
                   }`}
                 >
                   <div
@@ -408,25 +422,28 @@ export default function GlobePage() {
           })}
         </div>
 
-        <div className="absolute bottom-6 right-6 z-20 text-[11px] text-white/25 tracking-tight">
+        <div className="absolute bottom-3 right-3 md:bottom-6 md:right-6 z-20 text-[11px] text-white/25 tracking-tight hidden md:block">
           Drag to rotate · Scroll to zoom · Click to inspect
         </div>
       </div>
 
-      {/* Sidebar drawer */}
+      {/* Drawer: bottom sheet on mobile, right sidebar on desktop */}
       <div
-        className={`absolute top-0 right-0 h-full z-30 w-[380px] max-w-[90vw] bg-[#141416] border-l border-white/[.08] shadow-[-8px_0_32px_rgba(0,0,0,0.4)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${drawerOpen && selectedFacility ? "translate-x-0" : "translate-x-full"} flex flex-col`}
+        className={`absolute z-30 bg-[#141416] shadow-[0_-8px_32px_rgba(0,0,0,0.4)] md:shadow-[-8px_0_32px_rgba(0,0,0,0.4)] transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex flex-col bottom-0 left-0 right-0 max-h-[70vh] rounded-t-2xl border-t border-white/8 md:rounded-none md:border-t-0 md:border-l md:border-white/8 md:top-0 md:left-auto md:right-0 md:bottom-0 md:max-h-full md:h-full md:w-[380px] md:max-w-[90vw] ${drawerOpen && selectedFacility ? "translate-y-0 md:translate-x-0" : "translate-y-full md:translate-y-0 md:translate-x-full"}`}
       >
         {selectedFacility && (
           <>
-            <div className="px-6 pt-5 pb-4 border-b border-white/[.08] flex items-start justify-between gap-3">
+            <div className="flex justify-center pt-2 pb-0 md:hidden">
+              <div className="w-10 h-1 rounded-full bg-white/20" />
+            </div>
+            <div className="px-6 pt-4 md:pt-5 pb-4 border-b border-white/8 flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <h2 className="text-xl font-semibold text-white tracking-tight leading-tight truncate">{operator}</h2>
                 <div className="mt-1.5 flex items-center gap-2 text-xs text-white/50">
                   {selectedFacility.status === "under-construction" ? (
                     <StatusLoader />
                   ) : (
-                    <span className="inline-block w-[6px] h-[6px] rounded-full shrink-0 bg-[#0A84FF]" />
+                    <span className={`inline-block w-[6px] h-[6px] rounded-full shrink-0 ${selectedFacility.status === "proposed" ? "bg-[#BF5AF2]" : "bg-[#0A84FF]"}`} />
                   )}
                   <span>{STATUS_LABEL[selectedFacility.status]}</span>
                   {capacity && (
@@ -481,7 +498,7 @@ export default function GlobePage() {
               </div>
             </div>
 
-            <div className="px-6 py-4 border-t border-white/[.06]">
+            <div className="px-6 py-4 border-t border-white/[.06] pb-[max(1rem,env(safe-area-inset-bottom))]">
               <Link href="/datacenters" className="text-[13px] text-white/40 hover:text-white/80 transition-colors">
                 View all facilities →
               </Link>
