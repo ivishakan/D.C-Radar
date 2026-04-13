@@ -1,6 +1,8 @@
 "use client";
 
-import type { DataCenter } from "@/types";
+import { useState } from "react";
+import type { DataCenter, ImpactTag } from "@/types";
+import { IMPACT_TAG_LABEL } from "@/types";
 import { DC_COLOR } from "@/components/map/DataCenterDots";
 
 interface FacilityDetailProps {
@@ -44,9 +46,20 @@ const STATUS_LABEL: Record<DataCenter["status"], string> = {
  * definition list) instead of the busy pill-heavy treatment it had
  * before.
  */
+function prettyConcern(tag: string): string {
+  return (
+    IMPACT_TAG_LABEL[tag as ImpactTag] ??
+    tag
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ")
+  );
+}
+
 export default function FacilityDetail({
   facility,
 }: FacilityDetailProps) {
+  const [issuesOpen, setIssuesOpen] = useState(true);
   const operator = stripConfidence(facility.operator) ?? facility.operator;
   const user = stripConfidence(facility.primaryUser);
   const capacity = formatMW(facility.capacityMW);
@@ -54,7 +67,7 @@ export default function FacilityDetail({
   const cost = formatCost(facility.costUSD);
   const color = DC_COLOR[facility.status];
   const isProposed = facility.status === "proposed";
-  const showUser = user && user !== operator;
+  const showUser = !!user;
 
   const details: Array<{ label: string; value: string }> = [];
   if (showUser) details.push({ label: "Primary user", value: user! });
@@ -117,6 +130,46 @@ export default function FacilityDetail({
               </div>
             ))}
           </dl>
+        )}
+
+        {/* Issues dropdown — collapsible list of concern tags */}
+        {facility.concerns && facility.concerns.length > 0 && (
+          <div>
+            <button
+              type="button"
+              onClick={() => setIssuesOpen((o) => !o)}
+              aria-expanded={issuesOpen}
+              className="w-full flex items-center justify-between py-2 text-[13px] font-medium text-ink hover:text-ink/70 transition-colors"
+            >
+              <span>
+                Issues{" "}
+                <span className="text-muted font-normal">
+                  ({facility.concerns.length})
+                </span>
+              </span>
+              <span
+                aria-hidden
+                className="text-muted text-[11px] transition-transform"
+                style={{
+                  transform: issuesOpen ? "rotate(180deg)" : "rotate(0deg)",
+                }}
+              >
+                ▾
+              </span>
+            </button>
+            {issuesOpen && (
+              <ul className="mt-1.5 flex flex-wrap gap-1.5">
+                {facility.concerns.map((c) => (
+                  <li
+                    key={c}
+                    className="text-[11.5px] px-2 py-1 rounded-full bg-black/[.04] text-ink/80 tracking-tight"
+                  >
+                    {prettyConcern(c)}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         )}
 
         {/* Source attribution — single muted line, not a badge */}

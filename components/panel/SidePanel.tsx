@@ -1,19 +1,22 @@
 "use client";
 
+import Link from "next/link";
 import {
   useRef,
   useState,
   type CSSProperties,
   type ReactNode,
 } from "react";
-import Link from "next/link";
-import type { DataCenter, Entity, GovLevel } from "@/types";
+import { motion, MotionConfig } from "framer-motion";
+import type { DataCenter, DimensionLens, Entity, GovLevel } from "@/types";
 import StanceBadge from "@/components/ui/StanceBadge";
 import ContextBlurb from "./ContextBlurb";
 import LegislationList from "./LegislationList";
 import KeyFigures from "./KeyFigures";
 import NewsSection from "./NewsSection";
 import FacilityDetail from "./FacilityDetail";
+import DataCentersList from "./DataCentersList";
+import { facilitiesForEntity } from "@/lib/datacenters";
 
 interface SidePanelProps {
   entity: Entity | null;
@@ -26,6 +29,9 @@ interface SidePanelProps {
   /** When set, the panel renders facility detail instead of entity content. */
   facility?: DataCenter | null;
   onCloseFacility?: () => void;
+  /** Pins a facility from the Data Centers tab. */
+  onSelectFacility?: (dc: DataCenter) => void;
+  lens?: DimensionLens;
 }
 
 const LEVEL_LABEL: Record<GovLevel, string | null> = {
@@ -34,20 +40,46 @@ const LEVEL_LABEL: Record<GovLevel, string | null> = {
   bloc: null,
 };
 
-type Layer = "legislation" | "figures" | "news";
+type Layer = "legislation" | "figures" | "news" | "datacenters";
 type Position = "left" | "right" | "bottom";
 type Size = "min" | "md";
 
 const LEGISLATION_PREVIEW = 5;
 const FIGURES_PREVIEW = 3;
 const NEWS_PREVIEW = 3;
+const DC_PREVIEW = 6;
 
 // Bouncy spring — more pronounced overshoot for the rubber-band feel.
 const SPRING = "cubic-bezier(0.5, 1.55, 0.4, 1)";
 const DUR = "650ms";
 const TRANSITION = `transform ${DUR} ${SPRING}, width ${DUR} ${SPRING}, min-height ${DUR} ${SPRING}, max-height ${DUR} ${SPRING}, opacity 250ms ease`;
 
-function ShowAllLink({
+function ExpandToggle({
+  total,
+  shown,
+  label,
+  expanded,
+  onToggle,
+}: {
+  total: number;
+  shown: number;
+  label: string;
+  expanded: boolean;
+  onToggle: () => void;
+}) {
+  if (total <= shown) return null;
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      className="inline-block text-xs text-muted hover:text-ink transition-colors mt-3"
+    >
+      {expanded ? `Show fewer ${label}` : `Show all ${total} ${label} →`}
+    </button>
+  );
+}
+
+function SeeAllLink({
   total,
   shown,
   label,
@@ -56,25 +88,16 @@ function ShowAllLink({
   total: number;
   shown: number;
   label: string;
-  href?: string;
+  href: string;
 }) {
   if (total <= shown) return null;
-  const className =
-    "inline-block text-xs text-muted hover:text-ink transition-colors mt-3";
-  const content = `Show all ${total} ${label} →`;
-  if (href) {
-    return (
-      <Link href={href} className={className}>
-        {content}
-      </Link>
-    );
-  }
-  // No destination yet — render a muted "+N more" hint instead of a dead
-  // <a href="#"> which scrolled the page back to the top on click.
   return (
-    <span className="inline-block text-xs text-muted mt-3">
-      +{total - shown} more {label}
-    </span>
+    <Link
+      href={href}
+      className="inline-block text-xs text-muted hover:text-ink transition-colors mt-3"
+    >
+      See all {total} {label} →
+    </Link>
   );
 }
 
@@ -109,6 +132,8 @@ export default function SidePanel({
   isMobileViewport,
   facility = null,
   onCloseFacility,
+  onSelectFacility,
+  lens = "datacenter",
 }: SidePanelProps) {
   // Mobile defaults to the bottom-anchored card; desktop to top-left.
   // Derived state (not initial useState) so it actually tracks the
@@ -121,6 +146,13 @@ export default function SidePanel({
     explicitPosition ?? (isMobileViewport ? "bottom" : "left");
   const setPosition = (p: Position) => setExplicitPosition(p);
   const [preferredLayer, setPreferredLayer] = useState<Layer>("legislation");
+  const [expandedSections, setExpandedSections] = useState<Set<Layer>>(new Set());
+  const toggleExpand = (layer: Layer) =>
+    setExpandedSections((prev) => {
+      const next = new Set(prev);
+      next.has(layer) ? next.delete(layer) : next.add(layer);
+      return next;
+    });
   const setSize = onSizeChange;
   const [dragOffset, setDragOffset] = useState<{ x: number; y: number } | null>(
     null,
@@ -132,10 +164,19 @@ export default function SidePanel({
   const hasLegislation = !!entity && entity.legislation.length > 0;
   const hasFigures = !!entity && entity.keyFigures.length > 0;
   const hasNews = !!entity && entity.news.length > 0;
+
+  // Scope facilities to whatever the entity represents. The panel preview
+  // always renders flat; grouping only matters on the full /datacenters page.
+  const scopedFacilities: DataCenter[] = entity
+    ? facilitiesForEntity(entity).facilities
+    : [];
+  const hasDatacenters = scopedFacilities.length > 0;
+
   const availableLayers: Layer[] = [];
   if (hasLegislation) availableLayers.push("legislation");
   if (hasFigures) availableLayers.push("figures");
   if (hasNews) availableLayers.push("news");
+  if (hasDatacenters) availableLayers.push("datacenters");
   const activeLayer: Layer =
     availableLayers.length > 0 && !availableLayers.includes(preferredLayer)
       ? availableLayers[0]
@@ -145,11 +186,12 @@ export default function SidePanel({
 
   // Position the panel via direct top/right/bottom/left (not via calc-with-%
   // in a transform — that doesn't resolve reliably in all browsers).
-  // Min mode is always top-centered. md mode honors the position pick.
+  // Min mode sits below the TopToolbar (which owns top-6 ≈ 1.5rem); stacking
+  // them avoids the dynamic island being covered by the region tabs.
   const positionStyle: CSSProperties = (() => {
     if (size === "min") {
       return {
-        top: "1.5rem",
+        top: "4.5rem",
         left: "50%",
         right: "auto",
         bottom: "auto",
@@ -318,7 +360,7 @@ export default function SidePanel({
       ) : !entity ? (
         <div className="flex-1 flex items-center justify-center px-8 py-12 min-h-[160px]">
           <p className="text-xs text-muted text-center">
-            Select a country or region to explore legislation
+            Select a region to see its policies and data centers
           </p>
         </div>
       ) : (
@@ -328,7 +370,10 @@ export default function SidePanel({
               {entity.name}
             </h2>
             <div className="mt-2 flex items-center gap-3">
-              <StanceBadge stance={entity.stance} size="md" />
+              <StanceBadge
+                stance={lens === "ai" ? entity.stanceAI : entity.stanceDatacenter}
+                size="md"
+              />
               {LEVEL_LABEL[entity.level] && (
                 <span className="text-xs text-muted">
                   {LEVEL_LABEL[entity.level]}
@@ -338,6 +383,20 @@ export default function SidePanel({
           </div>
 
           <div className="p-6 flex flex-col gap-6">
+            {/* Onboarding hint — shows on the regional overview only, so
+                it appears the moment a new visitor lands and disappears
+                the instant they make a selection. Avoids needing a
+                dismissible tutorial. */}
+            {entity.isOverview && (
+              <div className="rounded-2xl bg-[oklch(0.96_0.025_85)] border border-[oklch(0.88_0.05_85)]/50 px-4 py-3 text-[12px] text-ink/80 leading-relaxed">
+                <div className="text-ink font-semibold mb-0.5">
+                  Click anywhere to explore
+                </div>
+                A country, state, or any data center pin opens its
+                detail. <span className="hidden lg:inline">Press <kbd className="font-sans px-1 rounded bg-white/85 border border-black/[.08] text-[10px] text-ink">?</kbd> for keyboard shortcuts.</span>
+              </div>
+            )}
+
             <ContextBlurb text={entity.contextBlurb} />
 
             {showViewStatesButton && onViewStates && (
@@ -346,13 +405,23 @@ export default function SidePanel({
                 onClick={onViewStates}
                 className="self-start rounded-full bg-ink text-white text-xs font-medium px-4 py-2 hover:bg-ink/90 transition-colors"
               >
-                View State Legislation →
+                View state policies →
               </button>
             )}
 
             {availableLayers.length > 0 && (
-              <>
-                <div className="inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04] self-start">
+              <MotionConfig
+                transition={{
+                  type: "spring",
+                  damping: 22,
+                  mass: 0.4,
+                  stiffness: 260,
+                }}
+              >
+                <div
+                  className="relative inline-flex items-center gap-1 p-1 rounded-full bg-black/[.04] self-start"
+                  role="tablist"
+                >
                   {availableLayers.map((layer) => {
                     const active = layer === activeLayer;
                     const label =
@@ -360,66 +429,109 @@ export default function SidePanel({
                         ? "Legislation"
                         : layer === "figures"
                           ? "Key Figures"
-                          : "News";
+                          : layer === "news"
+                            ? "News"
+                            : "Data Centers";
                     return (
                       <button
                         key={layer}
                         type="button"
+                        role="tab"
+                        aria-selected={active}
                         onClick={() => setPreferredLayer(layer)}
-                        className={`text-xs font-medium px-3 py-1.5 rounded-full transition-all ${
-                          active
-                            ? "bg-white text-ink shadow-[0_1px_3px_rgba(0,0,0,0.08)]"
-                            : "text-muted hover:text-ink"
+                        className={`relative text-xs font-medium px-3 py-1.5 rounded-full transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.97] ${
+                          active ? "text-ink" : "text-muted hover:text-ink"
                         }`}
+                        style={{ transitionProperty: "color, transform" }}
                       >
-                        {label}
+                        {active && (
+                          <motion.span
+                            layoutId="sidepanel-layer-indicator"
+                            className="absolute inset-0 rounded-full bg-white"
+                            style={{
+                              boxShadow: "0 1px 3px rgba(0,0,0,0.08)",
+                            }}
+                            // Bouncier than the default MotionConfig spring
+                            // so the pill overshoots a touch and settles —
+                            // makes the swap feel alive without losing
+                            // precision.
+                            transition={{
+                              type: "spring",
+                              stiffness: 480,
+                              damping: 26,
+                              mass: 0.7,
+                            }}
+                          />
+                        )}
+                        <span className="relative z-10">{label}</span>
                       </button>
                     );
                   })}
                 </div>
 
                 {activeLayer === "legislation" && hasLegislation && (
-                  <section>
+                  <motion.section layout>
                     <LegislationList
-                      legislation={entity.legislation.slice(
-                        0,
-                        LEGISLATION_PREVIEW,
-                      )}
+                      legislation={entity.legislation.slice(0, LEGISLATION_PREVIEW)}
                       stateCode={entity.level === "federal" ? "US" : undefined}
                     />
-                    <ShowAllLink
+                    <SeeAllLink
                       total={entity.legislation.length}
                       shown={LEGISLATION_PREVIEW}
                       label="bills"
                       href={`/legislation/${encodeURIComponent(entity.id)}`}
                     />
-                  </section>
+                  </motion.section>
                 )}
 
                 {activeLayer === "figures" && hasFigures && (
-                  <section>
+                  <motion.section layout>
                     <KeyFigures
-                      figures={entity.keyFigures.slice(0, FIGURES_PREVIEW)}
+                      figures={
+                        expandedSections.has("figures")
+                          ? entity.keyFigures
+                          : entity.keyFigures.slice(0, FIGURES_PREVIEW)
+                      }
+                      legislation={entity.legislation}
                     />
-                    <ShowAllLink
+                    <ExpandToggle
                       total={entity.keyFigures.length}
                       shown={FIGURES_PREVIEW}
                       label="figures"
+                      expanded={expandedSections.has("figures")}
+                      onToggle={() => toggleExpand("figures")}
                     />
-                  </section>
+                  </motion.section>
                 )}
 
                 {activeLayer === "news" && hasNews && (
-                  <section>
+                  <motion.section layout>
                     <NewsSection news={entity.news.slice(0, NEWS_PREVIEW)} />
-                    <ShowAllLink
+                    <SeeAllLink
                       total={entity.news.length}
                       shown={NEWS_PREVIEW}
                       label="articles"
+                      href={`/news/${encodeURIComponent(entity.id)}`}
                     />
-                  </section>
+                  </motion.section>
                 )}
-              </>
+
+                {activeLayer === "datacenters" && hasDatacenters && (
+                  <motion.section layout>
+                    <DataCentersList
+                      facilities={scopedFacilities.slice(0, DC_PREVIEW)}
+                      groupBy={null}
+                      onSelectFacility={onSelectFacility}
+                    />
+                    <SeeAllLink
+                      total={scopedFacilities.length}
+                      shown={DC_PREVIEW}
+                      label="data centers"
+                      href={`/datacenters/${encodeURIComponent(entity.id)}`}
+                    />
+                  </motion.section>
+                )}
+              </MotionConfig>
             )}
           </div>
         </div>
