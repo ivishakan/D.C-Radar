@@ -25,42 +25,77 @@ export default function ContactPage() {
 
         <div className="text-base text-ink/80 leading-relaxed space-y-5">
           <p>
-            We welcome corrections, suggestions, tips on bills we&rsquo;re
-            missing, and disagreements with our stance calls. The goal is a
-            more accurate map; fights about classification are the best way to
-            get there.
+            If I got something wrong, if a bill is missing, or if you
+            disagree with a stance call, please tell me. Corrections are
+            how the site gets more accurate, and I want them.
           </p>
           <p>
-            General:{" "}
+            Tips on things I should be tracking are also welcome. State
+            committees, EU developments, or anything happening outside
+            the usual legislative portals.
+          </p>
+        </div>
+
+        <div className="mt-12 pt-10 border-t border-black/[.06] space-y-5">
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+              Email
+            </div>
             <a
-              href="mailto:hello@trackpolicy.example"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
+              href="mailto:reksopuro.isabelle@gmail.com"
+              className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
             >
-              hello@trackpolicy.example
+              reksopuro.isabelle@gmail.com
             </a>
-          </p>
-          <p>
-            Press:{" "}
+          </div>
+
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+              Twitter / X
+            </div>
             <a
-              href="mailto:press@trackpolicy.example"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
+              href="https://x.com/isareksopuro"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
             >
-              press@trackpolicy.example
+              @isareksopuro
             </a>
-          </p>
-          <p>
-            Source tips or data corrections:{" "}
+            <span className="text-sm text-muted ml-2">
+              DMs are open for quick tips.
+            </span>
+          </div>
+
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+              GitHub
+            </div>
             <a
-              href="mailto:tips@trackpolicy.example"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
+              href="https://github.com/isabellereks/track-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
             >
-              tips@trackpolicy.example
+              github.com/isabellereks/track-policy
             </a>
-          </p>
-          <p className="text-muted italic">
-            These are placeholder addresses — real contact channels coming
-            soon.
-          </p>
+            <span className="text-sm text-muted ml-2">
+              Open an issue for data corrections.
+            </span>
+          </div>
+
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.06em] text-muted mb-1.5">
+              Personal site
+            </div>
+            <a
+              href="https://isabellereks.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-base text-ink underline underline-offset-2 hover:text-muted transition-colors"
+            >
+              isabellereks.com
+            </a>
+          </div>
         </div>
       </div>
     </main>
