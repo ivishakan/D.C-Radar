@@ -284,6 +284,13 @@ export interface Legislation {
   stage: Stage;
   /** Per-bill stance, primarily from Claude semantic classification. */
   stance?: StanceType;
+  /**
+   * Per-dimension stance overrides. A bill can read differently across
+   * dimensions (e.g. pro-development on data-center-energy, restrictive
+   * on ai-consumer). Only set for multi-dimension bills — single-dim
+   * bills defer to `stance`.
+   */
+  dimensionStances?: Partial<Record<Exclude<Dimension, "overall">, StanceType>>;
   impactTags: ImpactTag[];
   category: LegislationCategory;
   updatedDate: string;
@@ -309,6 +316,11 @@ export interface NewsItem {
   source: string;
   date: string;
   url: string;
+  summary?: string;
+  /** Provenance of `summary` — "article" = fetched + summarized, "headline-only"
+   *  = source was paywalled/unreachable so the summary was drafted from the
+   *  headline alone. Used by the UI to show a "from headline" chip. */
+  summarySource?: "article" | "headline-only";
 }
 
 export interface Entity {
@@ -321,7 +333,10 @@ export interface Entity {
   isOverview?: boolean;
   /** True if this entity has a state-level drill-down (currently only US). */
   canDrillDown?: boolean;
-  stance: StanceType;
+  /** Lens-scoped stance: aggregated over bills relevant to the data-center lens. */
+  stanceDatacenter: StanceType;
+  /** Lens-scoped stance: aggregated over bills relevant to the AI-regulation lens. */
+  stanceAI: StanceType;
   contextBlurb: string;
   legislation: Legislation[];
   keyFigures: Legislator[];

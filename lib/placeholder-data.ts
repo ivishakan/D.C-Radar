@@ -19,8 +19,9 @@ const NA_ENTITIES: Entity[] = [
     level: "federal",
     isOverview: true,
     canDrillDown: true,
-    stance: "favorable",
-    contextBlurb: "The US federal government has 12 relevant bills tracked in 2025–2026 — 7 on data-center policy and 5 on AI regulation. 1 imposes active bans or moratoriums. 2 offer incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "review",
+    contextBlurb: "The US federal government is advancing regulation on data centers and under discussion on AI. On data centers: HB1736 (on the floor) — Generative AI Terrorism Risk Assessment Act. On AI: HB7270 (in committee) — Creates a coordinated government strategy to combat identity fraud and theft across the financial services industry.",
     legislation: [
       {
         id: "us-sb3682",
@@ -29,6 +30,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require utilities to create separate waiting lists and special electricity rate categories specifically for data centers, so that their massive power demands don't drive up costs for regular consumers. It aims to protect households and businesses from bearing the financial burden of data centers connecting to the electric grid.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "review",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -100,6 +105,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how law enforcement agencies can use facial recognition technology, placing restrictions and oversight requirements on its use. It aims to prevent misuse while establishing accountability measures for police use of this AI-powered identification tool.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -125,6 +134,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This federal bill would require data center operators to report their energy and water usage to state governments and federal agencies like the EPA and Department of Energy. The goal is to increase transparency about the environmental footprint of data centers across the country.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -148,6 +161,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers to meet specific obligations to protect residential electricity customers from bearing the cost burden of data center power demands. It prioritizes everyday ratepayers over data center operators when it comes to grid access and energy pricing.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "review",
+          "land-use": "none",
+        },
         impactTags: [
           "energy-rates",
           "grid-capacity",
@@ -171,6 +189,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill directs the U.S. Secretary of Energy to study how data centers affect communities of color and low-income communities. It is a research and fact-finding effort without imposing any new restrictions or regulations on data centers.",
         stage: "Committee",
         stance: "review",
+        dimensionStances: {
+          environmental: "review",
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "environmental-review",
           "local-control",
@@ -198,6 +221,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill aims to protect American households from the strain that large data centers place on the electric grid, likely by imposing requirements or restrictions on data center energy use. It focuses on preventing data centers from causing higher electricity costs or reliability problems for everyday consumers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -220,6 +247,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This federal bill requires data centers to report on how they affect air quality, water quality, and electricity use. It focuses on gathering information rather than imposing restrictions or bans.",
         stage: "Committee",
         stance: "review",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -268,6 +299,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would restrict lawsuits that could slow down or block the environmental permitting process for building data centers and related infrastructure. It is designed to make it easier and faster to get data centers approved by limiting legal challenges during the environmental review process.",
         stage: "Committee",
         stance: "favorable",
+        dimensionStances: {
+          environmental: "favorable",
+          community: "none",
+        },
         impactTags: [
           "environmental-review",
           "local-control",
@@ -303,6 +338,589 @@ const NA_ENTITIES: Entity[] = [
           "Tim Sheehy",
           "Steve Daines",
           "John Hickenlooper",
+        ],
+      },
+      {
+        id: "us-sb1489",
+        billCode: "SB1489",
+        title: "Anti-Racism in Public Health Act of 2025",
+        summary: "A bill to amend the Public Health Service Act to provide for public health research and investment into understanding and eliminating structural racism and police violence.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "economic-development",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-04-10",
+        partyOrigin: "D",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/1489/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB1489/2025",
+        legiscanId: 2023149,
+        sponsors: [
+          "Elizabeth Warren",
+          "Edward Markey",
+          "Jeff Merkley",
+          "Tina Smith",
+        ],
+      },
+      {
+        id: "us-sb178",
+        billCode: "SB178",
+        title: "Ensuring Accurate and Complete Abortion Data Reporting Act of 2025",
+        summary: "A bill to amend title XIX of the Social Security Act and the Public Health Service Act to improve the reporting of abortion data to the Centers for Disease Control and Prevention, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-01-22",
+        partyOrigin: "R",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/178/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB178/2025",
+        legiscanId: 1936889,
+        sponsors: [
+          "Joni Ernst",
+          "James Lankford",
+          "Steve Daines",
+          "Kevin Cramer",
+        ],
+      },
+      {
+        id: "us-hb2884",
+        billCode: "HB2884",
+        title: "Anti-Racism in Public Health Act of 2025",
+        summary: "To amend the Public Health Service Act to provide for public health research and investment into understanding and eliminating structural racism and police violence.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "economic-development",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-04-10",
+        partyOrigin: "D",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/2884/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB2884/2025",
+        legiscanId: 2023275,
+        sponsors: [
+          "Ayanna Pressley",
+          "Joyce Beatty",
+          "Shontel Brown",
+          "Andre Carson",
+        ],
+      },
+      {
+        id: "us-hb627",
+        billCode: "HB627",
+        title: "Ensuring Accurate and Complete Abortion Data Reporting Act of 2025",
+        summary: "To amend title XIX of the Social Security Act and Public Health Service Act to improve the reporting of abortion data to the Centers for Disease Control and Prevention, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-01-22",
+        partyOrigin: "R",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/627/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB627/2025",
+        legiscanId: 1936797,
+        sponsors: [
+          "Ralph Norman",
+          "Rick Allen",
+          "Daniel Webster",
+          "Russ Fulcher",
+        ],
+      },
+      {
+        id: "us-sb1713",
+        billCode: "SB1713",
+        title: "Agriculture Innovation Act of 2025",
+        summary: "A bill to amend the Food Security Act of 1985 to authorize the Secretary of Agriculture to improve agricultural productivity, profitability, resilience, and ecological outcomes through modernized data infrastructure and analysis, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-05-12",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/1713/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB1713/2025",
+        legiscanId: 2030591,
+        sponsors: [
+          "Amy Klobuchar",
+          "John Thune",
+        ],
+      },
+      {
+        id: "us-hb5784",
+        billCode: "HB5784",
+        title: "Artificial Intelligence Wisdom for Innovative Small Enterprises Act AI–WISE Act",
+        summary: "To amend the Small Business Act to help small business concerns critically evaluate artificial intelligence tools, and for other purposes.",
+        stage: "Floor",
+        stance: "concerning",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2026-01-26",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/5784/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB5784/2025",
+        legiscanId: 2046890,
+        sponsors: [
+          "Hillary Scholten",
+          "Troy Downing",
+          "Josh Gottheimer",
+          "Brian Fitzpatrick",
+        ],
+      },
+      {
+        id: "us-sb2081",
+        billCode: "SB2081",
+        title: "RISE Act of 2025 Responsible Innovation and Safe Expertise Act of 2025",
+        summary: "A bill to establish immunity from civil liability for certain artificial intelligence developers, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-06-12",
+        partyOrigin: "R",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/2081/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB2081/2025",
+        legiscanId: 2037217,
+        sponsors: [
+          "Cynthia Lummis",
+        ],
+      },
+      {
+        id: "us-sb1378",
+        billCode: "SB1378",
+        title: "TAME Extreme Weather and Wildfires Act Transformational Artificial intelligence to Modernize the Economy against Extreme Weather and Wildfires Act",
+        summary: "A bill to enhance the use by the National Oceanic and Atmospheric Administration of artificial intelligence for weather forecasting, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-04-09",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/1378/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB1378/2025",
+        legiscanId: 2022578,
+        sponsors: [
+          "Brian Schatz",
+          "Tim Sheehy",
+          "Ben Lujan",
+          "Peter Welch",
+        ],
+      },
+      {
+        id: "us-sb3202",
+        billCode: "SB3202",
+        title: "Advanced Artificial Intelligence Security Readiness Act of 2025",
+        summary: "A bill to direct the Director of the National Security Agency to develop guidance to secure artificial intelligence related technologies, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-11-19",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/3202/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB3202/2025",
+        legiscanId: 2053374,
+        sponsors: [
+          "Todd Young",
+          "Mark Kelly",
+        ],
+      },
+      {
+        id: "us-sb2938",
+        billCode: "SB2938",
+        title: "Artificial Intelligence Risk Evaluation Act of 2025",
+        summary: "A bill to require the Secretary of Energy to establish the Advanced Artificial Intelligence Evaluation Program, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "ai-safety",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-09-29",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/2938/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB2938/2025",
+        legiscanId: 2045360,
+        sponsors: [
+          "Josh Hawley",
+          "Richard Blumenthal",
+          "Marsha Blackburn",
+        ],
+      },
+      {
+        id: "us-hb6275",
+        billCode: "HB6275",
+        title: "China AI Power Report Act",
+        summary: "To require the Secretary of Commerce to submit a report annually on the advanced artificial intelligence capabilities of the People's Republic of China, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-11-21",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/6275/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB6275/2025",
+        legiscanId: 2053841,
+        sponsors: [
+          "James Moylan",
+          "Eugene Vindman",
+          "Bill Huizenga",
+          "Jefferson Shreve",
+        ],
+      },
+      {
+        id: "us-hb5764",
+        billCode: "HB5764",
+        title: "AI for Main Street Act",
+        summary: "To amend the Small Business Act to require small business development centers to assist small business concerns with the use of artificial intelligence, and for other purposes.",
+        stage: "Floor",
+        stance: "concerning",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2026-01-26",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/5764/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB5764/2025",
+        legiscanId: 2046871,
+        sponsors: [
+          "Mark Alford",
+          "Hillary Scholten",
+          "Eugene Vindman",
+          "Josh Harder",
+        ],
+      },
+      {
+        id: "us-hb5388",
+        billCode: "HB5388",
+        title: "American Artificial Intelligence Leadership and Uniformity Act",
+        summary: "To provide a national framework to sustain American leadership in artificial intelligence, to require an actionable Federal plan aligned to that policy, and to establish a temporary moratorium preempting certain State laws that restrict artificial intelligence models and syste...",
+        stage: "Committee",
+        stance: "concerning",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-09-16",
+        partyOrigin: "R",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/5388/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB5388/2025",
+        legiscanId: 2044380,
+        sponsors: [
+          "Michael Baumgartner",
+        ],
+      },
+      {
+        id: "us-hb1736",
+        billCode: "HB1736",
+        title: "Generative AI Terrorism Risk Assessment Act",
+        summary: "To require the Secretary of Homeland Security to conduct annual assessments on terrorism threats to the United States posed by terrorist organizations utilizing generative artificial intelligence applications, and for other purposes.",
+        stage: "Floor",
+        stance: "concerning",
+        impactTags: [
+          "property-values",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-11-20",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/1736/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB1736/2025",
+        legiscanId: 1987991,
+        sponsors: [
+          "August Pfluger",
+          "Michael Guest",
+          "Gabe Evans",
+          "Pablo Jose Hernandez",
+        ],
+      },
+      {
+        id: "us-hb7209",
+        billCode: "HB7209",
+        title: "TRAIN Act Transparency and Responsibility for Artificial Intelligence Networks Act",
+        summary: "To create an administrative subpoena process to assist copyright owners in determining which of their copyrighted works have been used in the training of artificial intelligence models.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "nda-transparency",
+        ],
+        category: "ai-governance",
+        updatedDate: "2026-01-22",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/7209/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB7209/2025",
+        legiscanId: 2091456,
+        sponsors: [
+          "Madeleine Dean",
+          "Nathaniel Moran",
+          "Laurel Lee",
+        ],
+      },
+      {
+        id: "us-sb2455",
+        billCode: "SB2455",
+        title: "TRAIN Act Transparency and Responsibility for Artificial Intelligence Networks Act",
+        summary: "A bill to create an administrative subpoena process to assist copyright owners in determining which of their copyrighted works have been used in the training of artificial intelligence models.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "nda-transparency",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-07-24",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/2455/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB2455/2025",
+        legiscanId: 2040591,
+        sponsors: [
+          "Peter Welch",
+          "Marsha Blackburn",
+          "Josh Hawley",
+          "Adam Schiff",
+        ],
+      },
+      {
+        id: "us-hb5351",
+        billCode: "HB5351",
+        title: "NSF AI Education Act of 2025",
+        summary: "To support National Science Foundation education and professional development relating to artificial intelligence, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-09-15",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/5351/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB5351/2025",
+        legiscanId: 2044133,
+        sponsors: [
+          "Vince Fong",
+          "Andrea Salinas",
+          "Brittany Pettersen",
+          "Eugene Vindman",
+        ],
+      },
+      {
+        id: "us-hb2770",
+        billCode: "HB2770",
+        title: "TAME Extreme Weather and Wildfires Act Transformational Artificial intelligence to Modernize the Economy against Extreme Weather and Wildfires Act",
+        summary: "To direct the use of artificial intelligence by National Oceanic and Atmospheric Administration to adapt to extreme weather, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-04-09",
+        partyOrigin: "R",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/2770/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB2770/2025",
+        legiscanId: 2022459,
+        sponsors: [
+          "Scott Franklin",
+        ],
+      },
+      {
+        id: "us-sb2381",
+        billCode: "SB2381",
+        title: "PROACTIV Artificial Intelligence Data Act of 2025 Preventing Recurring Online Abuse of Children Through Intentional Vetting of Artificial Intelligence Data Act of 2025",
+        summary: "A bill to require the Director of the National Institute of Standards and Technology to develop a framework for detecting, removing, and reporting child pornography in datasets used to train artificial intelligence systems, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "child-safety",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-07-22",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/2381/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB2381/2025",
+        legiscanId: 2040128,
+        sponsors: [
+          "John Cornyn",
+          "Andy Kim",
+          "Ted Budd",
+        ],
+      },
+      {
+        id: "us-sb321",
+        billCode: "SB321",
+        title: "Decoupling America's Artificial Intelligence Capabilities from China Act of 2025",
+        summary: "A bill to amend title 18, United States Code, to prohibit United States persons from advancing artificial intelligence capabilities within the People's Republic of China, and for other purposes.",
+        stage: "Committee",
+        stance: "concerning",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-01-29",
+        partyOrigin: "R",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/321/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB321/2025",
+        legiscanId: 1948171,
+        sponsors: [
+          "Josh Hawley",
+        ],
+      },
+      {
+        id: "us-sb3062",
+        billCode: "SB3062",
+        title: "GUARD Act Guidelines for User Age-verification and Responsible Dialogue Act of 2025",
+        summary: "A bill to require artificial intelligence chatbots to implement age verification measures and make certain disclosures, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "child-safety",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-10-28",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/3062/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB3062/2025",
+        legiscanId: 2047758,
+        sponsors: [
+          "Josh Hawley",
+          "Richard Blumenthal",
+          "Katie Boyd Britt",
+          "Mark Warner",
+        ],
+      },
+      {
+        id: "us-sb3339",
+        billCode: "SB3339",
+        title: "AI Workforce PREPARE Act AI Workforce Projections, Research, and Evaluations to Promote AI Readiness and Employment Act",
+        summary: "A bill to better forecast and plan for the impact of artificial intelligence on the workforce of the United States, to provide data to improve training programs for in-demand industry sectors and occupations, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [
+          "job-creation",
+        ],
+        category: "ai-governance",
+        updatedDate: "2025-12-03",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/3339/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB3339/2025",
+        legiscanId: 2056926,
+        sponsors: [
+          "Jim Banks",
+          "Margaret Hassan",
+          "John Hickenlooper",
+          "Jon Husted",
+        ],
+      },
+      {
+        id: "us-hb3210",
+        billCode: "HB3210",
+        title: "Artificial Intelligence Literacy and Inclusion Act",
+        summary: "To direct the National Science Foundation to make awards for artificial intelligence literacy programs, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-05-06",
+        partyOrigin: "D",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/3210/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB3210/2025",
+        legiscanId: 2029224,
+        sponsors: [
+          "Adriano Espaillat",
+          "Ted Lieu",
+          "Yvette Clarke",
+          "Josh Gottheimer",
+        ],
+      },
+      {
+        id: "us-hb3679",
+        billCode: "HB3679",
+        title: "Small Business Artificial Intelligence Advancement Act",
+        summary: "To require the Director of the National Institute of Standards and Technology to develop resources for small businesses in utilizing artificial intelligence, and for other purposes.",
+        stage: "Floor",
+        stance: "concerning",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2026-02-24",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/3679/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB3679/2025",
+        legiscanId: 2035367,
+        sponsors: [
+          "Mike Collins",
+          "Haley Stevens",
+          "Laura Gillen",
+          "Eugene Vindman",
+        ],
+      },
+      {
+        id: "us-hb6306",
+        billCode: "HB6306",
+        title: "AI Fraud Deterrence Act",
+        summary: "To increase penalties for the commission of financial crimes using artificial intelligence.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-11-25",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/6306/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB6306/2025",
+        legiscanId: 2054344,
+        sponsors: [
+          "Ted Lieu",
+          "Neal Dunn",
+        ],
+      },
+      {
+        id: "us-hb5078",
+        billCode: "HB5078",
+        title: "Protecting Information by Local Leaders for Agency Resilience Act PILLAR Act",
+        summary: "To amend the Homeland Security Act of 2002 to reauthorize the State and local cybersecurity grant program of the Cybersecurity and Infrastructure Security Agency of the Department of Homeland Security, and for other purposes.",
+        stage: "Floor",
+        stance: "concerning",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-11-18",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/5078/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB5078/2025",
+        legiscanId: 2043072,
+        sponsors: [
+          "Andrew Ogles",
+          "Andrew Garbarino",
+          "Eric Swalwell",
+          "Gabe Evans",
+        ],
+      },
+      {
+        id: "us-hb7968",
+        billCode: "HB7968",
+        title: "Small AI Innovators Empowerment Act",
+        summary: "To authorize the Department of Commerce to carry out a study on challenges faced by United States small artificial intelligence businesses, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2026-03-17",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/house-bill/7968/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/HB7968/2025",
+        legiscanId: 2135381,
+        sponsors: [
+          "Suhas Subramanyam",
+          "Jay Obernolte",
+          "Josh Gottheimer",
+          "Julie Fedorchak",
+        ],
+      },
+      {
+        id: "us-sb3336",
+        billCode: "SB3336",
+        title: "Reliable Artificial Intelligence Research Act of 2025",
+        summary: "A bill to require the Secretary of Homeland Security to carry out prize competitions to advance the science of interpretability and to develop adversarial robustness with respect to artificial intelligence products, and for other purposes.",
+        stage: "Committee",
+        stance: "review",
+        impactTags: [],
+        category: "ai-governance",
+        updatedDate: "2025-12-03",
+        partyOrigin: "B",
+        sourceUrl: "https://www.congress.gov/bill/119th-congress/senate-bill/3336/all-info",
+        legiscanUrl: "https://legiscan.com/US/bill/SB3336/2025",
+        legiscanId: 2056821,
+        sponsors: [
+          "Margaret Hassan",
+          "Jim Banks",
         ],
       },
     ],
@@ -390,18 +1008,31 @@ const NA_ENTITIES: Entity[] = [
     ],
     news: [
       {
-        id: "us-altman-attack",
-        headline: "Suspect Arrested in Molotov Attack on Sam Altman's Home",
-        source: "CNN Business",
-        date: "2026-04-10",
-        url: "https://www.cnn.com/2026/04/10/tech/suspect-arrest-openai-ceo-sam-altman",
-      },
-      {
         id: "us-altman-backlash",
         headline: "Altman Attack Sparks Fears AI Backlash Is Turning Dangerous",
         source: "The San Francisco Standard",
         date: "2026-04-11",
         url: "https://sfstandard.com/2026/04/11/attack-openai-sam-altman/",
+        summary: "A Molotov cocktail was thrown at OpenAI CEO Sam Altman's San Francisco home on Friday, causing no damage; a 20-year-old suspect was arrested, and the incident has prompted tech executives and security professionals to express concerns about escalating threats against AI industry leaders.",
+        summarySource: "article",
+      },
+      {
+        id: "us-altman-attack",
+        headline: "Suspect Arrested in Molotov Attack on Sam Altman's Home",
+        source: "CNN Business",
+        date: "2026-04-10",
+        url: "https://www.cnn.com/2026/04/10/tech/suspect-arrest-openai-ceo-sam-altman",
+        summary: "A 20-year-old suspect was arrested after throwing a Molotov cocktail at OpenAI CEO Sam Altman's San Francisco home early Friday morning, damaging an exterior gate before the suspect allegedly proceeded to OpenAI's offices and made threats to burn down the building. No injuries were reported and authorities said charges are still pending.",
+        summarySource: "article",
+      },
+      {
+        id: "us-mythos-wallstreet-test",
+        headline: "Trump Admin Urges Wall Street Banks to Test Anthropic's Mythos Model",
+        source: "Bloomberg",
+        date: "2026-04-10",
+        url: "https://www.bloomberg.com/news/articles/2026-04-10/wall-street-banks-try-out-anthropic-s-mythos-as-us-urges-testing",
+        summary: "The Trump administration has encouraged major Wall Street banks to test Anthropic's Mythos model.",
+        summarySource: "headline-only",
       },
       {
         id: "us-claude-mythos",
@@ -409,6 +1040,8 @@ const NA_ENTITIES: Entity[] = [
         source: "d4b",
         date: "2026-04-08",
         url: "https://www.d4b.dev/blog/2026-04-08-when-intelligence-becomes-export-controlled",
+        summary: "Anthropic announced it will restrict access to Claude Mythos Preview, a model capable of identifying software vulnerabilities, to vetted partners rather than releasing it publicly, citing security concerns. The development raises questions about whether frontier AI models will become subject to government-controlled access regimes similar to export controls on semiconductors and military technology.",
+        summarySource: "article",
       },
       {
         id: "us-spy-anthropic",
@@ -416,6 +1049,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Defense One",
         date: "2026-04-08",
         url: "https://www.defenseone.com/policy/2026/04/spy-agencies-ai-anthropic-cybersecurity/412724/",
+        summary: "Anthropic unveiled Project Glasswing, an initiative pairing a new AI model called Claude Mythos Preview with major tech companies to identify software vulnerabilities before adversaries can exploit them, while U.S. intelligence agencies assess both the defensive benefits and security risks of the powerful tool.",
+        summarySource: "article",
       },
       {
         id: "us-propublica-strike",
@@ -423,6 +1058,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Nieman Journalism Lab",
         date: "2026-04-08",
         url: "https://www.niemanlab.org/2026/03/propublicas-union-authorizes-the-first-u-s-newsroom-strike-over-ai-protections/",
+        summary: "ProPublica's union voted to authorize a strike over demands including a ban on AI-related layoffs, just cause protections for firings, seniority provisions, and wage increases, marking the first major U.S. newsroom strike centered on AI protections. ProPublica management countered that freezing AI adoption decisions in a contract would be irresponsible and proposed expanded severance packages instead.",
+        summarySource: "article",
       },
       {
         id: "us-wh-framework",
@@ -430,6 +1067,17 @@ const NA_ENTITIES: Entity[] = [
         source: "Holland & Knight",
         date: "2026-03-27",
         url: "https://www.hklaw.com/en/insights/publications/2026/03/white-house-releases-a-national-policy-framework-for-artificial",
+        summary: "The White House released a National Policy Framework for Artificial Intelligence on March 20, 2026, offering nonbinding legislative recommendations to Congress that prioritize child safety, innovation, and a unified federal approach to AI regulation while cautioning against fragmented state laws. The Framework reflects the Trump Administration's preference for national uniformity and aligns with concurrent congressional proposals, including Senator Marsha Blackburn's updated TRUMP AMERICA AI Act.",
+        summarySource: "article",
+      },
+      {
+        id: "us-anthropic-wins-injunction",
+        headline: "Anthropic Wins Court Order Pausing Trump's Federal Claude Ban",
+        source: "Bloomberg",
+        date: "2026-03-26",
+        url: "https://www.bloomberg.com/news/articles/2026-03-26/anthropic-wins-court-order-blocking-trump-ban-on-use-of-ai-tool",
+        summary: "A federal court issued an order temporarily halting an implementation of a Trump administration ban on Claude.",
+        summarySource: "headline-only",
       },
       {
         id: "us-sanders-aoc",
@@ -437,6 +1085,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Office of Senator Bernie Sanders",
         date: "2026-03-25",
         url: "https://www.sanders.senate.gov/press-releases/news-sanders-ocasio-cortez-announce-ai-data-center-moratorium-act/",
+        summary: "Senator Bernie Sanders and Representative Alexandria Ocasio-Cortez introduced the AI Data Center Moratorium Act, which would pause AI data center development until federal safeguards address safety, worker protection, and environmental concerns. The bill would also restrict U.S. exports of AI computing infrastructure to countries lacking equivalent safety measures.",
+        summarySource: "article",
       },
       {
         id: "us-sanders-wapo",
@@ -444,6 +1094,8 @@ const NA_ENTITIES: Entity[] = [
         source: "The Washington Post",
         date: "2026-03-25",
         url: "https://www.washingtonpost.com/technology/2026/03/25/sanders-data-centers-bipartisan-moratorium/",
+        summary: "Sen. Bernie Sanders is introducing legislation to halt new data center construction until Congress enacts AI regulations. The bill represents a push from the populist left amid growing public concerns about artificial intelligence.",
+        summarySource: "article",
       },
       {
         id: "us-stop-ai-rally",
@@ -451,6 +1103,8 @@ const NA_ENTITIES: Entity[] = [
         source: "SFist",
         date: "2026-03-20",
         url: "https://sfist.com/2026/03/20/a-stop-the-ai-race-protest/",
+        summary: "A group called Stop the AI Race organized protests outside the San Francisco headquarters of Anthropic, OpenAI, and xAI on Saturday, calling on the companies' CEOs to publicly commit to pausing frontier AI development if all other major labs do the same. The protesters cited recent statements from DeepMind and OpenAI leaders expressing openness to conditional pauses, while noting that Anthropic dropped its own safety pause commitment in February and OpenAI has weakened its safety commitments during restructuring.",
+        summarySource: "article",
       },
       {
         id: "us-blackburn",
@@ -458,6 +1112,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Holland & Knight",
         date: "2026-03-18",
         url: "https://www.hklaw.com/en/insights/publications/2026/03/white-house-releases-a-national-policy-framework-for-artificial",
+        summary: "The White House released a National Policy Framework for Artificial Intelligence on March 20, 2026, outlining nonbinding legislative recommendations that prioritize child safety, innovation, and federal preemption of state AI laws, aligned with Senator Marsha Blackburn's updated TRUMP AMERICA AI Act draft released two days prior. The Framework reflects the Trump Administration's preference for unified national AI standards over the current patchwork of state regulations.",
+        summarySource: "article",
       },
       {
         id: "us-data-center-watch",
@@ -465,6 +1121,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Data Center Watch",
         date: "2026-03-15",
         url: "https://www.datacenterwatch.org/report",
+        summary: "$64 billion in U.S. data center projects have been blocked or delayed over the past two years amid local opposition driven by concerns about utility costs, water consumption, noise, and environmental impact. The backlash has emerged across political lines, with Republican officials citing tax incentives and grid strain while Democrats focus on environmental effects.",
+        summarySource: "article",
       },
       {
         id: "us-good-jobs-first",
@@ -472,6 +1130,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Good Jobs First",
         date: "2026-03-10",
         url: "https://goodjobsfirst.org/data-center-moratorium-bills-are-spreading-in-2026/",
+        summary: "Legislation pausing new data center development has been introduced in twelve states.",
+        summarySource: "headline-only",
       },
       {
         id: "us-cotton-data-act",
@@ -479,6 +1139,26 @@ const NA_ENTITIES: Entity[] = [
         source: "Foley Hoag",
         date: "2026-03-09",
         url: "https://foleyhoag.com/news-and-insights/blogs/energy-and-climate-counsel/2026/march/the-data-act-of-2026-and-the-future-of-data-center-development/",
+        summary: "Senator Tom Cotton's DATA Act of 2026 creates a new category of off-grid electric utility exempt from federal regulation, allowing data center operators to build privately financed power systems without federal oversight while remaining subject to state and local permitting. The bill aims to bypass lengthy federal interconnection processes, though exemptions from reliability standards and other regulatory requirements are expected to prove controversial.",
+        summarySource: "article",
+      },
+      {
+        id: "us-trump-woke-claude-eo",
+        headline: "Trump Signs Executive Order to Strip 'Woke' Outputs From Anthropic's Claude",
+        source: "Axios",
+        date: "2026-03-09",
+        url: "https://www.axios.com/2026/03/09/trump-white-house-anthropic-executive-order",
+        summary: "President Trump signed an executive order targeting what he characterizes as ideological bias in Anthropic's Claude AI system.",
+        summarySource: "headline-only",
+      },
+      {
+        id: "us-anthropic-sues-trump",
+        headline: "Anthropic Sues Trump Administration Over Pentagon Blacklist",
+        source: "CNBC",
+        date: "2026-03-09",
+        url: "https://www.cnbc.com/2026/03/09/anthropic-trump-claude-ai-supply-chain-risk.html",
+        summary: "Anthropic filed a lawsuit against the Trump administration after being designated a \"supply chain risk\" by the Pentagon, requiring defense contractors to certify they don't use the company's Claude AI models in work with the military. The company seeks to vacate the designation, arguing the action is unlawful and could cost it hundreds of millions of dollars in revenue.",
+        summarySource: "article",
       },
       {
         id: "us-defense-tech-drop",
@@ -486,6 +1166,8 @@ const NA_ENTITIES: Entity[] = [
         source: "CNBC",
         date: "2026-03-04",
         url: "https://www.cnbc.com/2026/03/04/pentagon-blacklist-anthropic-defense-tech-claude.html",
+        summary: "Following the Trump administration's designation of Anthropic as a supply chain risk, multiple defense contractors and tech companies are removing Claude from their systems and switching to alternative AI models for government work. The move comes after Anthropic executives refused Pentagon demands for assurances regarding the use of their AI in autonomous weapons and domestic surveillance.",
+        summarySource: "article",
       },
       {
         id: "us-ratepayer-pledge",
@@ -493,6 +1175,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Stateside Associates",
         date: "2026-03-04",
         url: "https://www.stateside.com/blog/2026-data-center-energy-policy-ratepayer-protection-pledge",
+        summary: "The White House announced a pledge with major cloud computing providers aimed at protecting electricity ratepayers.",
+        summarySource: "headline-only",
       },
       {
         id: "us-pa-resistance",
@@ -500,6 +1184,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Inside Climate News",
         date: "2026-03-03",
         url: "https://insideclimatenews.org/news/03032026/pennsylvania-data-center-resistance/",
+        summary: "Pennsylvania faces growing grassroots opposition to plans for more than 50 data centers, with community groups and environmental activists citing concerns about electricity demands, water consumption, diesel generator use, and rural industrialization. The movement has drawn support from state lawmakers and gained momentum through social media organizing, with participants comparing the public response to be stronger than previous campaigns against the state's coal and natural gas industries.",
+        summarySource: "article",
       },
       {
         id: "us-london-anti-ai",
@@ -507,6 +1193,8 @@ const NA_ENTITIES: Entity[] = [
         source: "MIT Technology Review",
         date: "2026-03-02",
         url: "https://www.technologyreview.com/2026/03/02/1133814/i-checked-out-londons-biggest-ever-anti-ai-protest/",
+        summary: "Hundreds of anti-AI protesters organized by activist groups Pause AI and Pull the Plug marched through London's King's Cross on February 28, 2026, expressing concerns ranging from job displacement to potential existential risks from artificial intelligence. The demonstration, described as the largest anti-AI protest to date, reflected growing public mobilization around AI governance issues, contrasting with much smaller protests in prior years.",
+        summarySource: "article",
       },
       {
         id: "us-anthropic-supply-chain",
@@ -514,6 +1202,8 @@ const NA_ENTITIES: Entity[] = [
         source: "CNN Business",
         date: "2026-02-27",
         url: "https://www.cnn.com/2026/02/27/tech/anthropic-pentagon-deadline",
+        summary: "The Trump administration ordered federal agencies and military contractors to cease business with Anthropic after the company refused to allow unrestricted Pentagon use of its AI technology, citing concerns about autonomous weapons and mass surveillance of U.S. citizens. The Pentagon designated Anthropic a \"supply chain risk,\" a designation typically used for foreign adversaries, while Anthropic stated it would challenge the decision in court.",
+        summarySource: "article",
       },
       {
         id: "us-anthropic-refuses",
@@ -521,6 +1211,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Axios",
         date: "2026-02-15",
         url: "https://www.axios.com/2026/02/15/claude-pentagon-anthropic-contract-maduro",
+        summary: "The Pentagon has threatened to reduce or eliminate its relationship with Anthropic due to restrictions on the Claude AI model.",
+        summarySource: "headline-only",
       },
       {
         id: "us-npr-scrambling",
@@ -528,6 +1220,8 @@ const NA_ENTITIES: Entity[] = [
         source: "NPR",
         date: "2026-01-25",
         url: "https://www.npr.org/2026/01/25/nx-s1-5684321/trump-ai",
+        summary: "AI data center construction is becoming a significant midterm election issue across multiple states, with protests shutting down proposals and drawing positions from both political parties that don't align neatly along traditional party lines. The debate pits those supporting rapid data center expansion, including President Trump and his AI czar, against elected officials on both sides of the aisle concerned about energy costs and other impacts.",
+        summarySource: "article",
       },
       {
         id: "us-dc-rebellion",
@@ -535,6 +1229,8 @@ const NA_ENTITIES: Entity[] = [
         source: "The Washington Post",
         date: "2026-01-06",
         url: "https://www.washingtonpost.com/business/2026/01/06/data-centers-backlash-impact-local-communities-opposition/",
+        summary: "Oklahoma residents are protesting the environmental and aesthetic impacts of data centers in their communities, as evidenced by anti-data center displays at local events. The demonstrations reflect growing local opposition to data center expansion in rural areas.",
+        summarySource: "article",
       },
       {
         id: "us-ferc-pjm",
@@ -542,6 +1238,8 @@ const NA_ENTITIES: Entity[] = [
         source: "FERC",
         date: "2025-12-18",
         url: "https://www.ferc.gov/news-events/news/fact-sheet-ferc-directs-nations-largest-grid-operator-create-new-rules-embrace",
+        summary: "FERC has ordered PJM Interconnection to revise its rules governing data center co-location arrangements.",
+        summarySource: "headline-only",
       },
       {
         id: "us-claude-gov",
@@ -549,6 +1247,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Anthropic",
         date: "2025-06-05",
         url: "https://www.anthropic.com/news/claude-gov-models-for-u-s-national-security-customers",
+        summary: "Anthropic announced Claude Gov, a custom set of AI models designed exclusively for U.S. national security customers operating in classified environments, featuring enhanced capabilities for handling classified materials, intelligence analysis, and cybersecurity data. The models have already been deployed by agencies at the highest level of U.S. national security and underwent the same safety testing as Anthropic's standard Claude models.",
+        summarySource: "article",
       },
     ],
   },
@@ -558,7 +1258,8 @@ const NA_ENTITIES: Entity[] = [
     name: "Canada",
     region: "na",
     level: "federal",
-    stance: "review",
+    stanceDatacenter: "review",
+    stanceAI: "review",
     contextBlurb: "Canada's AIDA (Artificial Intelligence and Data Act) died on the order paper in early 2025. The federal government is now pursuing AI regulation through privacy-law amendments and policy guidance rather than dedicated AI-specific legislation.",
     legislation: [],
     keyFigures: [],
@@ -569,6 +1270,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Schwartz Reisman Institute",
         date: "2025-02-11",
         url: "https://srinstitute.utoronto.ca/news/whats-next-for-aida",
+        summary: "Canada's proposed Artificial Intelligence and Data Act (AIDA) died in Parliament in January 2025 following the Prime Minister's resignation and prorogation, but AI governance continues through provincial regulations, Treasury Board policy instruments, and sector-specific oversight mechanisms. The country is expected to rely on existing regulatory tools rather than new federal legislation in the near term.",
+        summarySource: "article",
       },
       {
         id: "canada-osler",
@@ -576,6 +1279,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Osler, Hoskin & Harcourt",
         date: "2026-01-15",
         url: "https://www.osler.com/en/insights/reports/2025-legal-outlook/canadas-2026-privacy-priorities-data-sovereignty-open-banking-and-ai/",
+        summary: "Canadian law firm Osler identifies data sovereignty, open banking, and AI regulation as the country's top privacy priorities for 2026, anticipating new federal privacy legislation with stricter penalties and enforcement mechanisms. The firm expects increased government focus on data localization and sovereign AI infrastructure driven by national security and geopolitical concerns.",
+        summarySource: "article",
       },
       {
         id: "canada-ccpa",
@@ -583,6 +1288,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Canadian Centre for Policy Alternatives",
         date: "2026-02-03",
         url: "https://www.policyalternatives.ca/news-research/canada-still-has-no-meaningful-ai-regulation/",
+        summary: "Canada lacks binding AI regulation despite federal government investments in AI development, with critics arguing that proposed frameworks and the 2022 Artificial Intelligence and Data Act do not adequately protect against documented harms to privacy, human rights, and the environment. The federal government is prioritizing economic benefits and AI sovereignty while resisting stronger regulatory oversight, according to advocates and scholars who contend that meaningful protections are necessary before widespread AI deployment.",
+        summarySource: "article",
       },
       {
         id: "canada-ai-watch",
@@ -590,6 +1297,8 @@ const NA_ENTITIES: Entity[] = [
         source: "White & Case",
         date: "2026-03-01",
         url: "https://www.whitecase.com/insight-our-thinking/ai-watch-global-regulatory-tracker-canada",
+        summary: "Canada is pursuing regulation of artificial intelligence through existing privacy laws rather than enacting a standalone AI statute. The approach contrasts with other jurisdictions like the European Union, which has implemented comprehensive horizontal AI frameworks.",
+        summarySource: "article",
       },
     ],
   },
@@ -599,8 +1308,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Alabama",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Alabama has 11 relevant bills tracked in 2025–2026 — 6 on data-center policy and 5 on AI regulation. 6 advance stricter regulation. 4 offer incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Alabama is under discussion on data centers and advancing regulation on AI. On data centers: SB270 (on the floor) — Requires Alabama's Public Service Commission to review contracts between electric utilities and large data centers that draw significant amounts of power. On AI: SB63 (on the floor) — Sets rules for how health insurance companies can use artificial intelligence when deciding whether to approve or deny medical coverage.",
     legislation: [
       {
         id: "al-sb270",
@@ -609,6 +1319,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires Alabama's Public Service Commission to review contracts between electric utilities and large data centers that draw significant amounts of power. The goal is to ensure that these high-energy deals don't negatively impact grid stability or raise electricity costs for other customers.",
         stage: "Floor",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "review",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -795,6 +1509,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires that content created by artificial intelligence be clearly labeled or disclosed to viewers. It includes enforcement mechanisms to ensure compliance with the disclosure requirement.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "deepfake-regulation",
@@ -816,6 +1534,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how health insurance companies can use artificial intelligence when deciding whether to approve or deny medical coverage. It aims to ensure AI-driven coverage decisions are fair, transparent, and subject to human oversight.",
         stage: "Floor",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -837,6 +1559,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Alabama bill requires chatbots to verify users' ages and follow safety protocols, with special rules for AI-powered therapy chatbots. It gives people the right to sue if these requirements are violated.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "child-safety",
           "ai-in-healthcare",
@@ -861,6 +1588,8 @@ const NA_ENTITIES: Entity[] = [
         source: "GASP Group / Birmingham City Council",
         date: "2026-01-13",
         url: "https://gaspgroup.org/birmingham-residents-must-stay-engaged-on-the-proposed-data-center/",
+        summary: "Birmingham City Council approved a 180-day moratorium on a proposed data center on January 13, 2026, following concerns that similar large-scale projects in the region were being classified as \"light industrial\" to minimize environmental scrutiny and public input. Environmental groups and community advocates urged the council to use the moratorium period to assess potential impacts on air quality, water use, and public health before the project advances.",
+        summarySource: "article",
       },
       {
         id: "alabama-1",
@@ -868,6 +1597,8 @@ const NA_ENTITIES: Entity[] = [
         source: "WBRC",
         date: "2026-02-05",
         url: "https://www.wbrc.com/2026/02/05/alabama-senate-bills-target-data-center-incentives-utility-regulation/",
+        summary: "Alabama lawmakers introduced three bills to regulate data center incentives and utility oversight, including capping tax breaks at 20 years, requiring large data centers to pay for grid costs they create, and changing the Public Service Commission from elected to appointed positions. The bills aim to prevent large electricity users from increasing costs for other ratepayers.",
+        summarySource: "article",
       },
       {
         id: "alabama-2",
@@ -875,6 +1606,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Office of the Governor of Alabama",
         date: "2026-02-12",
         url: "https://governor.alabama.gov/newsroom/2026/02/governor-ivey-forms-technology-quality-assurance-board-to-oversee-innovation-and-safeguard-statewide-it-systems/",
+        summary: "Alabama Governor Kay Ivey established the Technology Quality Assurance Board to oversee the adoption of emerging technologies, including artificial intelligence, across state executive-branch agencies in accordance with legislation signed in May 2025. The board, composed of representatives from seven state agencies, will develop statewide technology standards and implement recommendations from the Governor's Task Force on Generative Artificial Intelligence, including adoption of NIST AI Risk Management Frameworks.",
+        summarySource: "article",
       },
       {
         id: "alabama-3",
@@ -882,6 +1615,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Alabama Reporter",
         date: "2026-03-13",
         url: "https://www.alreporter.com/2026/03/13/alabama-senate-passes-bill-to-rein-in-data-center-tax-incentives/",
+        summary: "The Alabama Senate unanimously passed legislation that would reduce the maximum data-center tax abatement period from 30 years to 20 years starting January 1, 2027, and require large data centers using 100 megawatts or more of electricity to pay state sales and use taxes. The bill extends the current tax incentive sunset date to 2032 while allowing the governor to waive tax requirements for facilities in economically struggling counties.",
+        summarySource: "article",
       },
       {
         id: "alabama-4",
@@ -889,6 +1624,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Alabama Reporter",
         date: "2026-04-10",
         url: "https://www.alreporter.com/2026/04/10/alabama-senate-sends-bill-to-limit-data-center-tax-breaks-to-governor/",
+        summary: "Alabama's legislature passed HB 399, which limits data center tax abatements to 20 years unless facilities meet community investment thresholds, while also requiring large data centers using 100 megawatts or more of electricity to pay state sales and use taxes. The bill allows data center operators to extend abatements to 30 years if they agree to provide local infrastructure, broadband, or education investments.",
+        summarySource: "article",
       },
     ],
   },
@@ -898,8 +1635,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Alaska",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Alaska has 5 relevant bills tracked in 2025–2026 — 1 on data-center policy and 4 on AI regulation. 1 has been enacted into law. 2 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "favorable",
+    stanceAI: "restrictive",
+    contextBlurb: "Alaska is leaning innovation-friendly on data centers and leaning restrictive on AI. On data centers: SB250 (in committee) — Establishes rules for how data centers connect to and receive utility services, likely streamlining the process for data centers to obtain power. On AI: HB57 (enacted) — Addresses multiple education topics including restricting wireless devices (like smartphones) in public schools.",
     legislation: [
       {
         id: "ak-sb250",
@@ -948,6 +1686,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Alaska bill requires disclosure when AI-generated deepfakes are used in election-related content and sets rules for how state agencies can use AI and share personal data. It aims to increase transparency and accountability in both political media and government AI use.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -1014,6 +1758,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Alaska bill addresses multiple education topics including restricting wireless devices (like smartphones) in public schools. It also touches on school funding, class sizes, charter schools, and vocational training.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-public": "none",
+        },
         impactTags: [
           "ai-in-education",
           "child-safety",
@@ -1038,6 +1786,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Alaska bill creates legal liability for defamation when synthetic media (AI-generated or manipulated content) is used to harm someone's reputation, and restricts the use of synthetic media in political campaign communications. It establishes enforceable rules around AI-generated content in elections and public discourse.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -1158,6 +1910,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Davis Wright Tremaine / Anchorage Daily News",
         date: "2026-03-27",
         url: "https://www.dwt.com/blogs/energy--environmental-law-blog/2026/04/anchorage-adopts-data-center-framework",
+        summary: "Anchorage adopted Ordinance AO 2026-27 on March 27, 2026, establishing a new regulatory framework for data centers that creates a dedicated zoning category, requires conditional use permits, and imposes design standards and utility capacity requirements. The ordinance reflects broader municipal and state efforts to manage land use and infrastructure impacts as data center development accelerates across the country.",
+        summarySource: "article",
       },
       {
         id: "alaska-1",
@@ -1165,6 +1919,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Recording Law",
         date: "2026-02-27",
         url: "https://www.recordinglaw.com/us-laws/ai-laws/alaska-ai-laws/",
+        summary: "Alaska's House Bill 47 passed unanimously on February 27, 2026, criminalizing the distribution and possession of AI-generated child sexual abuse material while imposing $1 million civil penalties on AI platforms for each instance of misuse, and also expanding restrictions to include forged digital likenesses and social media rules for minors. The bill now advances to the Alaska Senate after addressing a gap in state law that previously prevented prosecution of AI-generated child exploitation cases.",
+        summarySource: "article",
       },
       {
         id: "alaska-2",
@@ -1172,6 +1928,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Anchorage Daily News",
         date: "2026-03-04",
         url: "https://www.adn.com/alaska-news/anchorage/2026/03/04/data-centers-powering-the-ai-boom-demand-local-energy-anchorage-assembly-members-want-to-regulate-them/",
+        summary: "The Anchorage Assembly is developing zoning regulations to govern data center development in the city, requiring conditional-use permits, utility capacity reviews, and siting restrictions to industrial and commercial zones. The ordinance addresses a gap in local code as data centers proliferate nationally due to AI demand, with assembly members balancing potential economic benefits against concerns about power grid strain and resource demands.",
+        summarySource: "article",
       },
       {
         id: "alaska-3",
@@ -1179,6 +1937,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Recording Law",
         date: "2026-03-01",
         url: "https://www.recordinglaw.com/us-laws/ai-laws/alaska-ai-laws/",
+        summary: "Alaska's Senate Bill 2, which proposes comprehensive AI governance addressing election deepfakes, state agency AI use, and data transfers, has stalled in committee as of March 2026, while the state's House Bill 47 criminalizing AI-generated child sexual abuse material passed unanimously and awaits Senate consideration.",
+        summarySource: "article",
       },
       {
         id: "alaska-4",
@@ -1186,6 +1946,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Anchorage Daily News",
         date: "2026-01-03",
         url: "https://www.adn.com/opinions/2026/01/03/opinion-before-alaska-becomes-an-ai-data-farm-be-sure-to-read-the-fine-print/",
+        summary: "Alaska's House Concurrent Resolution 3 task force submitted findings on artificial intelligence data center development in the state, with discussions focusing on potential economic benefits alongside concerns about energy consumption, grid capacity, and environmental impacts. The report examined both large-scale hyperscale facilities and smaller microgrid data centers as options for the state.",
+        summarySource: "article",
       },
     ],
   },
@@ -1195,8 +1957,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Arizona",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Arizona has 8 relevant bills tracked in 2025–2026 — 3 on data-center policy and 5 on AI regulation. 6 advance stricter regulation. 2 offer incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Arizona is under discussion on data centers and advancing regulation on AI. On data centers: HB2738 (filed) — Establishes rules for cost responsibility agreements specifically for data centers, likely requiring data centers to pay for or share the costs of grid upgrades and infrastructure needed… On AI: HB2592 (in committee) — Sets rules for how Arizona state agencies can use artificial intelligence, likely requiring oversight, transparency, or accountability measures.",
     legislation: [
       {
         id: "az-sb1815",
@@ -1205,6 +1968,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Arizona bill sets rules for how businesses must handle consumers' personal data, giving people rights over their information and placing obligations on companies that collect or process it. It establishes requirements around data use, consumer consent, and transparency for organizations controlling personal data.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -1268,6 +2035,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Arizona bill sets rules for how businesses must handle people's personal data, including requirements around collection, use, and transparency. It places obligations on companies to protect consumer data rights and limits how personal information can be gathered and processed.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -1377,6 +2148,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for chatbots that collect or use personal data, requiring them to meet specific requirements around transparency and data handling. It aims to protect users by regulating how AI-powered chat systems interact with and store personal information.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -1437,6 +2212,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill regulates how insurance companies use modeling and data organizations to set rates or make decisions, adding oversight to algorithmic and data-driven insurance practices. It aims to increase accountability and transparency in how insurers collect and apply data in their models.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -1461,6 +2240,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Deseret News",
         date: "2026-01-22",
         url: "https://www.deseret.com/politics/2026/01/22/tuscon-fights-back-against-data-center-proposal-after-chandler-rejected-another-proposal-last-year/",
+        summary: "Arizona Attorney General Kris Mayes moved to block a utility rate agreement between Tucson Electric Power and a data center developer, arguing the deal circumvented standard regulatory review by the Arizona Corporation Commission. The action comes as local opposition to two competing data center projects in southern Arizona has grown over concerns about water scarcity and energy costs.",
+        summarySource: "article",
       },
       {
         id: "arizona-1",
@@ -1468,6 +2249,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Transparency Coalition AI / LegiScan",
         date: "2026-03-24",
         url: "https://www.transparencycoalition.ai/news/ai-legislative-update-march27-2026",
+        summary: "Arizona's HB 2311, a bill requiring chatbots to disclose their AI nature to child users, passed the Arizona House in February and is advancing through the state Senate with bipartisan support. The measure is part of a broader wave of chatbot safety legislation moving through state legislatures across the country.",
+        summarySource: "article",
       },
       {
         id: "arizona-2",
@@ -1475,6 +2258,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Snell & Wilmer / Lexology",
         date: "2026-03-28",
         url: "https://www.swlaw.com/publication/building-in-arizonas-data-center-boom-how-federal-executive-orders-state-regulation-and-national-security-policy-are-reshaping-the-rules-for-developers/",
+        summary: "Arizona HB 2756 prohibits data center operators from shifting grid infrastructure costs to utility customers, constraining project economics in a state where federal executive orders are accelerating development on federal lands. The legislation represents one of several state-level regulatory controls—including water ordinances and zoning restrictions—that remain binding constraints on data center projects despite federal permitting reforms.",
+        summarySource: "article",
       },
       {
         id: "arizona-3",
@@ -1489,6 +2274,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Arizona Mirror",
         date: "2026-03-25",
         url: "https://azmirror.com/2026/03/25/arizona-bill-would-require-supermajority-voter-approval-before-cities-can-deploy-surveillance-tech/",
+        summary: "The Arizona Senate advanced a bill that would require supermajority approval for AI surveillance measures.",
+        summarySource: "headline-only",
       },
     ],
   },
@@ -1498,8 +2285,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Arkansas",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Arkansas has 4 relevant bills tracked in 2025–2026 on data-center policy. 2 advance stricter regulation. 1 offers incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "none",
+    contextBlurb: "Arkansas is under discussion on data centers, with no AI legislation currently tracked. On data centers: HR1013 (in committee) — Would change the rules governing where and how cryptocurrency mining businesses can operate, including adjusting what local governments can and cannot regulate about these operat…",
     legislation: [
       {
         id: "ar-sr7",
@@ -1508,6 +2296,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Arkansas bill would change the rules for cryptocurrency mining businesses and adjust how much authority local governments have to regulate them. It could expand or restrict local oversight of these energy-intensive facilities, which often share infrastructure concerns with data centers.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-control",
           "local-zoning",
@@ -1530,6 +2322,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Arkansas bill would change the rules governing where and how cryptocurrency mining businesses can operate, including adjusting what local governments can and cannot regulate about these operations. It affects siting requirements and local authority over digital asset mining facilities, which often resemble data centers in their energy and land use impacts.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-control",
           "local-zoning",
@@ -1732,6 +2528,8 @@ const NA_ENTITIES: Entity[] = [
         source: "KATV",
         date: "2026-01-16",
         url: "https://katv.com/news/local/cotton-introduces-bill-to-shield-arkansans-from-data-center-driven-electric-rate-hi-artificial-intelligence-ai-entergy-senator-tom-cotton-trump-electric-bill-power-plant-google-avaio-little-rock-meta-aws-public-service-commission-danni-hoefer-data-act",
+        summary: "Senator Tom Cotton introduced the DATA Act to prevent data center electricity demands from driving up electric rates for Arkansas residents by allowing data center operators to build and operate their own off-grid power plants outside standard federal utility regulations. The bill aims to balance protecting consumers from rate increases while encouraging data center investment as competition in AI development intensifies globally.",
+        summarySource: "article",
       },
       {
         id: "arkansas-1",
@@ -1739,6 +2537,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Camden News",
         date: "2026-02-28",
         url: "https://www.camdenarknews.com/news/2026/feb/28/arkansas-politicians-weigh-in-on-data-center/",
+        summary: "Arkansas politicians have expressed mixed views on data center development, citing economic benefits while noting concerns about community impact, as five projects proceed across the state including Google's 1,100-acre facility in West Memphis. Planned data centers are also scheduled for Clarksville, Conway, the Port of Little Rock, and southeast Pulaski County.",
+        summarySource: "article",
       },
       {
         id: "arkansas-2",
@@ -1746,6 +2546,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Arkansas Democrat-Gazette (Arkansas Online)",
         date: "2026-03-26",
         url: "https://www.arkansasonline.com/news/2026/mar/26/bill-aims-to-halt-new-data-centers/",
+        summary: "Senators Bernie Sanders and Representative Alexandria Ocasio-Cortez introduced legislation to pause new data center construction until federal safeguards are established for worker protections and environmental concerns, though the bill faces broad bipartisan opposition from lawmakers who view a moratorium as economically disadvantageous to the United States relative to China.",
+        summarySource: "article",
       },
       {
         id: "arkansas-3",
@@ -1753,6 +2555,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Arkansas Times",
         date: "2026-04-08",
         url: "https://arktimes.com/arkansas-blog/2026/04/08/outsider-republican-carries-on-the-uphill-battle-to-regulate-data-centers",
+        summary: "Arkansas State Sen. Bryan King filed five bills during the fiscal session aimed at regulating data centers and cryptocurrency mining operations, including measures for public notice requirements and state monitoring of electricity and water usage. The bills would require a two-thirds vote in both chambers to advance, and King acknowledged uncertainty about passage while noting the need for a House co-sponsor.",
+        summarySource: "article",
       },
       {
         id: "arkansas-4",
@@ -1760,6 +2564,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Arkansas Times",
         date: "2026-04-09",
         url: "https://arktimes.com/arkansas-blog/2026/04/09/the-arkansas-two-step-how-legislators-shut-down-consumer-choice-and-drove-up-your-utility-bill",
+        summary: "Arkansas passed Act 278 in 2023, which restructured residential solar compensation from a one-to-one net metering system to a buy-low, sell-high model where customers receive 2.47 cents per kilowatt-hour for solar power sent to the grid but pay over 13 cents when drawing power back. The article reports that recent utility rate increases for SWEPCO and Entergy customers have followed this policy change, though the utilities' original justification of cost-shifting from solar users to other ratepayers was never substantiated with evidence.",
+        summarySource: "article",
       },
     ],
   },
@@ -1769,8 +2575,9 @@ const NA_ENTITIES: Entity[] = [
     name: "California",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "California has 8 relevant bills tracked in 2025–2026 — 3 on data-center policy and 5 on AI regulation. 3 have been enacted into law. 2 impose active bans or moratoriums.",
+    stanceDatacenter: "concerning",
+    stanceAI: "restrictive",
+    contextBlurb: "California is advancing regulation on data centers and leaning restrictive on AI. On data centers: AB2619 (in committee) — Requires data centers in California to report their water usage and incorporates data center water consumption into local water supply planning processes. On AI: AB621 (enacted) — Updates California's law on deepfake pornography, which prohibits creating or sharing sexually explicit fake images of real people without their consent.",
     legislation: [
       {
         id: "ca-sb361",
@@ -1820,6 +2627,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill updates California's law on deepfake pornography, which prohibits creating or sharing sexually explicit fake images of real people without their consent. It strengthens civil legal protections for victims of non-consensual AI-generated intimate imagery.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -1845,6 +2656,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This California bill would regulate how employers can use surveillance tools to monitor workers, including AI-driven monitoring systems. It adds new rules to the Labor Code aimed at protecting employees from invasive workplace surveillance.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "none",
+          "ai-workforce": "restrictive",
+        },
         impactTags: [
           "ai-in-employment",
           "algorithmic-transparency",
@@ -1888,6 +2704,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in California to report on and manage their water usage. It sets rules around water consumption by data centers, likely including reporting requirements or efficiency standards.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -1930,6 +2750,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in California to report their water usage and incorporates data center water consumption into local water supply planning processes. It aims to ensure that water agencies account for the significant water demands of data centers when planning future water resources.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -1991,6 +2815,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers to meet power usage effectiveness (PUE) standards and addresses how data centers' energy costs are allocated among utility ratepayers. It aims to prevent data center energy consumption from shifting costs onto other electricity customers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "review",
+          energy: "concerning",
+        },
         impactTags: [
           "energy-rates",
           "grid-capacity",
@@ -2033,6 +2861,8 @@ const NA_ENTITIES: Entity[] = [
         source: "CalMatters",
         date: "2026-04-03",
         url: "https://calmatters.org/politics/2026/04/newsom-moves-for-california-ai-startups/",
+        summary: "California Governor Gavin Newsom signed an executive order establishing state review of federal supply-chain risk designations for AI companies and requiring state agencies to develop AI governance standards covering child safety, civil liberties, and discrimination concerns. The order comes after the Department of Defense designated San Francisco-based Anthropic a supply-chain risk over contract disputes regarding military use of its systems.",
+        summarySource: "article",
       },
       {
         id: "california-1",
@@ -2040,6 +2870,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Data Center Dynamics",
         date: "2026-01-26",
         url: "https://www.datacenterdynamics.com/en/news/45-day-data-center-moratorium-passed-in-monterey-park-california-with-more-permanent-regulations-to-come/",
+        summary: "Monterey Park's city council voted to impose a moratorium on data center development at Saturn Park.",
+        summarySource: "headline-only",
       },
       {
         id: "california-2",
@@ -2047,6 +2879,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Food & Water Watch",
         date: "2026-04-07",
         url: "https://www.foodandwaterwatch.org/2026/04/07/in-massive-victory-community-stops-monterey-park-data-center/",
+        summary: "HMC Capital withdrew its application to build a data center in Monterey Park, California following community opposition to the project. Environmental and community groups had campaigned against the proposal, citing concerns about water consumption, electricity costs, and climate impacts.",
+        summarySource: "article",
       },
       {
         id: "california-3",
@@ -2061,6 +2895,8 @@ const NA_ENTITIES: Entity[] = [
         source: "inewsource",
         date: "2026-04-08",
         url: "https://inewsource.org/2026/04/08/california-data-center-nimby-imperial-county/",
+        summary: "Imperial County residents have launched a ballot initiative to prohibit data centers after developer Sebastian Rucci proposed a 330-megawatt hyperscale facility on county land near residential areas without environmental review under California law. The project has energized community opposition citing concerns about precedent and past broken promises from industrial development, though some local groups support the facility for its potential economic benefits.",
+        summarySource: "article",
       },
     ],
   },
@@ -2070,8 +2906,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Colorado",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Colorado has 7 relevant bills tracked in 2025–2026 — 2 on data-center policy and 5 on AI regulation. 3 impose active bans or moratoriums.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Colorado is under discussion on data centers and advancing regulation on AI. On data centers: SB102 (in committee) — Establishes accountability measures for large-scale data centers in Colorado, likely including requirements around energy use, grid impact, and reporting. On AI: HB1113 (in committee) — Modifies Colorado election laws, likely including rules around the use of AI-generated or synthetic media in political campaigns.",
     legislation: [
       {
         id: "co-sb102",
@@ -2080,6 +2917,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes accountability measures for large-scale data centers in Colorado, likely including requirements around energy use, grid impact, and reporting. It aims to ensure that data centers consuming significant amounts of power are subject to oversight and transparency obligations.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          "ai-governance-dim": "none",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -2105,6 +2947,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans the use of someone's personal identifying features — such as their face, voice, or likeness — without their permission. It aims to protect individuals from unauthorized digital reproduction or impersonation of their identity.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "data-privacy",
@@ -2128,6 +2974,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill regulates how law enforcement agencies in Colorado can use surveillance technologies, with the goal of protecting citizens' rights. It likely requires oversight, transparency, or restrictions on tools like facial recognition or other monitoring systems used by police.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -2149,6 +2999,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets up a framework to guide how data centers are built and powered in Colorado, requiring them to support clean energy, grid modernization, and environmental protections. It aims to balance the rapid growth of data centers with the needs of utility customers and the environment.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "renewable-energy",
@@ -2175,6 +3029,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for companies that operate AI chatbot or conversational AI services, requiring them to meet certain transparency and safety standards. It likely includes protections for users, particularly around disclosure that they are interacting with an AI and safeguards for vulnerable users such as children.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -2201,6 +3059,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill places restrictions on how artificial intelligence can be used in psychotherapy services in Colorado. It aims to protect patients by limiting or regulating AI's role in mental health treatment.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -2356,6 +3218,8 @@ const NA_ENTITIES: Entity[] = [
         source: "Denver Gazette",
         date: "2026-03-31",
         url: "https://www.denvergazette.com/2026/03/31/denver-proposes-yearlong-moratorium-on-new-data-centers/",
+        summary: "Denver City Council advanced a one-year moratorium on new data center construction beginning May 21 to allow time for developing regulations addressing water use, community safety, and equity concerns. The pause would not affect existing permitted or under-construction facilities, and a working group of community members, industry stakeholders, and experts would be established to recommend future guidelines.",
+        summarySource: "article",
       },
       {
         id: "colorado-1",
@@ -2393,8 +3257,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Connecticut",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Connecticut has 8 relevant bills tracked in 2025–2026 — 1 on data-center policy and 7 on AI regulation. 2 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "none",
+    stanceAI: "concerning",
+    contextBlurb: "Connecticut is advancing regulation on AI, with no data-center legislation currently tracked. On AI: SB00092 (in committee) — Establishes additional protections for warehouse workers, likely including rules around automated monitoring and work-quota systems driven by algorithms.",
     legislation: [
       {
         id: "ct-sb00092",
@@ -2420,6 +3285,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This wide-ranging Connecticut bill creates a comprehensive AI regulatory framework including a new AI Policy Office, disclosure requirements for AI providers, rules on synthetic media detectability, and restrictions on automated hiring tools. It also establishes workforce training programs and a health AI initiative while imposing obligations on developers of powerful 'frontier' AI models.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-workforce": "concerning",
+          "ai-synthetic": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -2447,6 +3318,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Connecticut bill strengthens consumer privacy protections by regulating data brokers, restricting the use of facial recognition technology, limiting sharing of precise location data, and requiring businesses to disclose when they use algorithms to set personalized prices. It also expands workers' rights by removing exemptions that allowed employment-related data processing decisions to go unchecked.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+          "ai-workforce": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -2623,6 +3499,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes a framework for the responsible use of artificial intelligence in Connecticut, addressing safety, transparency, and accountability requirements. It implements the Governor's budget recommendations related to AI innovation and oversight.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "ai-safety",
           "algorithmic-transparency",
@@ -2642,6 +3522,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how employers in Connecticut can use automated systems and AI when making decisions about workers, such as hiring, firing, or promotions. It requires transparency and establishes protections to ensure employees are treated fairly when AI is involved in workplace decisions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-workforce": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-in-employment",
@@ -2706,8 +3591,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Delaware",
     region: "na",
     level: "state",
-    stance: "review",
-    contextBlurb: "Delaware has 2 relevant bills tracked in 2025–2026 on AI regulation. 1 has been enacted into law. 1 advances stricter regulation.",
+    stanceDatacenter: "none",
+    stanceAI: "review",
+    contextBlurb: "Delaware is under discussion on AI, with no data-center legislation currently tracked. On AI: HJR7 (enacted) — This resolution directs Delaware's AI Commission to work with the Secretary of State to design a regulatory sandbox — a controlled testing environment — for new technologies that use agentic AI, wh…",
     legislation: [
       {
         id: "de-hb231",
@@ -3014,8 +3900,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Florida",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Florida has 9 relevant bills tracked in 2025–2026 — 4 on data-center policy and 5 on AI regulation. 1 imposes active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "Florida is advancing regulation across both data centers and AI. On data centers: S0484 (on the floor) — Gives local governments control over zoning and land-use rules for large data centers, sets utility service requirements for big power customers, and blocks water-use permits for… On AI: S0480 (in committee) — Reorganizes Florida's state technology operations by moving the Florida Digital Service into a new division called DIGIT within the Governor's office.",
     legislation: [
       {
         id: "fl-h1007",
@@ -3024,6 +3911,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill places significant restrictions on large data centers in Florida, including banning the use of fresh water (requiring reclaimed water instead), giving local governments control over data center land-use planning, and requiring energy and grid impact studies before construction permits are issued. It also prohibits state agencies from signing nondisclosure agreements that hide data center-related information from the public.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          community: "favorable",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -3050,6 +3943,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Florida bill allows insurance companies and HMOs to use AI to help process claims, but prohibits AI from being the sole reason a claim is denied or reduced. A qualified human professional must make the final call on any claim denial or payment reduction.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-in-healthcare",
@@ -3075,6 +3972,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Florida bill reforms how police conduct eyewitness identification procedures, including placing limits on when facial recognition technology can be used. It sets strict documentation, recording, and procedural requirements for lineups and other identification methods.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "none",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -3138,6 +4039,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Florida bill gives local governments control over zoning and land-use rules for large data centers, sets utility service requirements for big power customers, and blocks water-use permits for large-scale data centers under certain conditions. It also requires a study on the impacts of building and operating large-scale data centers in the state.",
         stage: "Floor",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          community: "favorable",
+          "land-use": "favorable",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -3188,6 +4095,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill shields information about plans to build or locate data centers from public records requests in Florida. It keeps site selection details confidential, which can help companies avoid competitors learning their expansion plans but reduces public visibility into where data centers may be built.",
         stage: "Committee",
         stance: "favorable",
+        dimensionStances: {
+          community: "favorable",
+          "land-use": "favorable",
+        },
         impactTags: [
           "local-zoning",
           "nda-transparency",
@@ -3263,6 +4174,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill restricts Florida government agencies from contracting with AI vendors unless specific requirements are met, and requires parental consent before minors can use companion chatbot platforms. It also mandates that chatbot operators periodically remind users they are interacting with a bot.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -3326,8 +4241,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Georgia",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Georgia has 11 relevant bills tracked in 2025–2026 — 5 on data-center policy and 6 on AI regulation. 1 has been enacted into law. 4 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "Georgia is advancing regulation across both data centers and AI. On data centers: HB1063 (in committee) — Requires Georgia electric utilities to shield residential and retail customers from bearing the costs tied to data center construction and operation. On AI: SR789 (enacted) — This resolution creates a Georgia Senate committee to study the effects and implications of artificial intelligence.",
     legislation: [
       {
         id: "ga-hb1323",
@@ -3336,6 +4252,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require new data centers in Georgia to operate as 'hybrid power data centers,' meaning they must use a combination of power sources, and be certified by the Public Service Commission. It aims to reduce the strain that large data centers place on the electrical grid by mandating diversified energy use.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "renewable-energy",
@@ -3359,6 +4279,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Georgia bill prohibits health insurance companies from using artificial intelligence alone to make coverage decisions for healthcare services. Human review must be part of any such decision-making process.",
         stage: "Floor",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -3404,6 +4328,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires Georgia electric utilities to shield residential and retail customers from bearing the costs tied to data center construction and operation. It mandates specific contract terms to ensure that data centers, not everyday ratepayers, cover the expenses their energy demands place on the grid.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "restrictive",
+          community: "favorable",
+        },
         impactTags: [
           "energy-rates",
           "grid-capacity",
@@ -3429,6 +4357,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would temporarily ban the construction of new data centers in Georgia while a state commission studies their impact on utilities, the environment, and communities. It establishes a formal review body to assess how data centers affect power grids, water use, and other public resources before development can resume.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          environmental: "restrictive",
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "grid-capacity",
           "environmental-review",
@@ -3456,6 +4390,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would prevent electric utilities from spreading the costs of serving commercial data centers across all ratepayers, requiring that those costs be charged specifically to the data centers themselves. It aims to protect regular electricity customers from subsidizing the high energy demands of data center operations.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "none",
+        },
         impactTags: [
           "energy-rates",
           "grid-capacity",
@@ -3481,6 +4419,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Georgia bill would use property tax revenue collected from data centers to fund a statewide homestead exemption, reducing property taxes for homeowners. It essentially links data center tax contributions to direct financial relief for residential property owners across the state.",
         stage: "Filed",
         stance: "favorable",
+        dimensionStances: {
+          community: "favorable",
+          "land-use": "none",
+        },
         impactTags: [
           "tax-incentives",
           "local-zoning",
@@ -3578,6 +4520,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Georgia law requires that performers give their consent before their likeness can be used to create a digital replica through AI. Performers who have their likeness used without permission can sue for violations.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "data-privacy",
@@ -3599,6 +4545,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Georgia bill bans the distribution of computer-generated obscene material depicting children and adds enhanced criminal sentences for offenders who use artificial intelligence to commit certain crimes. It updates the state's obscenity laws to specifically address AI-generated content targeting minors.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -3663,8 +4614,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Hawaii",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Hawaii has 3 relevant bills tracked in 2025–2026 on AI regulation. 2 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "none",
+    stanceAI: "review",
+    contextBlurb: "Hawaii is under discussion on AI, with no data-center legislation currently tracked. On AI: SB2049 (in committee) — Bans police in Hawaii from using biometric surveillance technology (such as facial recognition) unless specific conditions are satisfied.",
     legislation: [
       {
         id: "hi-hb775",
@@ -3716,6 +4668,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill makes it a crime in Hawaii to create or share sexually explicit deepfake images or videos without consent. It targets AI-generated fake content that depicts real people in sexual situations.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -3739,6 +4695,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans police in Hawaii from using biometric surveillance technology (such as facial recognition) unless specific conditions are satisfied. It places strict limits on how and when law enforcement can deploy these tools.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -3955,8 +4915,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Idaho",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Idaho has 9 relevant bills tracked in 2025–2026 — 4 on data-center policy and 5 on AI regulation. 3 have been enacted into law. 1 imposes active bans or moratoriums. 4 offer incentives or deregulation.",
+    stanceDatacenter: "restrictive",
+    stanceAI: "concerning",
+    contextBlurb: "Idaho is leaning restrictive on data centers and advancing regulation on AI. On data centers: H0895 (enacted) — Sets limits on how much water data centers in Idaho can use for cooling purposes. On AI: S1297 (enacted) — Establishes safety requirements for conversational AI systems, likely including disclosure and protective standards for users.",
     legislation: [
       {
         id: "id-h0609",
@@ -4025,6 +4986,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets limits on how much water data centers in Idaho can use for cooling purposes. It places enforceable restrictions on water consumption to reduce the impact data centers have on local water supplies.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          environmental: "restrictive",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -4045,6 +5010,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how generative AI tools can be used in Idaho's public schools. It establishes specific guidelines and requirements governing AI in educational settings.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-education",
           "algorithmic-transparency",
@@ -4085,6 +5054,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes safety requirements for conversational AI systems, likely including disclosure and protective standards for users. It sets rules that AI chatbot and virtual assistant providers must follow to ensure safe interactions, potentially with special protections for vulnerable users like children.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "ai-safety",
           "algorithmic-transparency",
@@ -4108,6 +5081,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates new rules in Idaho law governing how biometric identifiers — such as fingerprints, facial scans, or iris patterns — can be collected and used. It establishes legal protections and likely requires consent or disclosure before capturing someone's biometric data.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -4239,8 +5216,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Illinois",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Illinois has 12 relevant bills tracked in 2025–2026 on AI regulation. 2 impose active bans or moratoriums.",
+    stanceDatacenter: "none",
+    stanceAI: "concerning",
+    contextBlurb: "Illinois is advancing regulation on AI, with no data-center legislation currently tracked. On AI: HB3303 (in committee) — Bans distributing deceptive AI-generated or manipulated media about candidates within 90 days of an election if it's intended to damage their reputation or mislead voters.",
     legislation: [
       {
         id: "il-hb3312",
@@ -4272,6 +5250,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Illinois bill requires AI companies to embed provenance labels in all AI-generated images, video, and audio content, and to provide free tools for people to read those labels. It also places compliance obligations on online platforms, device manufacturers, and hosting services, with civil penalties for violations.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "deepfake-regulation",
@@ -4314,6 +5296,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Illinois bill bans distributing deceptive AI-generated or manipulated media about candidates within 90 days of an election if it's intended to damage their reputation or mislead voters. Violators face penalties, with exceptions for satire and clearly labeled content.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -4335,6 +5321,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Illinois bill sets rules for how police can use facial recognition technology, banning its use for real-time surveillance, politically motivated monitoring, or profiling based on race or protected characteristics. It also requires compliance audits, state reporting on accuracy, and standardized training for law enforcement agencies.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -4357,6 +5347,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires Illinois utilities to store customer energy usage data for extended periods and share it securely with account holders or their designated third parties upon request. It establishes rules for how and when this data must be delivered, and includes protections for utilities against liability when data is misused after proper sharing.",
         stage: "Committee",
         stance: "review",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "none",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -4378,6 +5372,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require companies that handle large amounts of Illinois residents' personal data to give consumers rights to access, correct, and delete their information, and to know who their data has been shared with. It also requires data brokers to register with the state and creates a portal for consumers to request deletion of their data across all registered brokers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -4399,6 +5397,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would create a comprehensive Illinois data privacy law requiring businesses to limit how they collect and use personal data, give individuals rights over their information, and apply special protections for children. Companies would need clear policies and face enforcement for violations.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "child-safety",
@@ -4421,6 +5423,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would create a comprehensive data privacy law in Illinois, giving consumers rights to access, correct, and understand how their personal data is used by businesses. It applies to companies handling data of 100,000 or more Illinois residents or those that earn significant revenue from selling personal data, with enforcement by the Attorney General.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -4442,6 +5448,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Illinois bill requires companies that handle personal health data to clearly disclose their privacy practices, get explicit consent before collecting or selling health data, and give individuals the right to delete their data or withdraw consent. It also bans discriminatory treatment of people who refuse to share their health data and restricts location-based targeting near health facilities.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "none",
+        },
         impactTags: [
           "data-privacy",
           "ai-in-healthcare",
@@ -4466,6 +5476,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Illinois bill requires companies that handle personal health data to disclose their privacy practices, get explicit consent before collecting or selling health information, and give individuals the right to delete their data. It also bans discriminatory practices against people who refuse to share their health data and places strict rules on geofencing near health facilities.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "ai-in-healthcare",
@@ -4487,6 +5501,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Illinois bill creates a comprehensive consumer data privacy law giving residents the right to opt out of targeted advertising, data sales, and automated profiling that affects their lives. It establishes rules for businesses handling personal data and imposes civil penalties for violations, taking effect in 2027.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -4547,8 +5565,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Indiana",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Indiana has 7 relevant bills tracked in 2025–2026 — 4 on data-center policy and 3 on AI regulation. 1 has been enacted into law. 3 impose active bans or moratoriums.",
+    stanceDatacenter: "concerning",
+    stanceAI: "restrictive",
+    contextBlurb: "Indiana is advancing regulation on data centers and leaning restrictive on AI. On data centers: HB1333 (in committee) — Sets new rules for data centers in Indiana, requiring them to contribute at least 1% of their tax savings to local governments before receiving sales tax exemptions on equipment purchases. On AI: HB1271 (enacted) — Regulates how hospitals and insurers handle health insurance claims, including a ban on using automated systems to submit claims without human review by the provider.",
     legislation: [
       {
         id: "in-sb0083",
@@ -4625,6 +5644,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets new rules for data centers in Indiana, requiring them to contribute at least 1% of their tax savings to local governments before receiving sales tax exemptions on equipment purchases. It also addresses land use on agricultural soils, battery energy storage systems, and requires emergency response documentation for large energy storage facilities.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "review",
+          energy: "favorable",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "tax-incentives",
@@ -4673,6 +5698,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in Indiana to obtain a water consumption permit from the state's Department of Natural Resources before operating. It establishes an application and approval process to regulate how much water data centers can use.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "none",
+          community: "review",
+          "land-use": "none",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -4697,6 +5728,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Indiana bill requires data centers to regularly report their electricity usage to state regulators and disclose projected power and water needs before receiving construction permits. It also creates a working group to study and forecast the future electricity demands of Indiana's data center industry.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "review",
+          community: "review",
+          "land-use": "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "water-infrastructure",
@@ -4803,6 +5839,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Indiana bill bans the use of AI systems to impersonate or replace licensed mental health professionals, while also setting rules around insurance reimbursement and network adequacy for mental health services. The AI-specific provision is an outright prohibition, making it restrictive in that regard.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -4887,8 +5927,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Iowa",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Iowa has 10 relevant bills tracked in 2025–2026 — 6 on data-center policy and 4 on AI regulation. 1 imposes active bans or moratoriums. 3 offer incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "favorable",
+    contextBlurb: "Iowa is advancing regulation on data centers and leaning innovation-friendly on AI. On data centers: HF2447 (in committee) — Requires data centers in Iowa to report on their water and energy usage and establishes specific tariff rules related to those resources. On AI: HSB294 (in committee) — Regulates the use of AI to create election-related content, such as deepfakes or synthetic media that could mislead voters.",
     legislation: [
       {
         id: "ia-hf2447",
@@ -4897,6 +5938,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in Iowa to report on their water and energy usage and establishes specific tariff rules related to those resources. It creates new regulatory obligations around how data centers consume water and electricity, with potential cost implications for operators.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "energy-rates",
@@ -4920,6 +5965,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Iowa bill regulates the use of AI to create election-related content, such as deepfakes or synthetic media that could mislead voters. It also establishes protections for people interacting with AI systems and sets penalties for violations.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -4977,6 +6027,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Iowa bill requires data centers to report their water and energy usage and subjects them to specific utility tariff requirements. It imposes new oversight obligations on data centers related to their consumption of water and electricity resources.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -5039,6 +6093,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Iowa bill requires data centers to use water-efficient cooling technologies and encourages the use of recycled or non-drinking water sources. Data centers that fail to comply would face civil penalties.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -5081,6 +6139,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Iowa bill would require high schools to include computer science and AI education in their curricula and graduation requirements, while also affecting teacher preparation programs and college admissions. It establishes mandatory standards for how AI and computer science are taught across the state.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-public": "favorable",
+        },
         impactTags: [
           "ai-in-education",
           "ai-safety",
@@ -5102,6 +6164,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Iowa bill requires high schools to include computer science and artificial intelligence in their curricula and graduation requirements, and updates teacher preparation programs to cover these topics. It aims to ensure students and educators are equipped with AI and computer science knowledge.",
         stage: "Filed",
         stance: "favorable",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-public": "favorable",
+        },
         impactTags: [
           "ai-in-education",
           "algorithmic-transparency",
@@ -5122,6 +6188,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill addresses who legally owns the content created by AI systems and the AI models themselves after they have been trained. It establishes rules around intellectual property rights for AI-generated outputs and trained AI systems.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "none",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -5181,8 +6251,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Kansas",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Kansas has 8 relevant bills tracked in 2025–2026 — 5 on data-center policy and 3 on AI regulation. 3 have been enacted into law. 4 impose active bans or moratoriums. 2 offer incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "restrictive",
+    contextBlurb: "Kansas is advancing regulation on data centers and leaning restrictive on AI. On data centers: SB531 (in committee) — Would ban the construction or operation of new large data centers in Kansas counties that have experienced a drought emergency in the past three years. On AI: HB2183 (enacted) — Updates Kansas criminal law to ban the creation and distribution of AI-generated or digitally altered sexual images of children, even when no real child was directly involved in making them.",
     legislation: [
       {
         id: "ks-sb526",
@@ -5191,6 +6262,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers to be built on land already zoned for industrial or manufacturing use (or unzoned) as of July 1, 2025, in order to qualify for a sales tax exemption. It effectively restricts where data centers can be located to receive tax benefits, steering them away from residential or commercial zones.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "tax-incentives",
@@ -5211,6 +6286,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kansas bill bans the use of DeepSeek and other AI platforms controlled by foreign adversary nations on state-owned devices and government networks. It also prohibits state use of genetic sequencing equipment or software produced by foreign adversaries.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-consumer": "none",
+        },
         impactTags: [
           "ai-safety",
           "data-privacy",
@@ -5270,6 +6349,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would ban the construction or operation of new large data centers in Kansas counties that have experienced a drought emergency in the past three years. It aims to protect water resources in drought-stressed areas from the heavy water demands of large data center facilities.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          environmental: "restrictive",
+          community: "concerning",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "water-consumption",
           "local-zoning",
@@ -5308,6 +6392,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require data centers in Kansas to use closed-loop cooling systems, which recirculate water rather than continuously drawing fresh water. The goal is to reduce the amount of water data centers consume from local supplies.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -5328,6 +6416,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would make it illegal to train AI systems to encourage suicide or violence, form emotional bonds with users, pose as healthcare professionals, or simulate human relationships. It broadly restricts AI from providing emotional support or encouraging social isolation.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-consumer": "restrictive",
+          "ai-public": "restrictive",
+          "ai-synthetic": "none",
+        },
         impactTags: [
           "ai-safety",
           "child-safety",
@@ -5350,6 +6444,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill updates Kansas criminal law to ban the creation and distribution of AI-generated or digitally altered sexual images of children, even when no real child was directly involved in making them. It also prohibits sharing realistic fake explicit images of identifiable real people without their consent.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -5469,8 +6567,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Kentucky",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Kentucky has 10 relevant bills tracked in 2025–2026 — 5 on data-center policy and 5 on AI regulation. 1 imposes active bans or moratoriums.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "Kentucky is advancing regulation across both data centers and AI. On data centers: HB593 (in committee) — Requires data centers to obtain electricity only through special contracts that protect other utility customers from bearing the costs of new infrastructure built to serve data c… On AI: HB676 (on the floor) — Creates a statewide health data system in Kentucky that collects and shares health information from various participants, governed by a board and operated by a consortium of public health…",
     legislation: [
       {
         id: "ky-hb593",
@@ -5479,6 +6578,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kentucky bill requires data centers to obtain electricity only through special contracts that protect other utility customers from bearing the costs of new infrastructure built to serve data centers. It establishes a formal application and review process to ensure data center power demands don't raise rates or hurt service quality for residential and other customers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -5506,6 +6610,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kentucky bill restricts how licensed therapists and psychotherapists can use AI tools during therapy sessions, including banning AI from assisting when sessions are recorded. It also prohibits advertising therapy services unless delivered by a licensed human professional.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -5531,6 +6640,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kentucky bill requires data centers built on agricultural land to file a decommissioning plan and post a financial bond before operating, ensuring cleanup costs are covered when a facility closes. It also requires data centers receiving state tax exemptions to work with local governments on improving energy and water efficiency.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          community: "review",
+          "land-use": "concerning",
+        },
         impactTags: [
           "protected-land",
           "environmental-review",
@@ -5555,6 +6669,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kentucky bill requires large data centers using more than 100 megawatts of electricity to get Public Service Commission approval before receiving utility service, ensuring the data center pays for the new infrastructure it needs. The law is designed to prevent ordinary utility customers from bearing the costs of expanding the grid for massive data center operations.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "none",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -5578,6 +6696,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kentucky bill prevents government agencies from signing secrecy agreements with data center companies that go beyond what state law already allows, and ensures the public has access to information about data center projects and their impacts. It also stops contracts from overriding Kentucky's open records and open meetings laws, and protects local officials' ability to discuss data center effects with the public.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          community: "concerning",
+          "land-use": "none",
+        },
         impactTags: [
           "nda-transparency",
           "local-control",
@@ -5622,6 +6744,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in Kentucky to complete a water feasibility study before opening and submit annual reports on their water usage to the state's Energy and Environment Cabinet. It introduces mandatory oversight of how much water data centers consume, adding regulatory hurdles before operations can begin.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -5644,6 +6770,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kentucky bill gives consumers rights over their personal data held by social media companies and AI systems, and requires those companies to allow users to move their data to other platforms. It also sets rules for how social media and AI companies can share data with each other, with enforcement by the Attorney General.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -5665,6 +6795,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Kentucky bill sets rules for companies offering AI-powered mental health chatbots, requiring them to clearly disclose that users are interacting with AI, protect users' personal health information, and avoid deceptive advertising. The Attorney General would have authority to enforce these requirements.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "data-privacy",
@@ -5688,6 +6823,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates a Kentucky Health Command within the state's technology office to develop and oversee an AI-assisted virtual health platform for rural healthcare providers. The platform can provide health information and services but is prohibited from practicing medicine or diagnosing and treating conditions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "favorable",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -5728,6 +6867,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates a statewide health data system in Kentucky that collects and shares health information from various participants, governed by a board and operated by a consortium of public health colleges. It establishes rules for how health data is submitted, shared, and protected, with enforcement powers for non-compliance.",
         stage: "Floor",
         stance: "review",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "favorable",
+        },
         impactTags: [
           "data-privacy",
           "ai-in-healthcare",
@@ -5788,8 +6931,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Louisiana",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Louisiana has 9 relevant bills tracked in 2025–2026 — 1 on data-center policy and 8 on AI regulation. 4 impose active bans or moratoriums.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Louisiana is under discussion on data centers and advancing regulation on AI. On data centers: HB1206 (in committee) — Requires data centers to obtain permits and report on how much water they use. On AI: HB119 (in committee) — Makes it illegal to create or share AI-generated images of real people without their consent.",
     legislation: [
       {
         id: "la-hb1206",
@@ -5798,6 +6942,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Louisiana bill requires data centers to obtain permits and report on how much water they use. It creates new regulatory requirements aimed at tracking and managing the significant water consumption associated with data center cooling systems.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -5820,6 +6968,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Louisiana bill sets rules for health insurance companies that use AI or automated systems to make coverage and claims decisions. It aims to ensure these systems are transparent, accountable, and don't unfairly deny or limit patient benefits.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -5843,6 +6996,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Louisiana law bans the creation or use of AI-generated fake images or videos (deepfakes) targeting K-12 students. It establishes enforceable protections for minors in schools against synthetic media abuse.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -5922,6 +7079,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how information can be shared within Louisiana's LA FIRST research and data integration system. It focuses on data sharing protocols for a state-run system aimed at transforming how Louisiana collects and uses public data.",
         stage: "Committee",
         stance: "review",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "none",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -5943,6 +7104,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes a set of consumer rights related to artificial intelligence, giving people protections around how AI systems can affect them. It likely includes requirements for transparency, fairness, and accountability when businesses use AI to make decisions about consumers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -5968,6 +7133,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Louisiana bill makes it illegal to create or share AI-generated images of real people without their consent. It establishes criminal penalties for those who use artificial intelligence to produce unauthorized or harmful depictions of individuals.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -5991,6 +7160,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires political campaigns to disclose when artificial intelligence is used to create or assist in telephone communications. Voters must be informed when AI-generated content is used in campaign calls.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "concerning",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -6033,6 +7206,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans the use of AI to generate child sexual abuse material. Violations are subject to criminal prohibition under Louisiana law.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -6094,8 +7271,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Maine",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Maine has 8 relevant bills tracked in 2025–2026 — 1 on data-center policy and 7 on AI regulation. 3 have been enacted into law. 5 impose active bans or moratoriums.",
+    stanceDatacenter: "restrictive",
+    stanceAI: "concerning",
+    contextBlurb: "Maine is leaning restrictive on data centers and advancing regulation on AI. On data centers: LD912 (enacted) — Caps the amount of electricity that can be supplied to data centers on commercial or industrial sites in Maine. On AI: LD1727 (enacted) — Requires businesses to be upfront with consumers when they are interacting with or being affected by artificial intelligence in commercial transactions.",
     legislation: [
       {
         id: "me-ld912",
@@ -6104,6 +7282,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill caps the amount of electricity that can be supplied to data centers on commercial or industrial sites in Maine. It is designed to limit the grid load and energy consumption associated with large data center operations.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          energy: "restrictive",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -6126,6 +7309,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Maine bill would regulate or ban children's access to AI chatbots that mimic human conversation and AI social companions. It aims to protect minors from potentially harmful interactions with human-like AI systems.",
         stage: "Floor",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "child-safety",
           "algorithmic-transparency",
@@ -6208,6 +7395,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires that humans, not automated systems, make final decisions about medical insurance coverage and payments. It ensures that AI or algorithmic tools cannot independently deny or approve claims without human review.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -6232,6 +7423,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires businesses to be upfront with consumers when they are interacting with or being affected by artificial intelligence in commercial transactions. It aims to ensure people know when AI is being used in decisions or communications that affect them as customers.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -6277,6 +7472,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill aims to protect children by prohibiting AI-generated harmful depictions of minors. It establishes legal safeguards against the creation or distribution of such content.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -6298,6 +7497,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Maine bill would ban health insurance companies from using artificial intelligence to deny claims, requiring human decision-making in coverage denials. It aims to protect patients from automated rejections of their health insurance claims.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -6340,6 +7543,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill directs Maine's Arts Commission to study how federal and other states' laws are protecting artists from having their work used without permission by AI companies. The commission would also monitor how AI is being used in educational settings.",
         stage: "Enacted",
         stance: "review",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-public": "review",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-in-education",
@@ -6403,8 +7610,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Maryland",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Maryland has 11 relevant bills tracked in 2025–2026 — 7 on data-center policy and 4 on AI regulation. 2 impose active bans or moratoriums. 3 offer incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "Maryland is advancing regulation across both data centers and AI. On data centers: HB120 (in committee) — Places a statewide ban on new data center construction, preventing both private builders and government bodies from proceeding with new projects. On AI: HB293 (on the floor) — Allows Maryland's student and workforce data system to share data with third-party data centers for multistate reporting, subject to written agreements and compliance requirements.",
     legislation: [
       {
         id: "md-hb293",
@@ -6413,6 +7621,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill allows Maryland's student and workforce data system to share data with third-party data centers for multistate reporting, subject to written agreements and compliance requirements. It establishes oversight by requiring reports to legislative committees whenever such data-sharing agreements are entered into.",
         stage: "Floor",
         stance: "concerning",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "review",
+        },
         impactTags: [
           "data-privacy",
           "ai-in-education",
@@ -6459,6 +7671,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill allows police in Maryland to use facial recognition technology when investigating certain crimes, specifically when the image analyzed was taken inside a home. It expands law enforcement's ability to use this surveillance tool in residential settings, raising privacy concerns.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -6480,6 +7696,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill allows Maryland's student and workforce data system to share data with third-party data centers for multistate reporting, subject to written agreements and compliance requirements. It raises data privacy considerations by enabling sensitive student and workforce information to flow to external organizations under regulated but permissive conditions.",
         stage: "Floor",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -6500,6 +7720,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Maryland bill requires large data center operators to file detailed disclosure reports with state and local agencies, and mandates that larger localities create formal data center planning rules by 2027. It increases oversight and transparency around where and how large data centers are built and operated.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -6548,6 +7774,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets operational and siting standards for data centers in Maryland, including noise and vibration limits, backup power generation rules, and a ban on building data centers on certain agricultural land. It also requires applicants to submit reports to local authorities under specific conditions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          community: "concerning",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "noise-vibration",
           "local-zoning",
@@ -6572,6 +7803,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires large electricity users, including data centers, to register with Maryland's Public Service Commission before connecting to the grid and participate in a demand response program that can curtail their power use. Data centers must meet certain conditions to qualify for a tax exemption, and the Commission gains new authority to manage grid impacts from these large power consumers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "review",
+          "land-use": "none",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -6661,6 +7897,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill places a statewide ban on new data center construction, preventing both private builders and government bodies from proceeding with new projects. The moratorium would automatically end if Maryland passes separate legislation specifically addressing data centers built alongside natural gas, nuclear, or small modular reactor power facilities.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          environmental: "restrictive",
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -6726,8 +7968,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Massachusetts",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Massachusetts has 7 relevant bills tracked in 2025–2026 — 1 on data-center policy and 6 on AI regulation. 7 advance stricter regulation.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Massachusetts is under discussion on data centers and advancing regulation on AI. On data centers: H495 (in committee) — Aims to reduce the greenhouse gas emissions produced by artificial intelligence systems and data centers in Massachusetts. On AI: H4640 (in committee) — Puts into law the recommendations made by a special commission studying facial recognition technology, likely establishing rules and restrictions on how it can be used.",
     legislation: [
       {
         id: "ma-s50",
@@ -6756,6 +7999,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes consumer protections for people interacting with AI systems, likely requiring transparency and safeguards around how AI engages with users. It aims to ensure consumers are informed and protected when dealing with automated AI-driven interactions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -6779,6 +8026,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill puts into law the recommendations made by a special commission studying facial recognition technology, likely establishing rules and restrictions on how it can be used. It aims to regulate the deployment of facial recognition, particularly by law enforcement and government agencies.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -6876,6 +8127,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill aims to reduce the greenhouse gas emissions produced by artificial intelligence systems and data centers in Massachusetts. It would likely impose reporting requirements or efficiency standards on AI operations to address their environmental impact.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          "ai-governance-dim": "review",
+        },
         impactTags: [
           "carbon-emissions",
           "energy-rates",
@@ -6899,6 +8155,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill proposes rules governing how artificial intelligence and software tools can be used when making healthcare decisions. It aims to ensure oversight and likely transparency requirements for AI-driven medical decision-making processes.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -6920,6 +8180,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill proposes rules governing how artificial intelligence and software tools can be used to make or assist in healthcare decisions in Massachusetts. It likely requires transparency, oversight, or restrictions on AI-driven medical decision-making to protect patients.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -6941,6 +8205,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require disclosures when artificial intelligence is used, so people know when they are interacting with or being affected by AI systems. It aims to increase transparency around how AI is being used in Massachusetts.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -7022,8 +8290,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Michigan",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Michigan has 9 relevant bills tracked in 2025–2026 on AI regulation. 4 impose active bans or moratoriums.",
+    stanceDatacenter: "none",
+    stanceAI: "concerning",
+    contextBlurb: "Michigan is advancing regulation on AI, with no data-center legislation currently tracked. On AI: HB5769 (in committee) — Creates a new law in Michigan specifically protecting the privacy of consumers' reproductive health data.",
     legislation: [
       {
         id: "mi-sb0198",
@@ -7032,6 +8301,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates new rules governing how automobile dealers collect and handle customer data. It establishes requirements around what data can be gathered and how it must be managed, aiming to protect consumer privacy in car dealership transactions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -7053,6 +8326,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would ban companion chatbots from being made available to minors in Michigan. It creates a new law specifically targeting AI-powered social or emotional companion apps that children could access.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "child-safety",
           "ai-safety",
@@ -7097,6 +8374,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would create a new Michigan law giving consumers rights over their personal data, including how it is collected, used, and shared by businesses. It establishes rules companies must follow to protect consumer privacy and would include oversight and enforcement mechanisms.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -7180,6 +8461,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates the Michigan Kids Code Act, which establishes online safety protections for children by regulating how internet services collect data and deliver content to minors. It imposes restrictions on platforms to limit harmful algorithmic recommendations and data practices targeting kids.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "child-safety",
           "data-privacy",
@@ -7204,6 +8489,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Michigan bill would prohibit employers from using electronic monitoring or automated decision-making tools in the workplace except for specific allowed purposes. It creates new workplace protections against algorithmic surveillance and automated employment decisions.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-workforce": "restrictive",
+        },
         impactTags: [
           "ai-in-employment",
           "algorithmic-transparency",
@@ -7252,6 +8542,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes rules governing how law enforcement agencies in Michigan can use license plate reader systems to track and record vehicle information. It sets guidelines intended to regulate the collection, storage, and use of that data by police.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -7296,20 +8590,6 @@ const NA_ENTITIES: Entity[] = [
     keyFigures: [],
     news: [
       {
-        id: "michigan-0",
-        headline: "Michigan HBs 5594 5595 5596 Would Halt New Data Centers",
-        source: "Michigan Advance",
-        date: "2026-02-27",
-        url: "https://michiganadvance.com/briefs/wortz-spearheads-bipartisan-effort-to-halt-data-center-construction-in-michigan/",
-      },
-      {
-        id: "michigan-1",
-        headline: "25 Michigan Communities Enact Local Data Center Moratoriums",
-        source: "WKAR Public Media",
-        date: "2026-02-27",
-        url: "https://www.wkar.org/wkar-news/2026-02-27/michigan-data-center-tracker-moratoria-legislation-and-grid-impact",
-      },
-      {
         id: "michigan-2",
         headline: "Anti-Data Center Rallies Planned Across Six Michigan Cities",
         source: "Planet Detroit",
@@ -7330,6 +8610,20 @@ const NA_ENTITIES: Entity[] = [
         date: "2026-03-06",
         url: "https://gandernewsroom.com/2026/03/02/how-many-ai-data-centers-are-planned-in-michigan-we-counted/",
       },
+      {
+        id: "michigan-0",
+        headline: "Michigan HBs 5594 5595 5596 Would Halt New Data Centers",
+        source: "Michigan Advance",
+        date: "2026-02-27",
+        url: "https://michiganadvance.com/briefs/wortz-spearheads-bipartisan-effort-to-halt-data-center-construction-in-michigan/",
+      },
+      {
+        id: "michigan-1",
+        headline: "25 Michigan Communities Enact Local Data Center Moratoriums",
+        source: "WKAR Public Media",
+        date: "2026-02-27",
+        url: "https://www.wkar.org/wkar-news/2026-02-27/michigan-data-center-tracker-moratoria-legislation-and-grid-impact",
+      },
     ],
   },
   {
@@ -7338,8 +8632,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Minnesota",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Minnesota has 11 relevant bills tracked in 2025–2026 — 9 on data-center policy and 2 on AI regulation. 1 imposes active bans or moratoriums. 6 offer incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "review",
+    contextBlurb: "Minnesota is under discussion across both data centers and AI. On data centers: SF5100 (in committee) — Modifies existing rules and requirements that govern how data centers are built and operated in the state. On AI: SF1242 (in committee) — Requires law enforcement in Minnesota to obtain a warrant before using facial recognition technology to identify individuals.",
     legislation: [
       {
         id: "mn-hf4153",
@@ -7348,6 +8643,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill makes it easier for data centers to get water use approvals, exempts them from sales tax on electricity, and excludes their electricity use from calculations that determine how much solar energy utilities must provide. Overall, it reduces regulatory and financial burdens on data centers operating in Minnesota.",
         stage: "Committee",
         stance: "favorable",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "favorable",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -7419,6 +8718,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires law enforcement in Minnesota to obtain a warrant before using facial recognition technology to identify individuals. It establishes legal guardrails around how police can deploy this surveillance tool, protecting people's privacy rights.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -7558,6 +8861,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Minnesota bill modifies existing rules and requirements that govern how data centers are built and operated in the state. The changes could affect where data centers can be located, how they interact with local communities, and the economic conditions surrounding their development.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -7604,6 +8911,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Minnesota bill sets new rules for data centers around water use permits and environmental review requirements. It also exempts data centers from having to contribute to an energy conservation fund, while adding oversight on large water appropriation projects.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "favorable",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -7675,8 +8986,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Mississippi",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Mississippi has 4 relevant bills tracked in 2025–2026 on AI regulation. 1 imposes active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "none",
+    stanceAI: "concerning",
+    contextBlurb: "",
     legislation: [
       {
         id: "ms-hb534",
@@ -7705,6 +9017,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Mississippi bill requires political advertisements that use AI-generated content to clearly disclose that fact to the public. Campaigns or individuals who fail to include the required disclosure face civil penalties and can be sued by affected parties or the state attorney general.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "concerning",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -7768,6 +9084,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would create a Mississippi consumer privacy law giving residents the right to access, correct, delete, or opt out of the sale of their personal data held by large businesses. Companies collecting such data would face new requirements around transparency, security practices, and data protection assessments.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -7966,8 +9286,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Missouri",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Missouri has 7 relevant bills tracked in 2025–2026 — 2 on data-center policy and 5 on AI regulation. 3 impose active bans or moratoriums.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Missouri is under discussion on data centers and advancing regulation on AI. On data centers: HB3390 (filed) — Establishes new rules governing where and how data centers can be built in the state. On AI: HB2032 (in committee) — Requires age verification for companion chatbot services to prevent minors from accessing them.",
     legislation: [
       {
         id: "mo-hb1810",
@@ -7994,6 +9315,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes rules for AI chatbots, likely requiring disclosures and safety measures around their use. It appears to set standards for transparency and potentially protections for vulnerable users such as children.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -8070,6 +9395,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Missouri bill establishes new rules governing where and how data centers can be built in the state. It likely sets siting requirements, zoning standards, or review processes that developers must follow before constructing new facilities.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "none",
+          community: "none",
+          "land-use": "none",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -8110,6 +9440,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes environmental accountability requirements for AI data centers in Missouri, likely including reporting and compliance standards around energy use, water consumption, and environmental impact. It aims to hold data center operators responsible for their environmental footprint as these facilities expand.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -8134,6 +9468,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes new rules for how warehouse distribution centers can manage and monitor their workers, likely targeting automated or algorithm-driven work quota and tracking systems. It aims to protect employees from unfair treatment driven by automated performance monitoring in warehouse settings.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-workforce": "concerning",
+        },
         impactTags: [
           "ai-in-employment",
           "algorithmic-transparency",
@@ -8155,6 +9493,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires age verification for companion chatbot services to prevent minors from accessing them. It establishes rules to ensure these AI-powered conversational tools are not used by children without appropriate safeguards.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "none",
+        },
         impactTags: [
           "child-safety",
           "ai-in-healthcare",
@@ -8199,6 +9542,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Missouri bill lets people sue if someone publishes AI-generated or AI-modified content without disclosing that AI was used to create or alter it. It creates a legal remedy for individuals harmed by undisclosed AI-generated content.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -8280,8 +9627,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Montana",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Montana has 8 relevant bills tracked in 2025–2026 — 3 on data-center policy and 5 on AI regulation. 5 have been enacted into law. 2 impose active bans or moratoriums. 2 offer incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "restrictive",
+    contextBlurb: "Montana is leaning restrictive on AI, with no data-center legislation currently tracked. On AI: HB178 (enacted) — Places limits on how Montana state government agencies can use artificial intelligence systems.",
     legislation: [
       {
         id: "mt-hb388",
@@ -8371,6 +9719,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This resolution directs a formal study of data centers in Montana, examining issues like their siting, energy use, and economic impact. No restrictions or incentives are enacted yet — it's an exploratory effort to inform future policy.",
         stage: "Dead",
         stance: "review",
+        dimensionStances: {
+          energy: "review",
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "local-zoning",
           "grid-capacity",
@@ -8435,6 +9788,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill updates the rules for how health insurance companies in Montana can use artificial intelligence when making decisions about coverage or claims. It imposes requirements and restrictions to ensure AI is used fairly and transparently in health insurance processes.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -8456,6 +9813,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill updates Montana election laws to require disclosure when artificial intelligence is used to create or alter political content. Candidates and campaigns would need to inform voters when AI-generated material appears in election-related communications.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "concerning",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -8570,8 +9931,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Nebraska",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Nebraska has 9 relevant bills tracked in 2025–2026 — 2 on data-center policy and 7 on AI regulation. 3 have been enacted into law. 2 impose active bans or moratoriums.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Nebraska is under discussion on data centers and advancing regulation on AI. On data centers: LB1010 (enacted) — Establishes new rules for large electricity customers like data centers and crypto miners, addressing how they connect to and impact the power grid. On AI: LB525 (enacted) — Establishes privacy protections for agricultural data and sets safety requirements for conversational AI systems in Nebraska.",
     legislation: [
       {
         id: "ne-lb1111",
@@ -8580,6 +9942,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Nebraska bill requires data centers to submit annual energy load reports to the state Power Review Board and gives public utilities new authority to regulate data centers and cryptocurrency mining operations. It establishes oversight mechanisms aimed at managing the significant electricity demand these facilities place on the grid.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "review",
+          energy: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -8601,6 +9967,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Nebraska bill would establish consumer protection rules around artificial intelligence, likely requiring transparency and accountability from companies that deploy AI systems. It aims to protect residents from potential harms caused by AI tools and automated decision-making.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -8622,6 +9992,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Nebraska bill establishes rules protecting people's biometric data — such as fingerprints, face scans, and iris patterns — by requiring consent before collection and limiting how companies can use or share that information. It creates legal rights and remedies for residents whose biometric privacy is violated.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -8659,6 +10033,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Nebraska bill establishes new rules for large electricity customers like data centers and crypto miners, addressing how they connect to and impact the power grid. It also covers energy storage regulation, taxation, and eminent domain powers related to energy storage resources.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "concerning",
+          "land-use": "review",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -8698,6 +10077,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes safety requirements for conversational AI systems, such as chatbots and virtual assistants, operating in Nebraska. It likely mandates disclosures, safeguards, and oversight measures to protect users from potential harms.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "ai-safety",
           "algorithmic-transparency",
@@ -8719,6 +10102,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes privacy protections for agricultural data and sets safety requirements for conversational AI systems in Nebraska. It creates rules around how AI chatbots and similar tools must operate, likely including disclosure and transparency obligations.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "ai-safety",
@@ -8740,6 +10127,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Nebraska bill would require organizations using AI systems to follow risk management and transparency standards, creating new oversight rules for how AI is developed and used. It also establishes a related fund and updates public records laws to account for AI-related information.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -8761,6 +10152,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes rules in Nebraska to protect people's biometric data — such as fingerprints, face scans, and iris patterns — by requiring consent before collection and limiting how companies can use or share it. It gives individuals legal rights over their own biological identifiers and sets penalties for violations.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -8856,8 +10251,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Nevada",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Nevada has 6 relevant bills tracked in 2025–2026 — 2 on data-center policy and 4 on AI regulation. 3 have been enacted into law. 2 impose active bans or moratoriums. 2 offer incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "restrictive",
+    contextBlurb: "Nevada is leaning restrictive on AI, with no data-center legislation currently tracked. On AI: AB406 (enacted) — Bans certain uses of AI in public schools, restricts how AI can be used in mental and behavioral health care, and prohibits AI systems from falsely presenting themselves as qualifi…",
     legislation: [
       {
         id: "nv-ab226",
@@ -8968,6 +10364,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Nevada bill creates a Security Operations Center within the state's chief information office to oversee government cybersecurity, establishes a talent pipeline program for cybersecurity workers, and requires annual effectiveness reports. It also allows school districts to use state cybersecurity services and makes other updates to how government entities manage digital security.",
         stage: "Dead",
         stance: "review",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "none",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -9059,6 +10459,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Nevada bill bans certain uses of AI in public schools, restricts how AI can be used in mental and behavioral health care, and prohibits AI systems from falsely presenting themselves as qualified mental health providers. It also requires the state Education Department to create a policy on AI use and establishes civil penalties for violations.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "ai-in-education",
@@ -9142,8 +10547,9 @@ const NA_ENTITIES: Entity[] = [
     name: "New Hampshire",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "New Hampshire has 9 relevant bills tracked in 2025–2026 — 3 on data-center policy and 6 on AI regulation. 3 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "New Hampshire is under discussion on data centers and advancing regulation on AI. On data centers: SB439 (in committee) — Addresses how New Hampshire municipalities can regulate the siting and zoning of data centers within their jurisdictions. On AI: HB1460 (in committee) — Bans the sale of personal data belonging to children in New Hampshire.",
     legislation: [
       {
         id: "nh-hb1694",
@@ -9152,6 +10558,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how websites and data brokers can collect, use, and share people's personal information. It aims to give consumers more control and protection over their data held by these companies.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -9245,6 +10655,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill addresses how New Hampshire municipalities can regulate the siting and zoning of data centers within their jurisdictions. It deals with local government authority over where data centers can be built or operated.",
         stage: "Committee",
         stance: "review",
+        dimensionStances: {
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -9288,6 +10702,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes a 'Digital Choice Act' in New Hampshire, likely giving consumers rights over their personal data collected by digital platforms. It would impose obligations on companies regarding how they handle, share, or process user data.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -9379,6 +10797,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would ban all new data center construction in New Hampshire while creating a committee to study the environmental effects of data centers. It combines an outright prohibition with a formal review of impacts like energy use, water consumption, and emissions.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          environmental: "restrictive",
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "environmental-review",
           "water-consumption",
@@ -9468,8 +10892,9 @@ const NA_ENTITIES: Entity[] = [
     name: "New Jersey",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "New Jersey has 10 relevant bills tracked in 2025–2026 — 4 on data-center policy and 6 on AI regulation. 2 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "New Jersey is advancing regulation across both data centers and AI. On data centers: S3379 (in committee) — Would require data center owners and operators in New Jersey to report their water and energy usage to the Board of Public Utilities twice a year. On AI: A4163 (in committee) — Imposes civil fines on political campaigns that use AI-generated deepfakes to misrepresent candidates in advertisements.",
     legislation: [
       {
         id: "nj-s3379",
@@ -9478,6 +10903,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require data center owners and operators in New Jersey to report their water and energy usage to the Board of Public Utilities twice a year. The goal is to increase transparency around how much resources data centers consume.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -9527,6 +10956,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill imposes civil fines on political campaigns that use AI-generated deepfakes to misrepresent candidates in advertisements. It targets fabricated or manipulated media used in elections to deceive voters about what a candidate said or did.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -9571,6 +11004,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates privacy protections for consumer health data held by healthcare providers, setting rules around how that data can be collected, used, and shared. It places significant obligations on entities handling health information to safeguard patient privacy.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "ai-in-healthcare",
@@ -9592,6 +11029,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates privacy protections for consumer health data held by health care providers and other entities in New Jersey. It sets rules around how health data can be collected, used, and shared, giving patients more control over their personal health information.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "ai-in-healthcare",
@@ -9673,6 +11114,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data center owners and operators in New Jersey to report their water and energy usage to the Board of Public Utilities every six months. It creates mandatory transparency around how much power and water data centers consume, without outright banning or limiting their operations.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -9698,6 +11143,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data center owners and operators in New Jersey to regularly report their water and energy usage to the Board of Public Utilities. It creates mandatory transparency and oversight around how much power and water data centers consume.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -9722,6 +11171,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data center owners and operators in New Jersey to submit reports on their water and energy usage to the Board of Public Utilities. It creates mandatory disclosure obligations aimed at tracking the resource consumption of data centers in the state.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -9786,8 +11239,9 @@ const NA_ENTITIES: Entity[] = [
     name: "New Mexico",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "New Mexico has 5 relevant bills tracked in 2025–2026 on AI regulation. 1 imposes active bans or moratoriums.",
+    stanceDatacenter: "none",
+    stanceAI: "concerning",
+    contextBlurb: "New Mexico is advancing regulation on AI, with no data-center legislation currently tracked. On AI: HB22 (filed) — Prohibits the distribution of intimate deepfake images — realistic AI-generated or manipulated photos or videos of real people in sexual contexts — without their consent.",
     legislation: [
       {
         id: "nm-hm6",
@@ -9817,6 +11271,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes transparency requirements for artificial intelligence systems used in New Mexico, requiring developers or deployers to disclose when AI is being used and how it makes decisions. It aims to ensure people know when AI is affecting them and have access to information about how those systems work.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -9839,6 +11297,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill prohibits the distribution of intimate deepfake images — realistic AI-generated or manipulated photos or videos of real people in sexual contexts — without their consent. It establishes legal penalties for sharing such content, with likely enhanced protections for minors.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -9938,6 +11400,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes safety requirements for chatbots, likely including disclosure rules and protections for users—especially children—interacting with AI-powered conversational systems. It aims to ensure people know when they are talking to an AI and that certain safeguards are in place to prevent harm.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -9983,6 +11449,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes accountability requirements for artificial intelligence systems used in New Mexico, likely including risk assessments, transparency obligations, and oversight mechanisms. It aims to ensure AI tools are used responsibly and that people are protected from harmful or biased automated decisions.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -10082,8 +11552,9 @@ const NA_ENTITIES: Entity[] = [
     name: "New York",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "New York has 11 relevant bills tracked in 2025–2026 — 5 on data-center policy and 6 on AI regulation. 3 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "New York is advancing regulation across both data centers and AI. On data centers: A10141 (in committee) — Would halt all new data center construction permits in New York while requiring regulators to take action to protect residents, businesses, and industries from higher electricity and gas… On AI: S01962 (in committee) — Would prohibit businesses from using AI algorithms to discriminate against people based on protected characteristics like race, gender, or religion.",
     legislation: [
       {
         id: "ny-a09086",
@@ -10092,6 +11563,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in New York to report their annual energy use and bans them from receiving incentives tied to fossil fuel energy contracts. It also directs state regulators to create a special surcharge and discount system to manage the grid costs that data centers impose on other utility customers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          "ai-governance-dim": "none",
+        },
         impactTags: [
           "carbon-emissions",
           "energy-rates",
@@ -10142,6 +11618,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This New York bill would require data centers to report their annual energy use and ban them from receiving incentives tied to fossil fuel energy contracts. It also directs state regulators to create a special surcharge and discount system for data center electricity rates.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          "ai-governance-dim": "none",
+        },
         impactTags: [
           "carbon-emissions",
           "energy-rates",
@@ -10167,6 +11648,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would halt all new data center construction permits in New York while requiring regulators to take action to protect residents, businesses, and industries from higher electricity and gas bills caused by data centers. It aims to pause data center growth until the impact on utility rates can be addressed.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -10192,6 +11678,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would halt all new data center construction permits in New York while requiring state regulators to take action to protect residents, businesses, and industries from rising electricity and gas costs caused by data centers. It directly targets the rapid growth of data centers and their strain on the energy grid.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -10217,6 +11708,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill allows New York's Office of Renewable Energy Siting to issue permits for battery energy storage systems used by data centers, even when not paired with renewable energy. It also requires data centers to submit plans showing how they will reduce their carbon emissions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "favorable",
+        },
         impactTags: [
           "carbon-emissions",
           "renewable-energy",
@@ -10259,6 +11754,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This New York bill would require companies that build generative AI systems to publicly disclose information about the data used to train those systems on their websites. Developers would need to provide at least a high-level summary of the datasets used, increasing transparency around how AI models are built.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -10283,6 +11782,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would prohibit businesses from using AI algorithms to discriminate against people based on protected characteristics like race, gender, or religion. It establishes consumer protections against discriminatory AI decision-making in New York.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -10305,6 +11808,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would prohibit businesses from using AI algorithms to discriminate against people based on protected characteristics like race, gender, or religion. It establishes consumer protections against biased AI decision-making in New York.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -10327,6 +11834,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This New York bill would require companies that build generative AI models to publicly disclose information about the data used to train those models on their websites. Developers would need to provide a high-level summary of their training datasets, increasing transparency around how AI systems are built.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -10411,8 +11922,9 @@ const NA_ENTITIES: Entity[] = [
     name: "North Carolina",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "North Carolina has 7 relevant bills tracked in 2025–2026 — 2 on data-center policy and 5 on AI regulation. 1 has been enacted into law. 2 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "restrictive",
+    contextBlurb: "North Carolina is under discussion on data centers and leaning restrictive on AI. On data centers: H1002 (in committee) — Aims to protect North Carolina utility ratepayers, likely by limiting how costs from large energy consumers like data centers are passed on to regular customers. On AI: H805 (enacted) — Aims to prevent the sexual exploitation of women and minors, likely addressing non-consensual synthetic or digital media used for exploitation.",
     legislation: [
       {
         id: "nc-s133",
@@ -10465,6 +11977,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill aims to prevent the sexual exploitation of women and minors, likely addressing non-consensual synthetic or digital media used for exploitation. It establishes prohibitions or penalties related to such content.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -10647,6 +12163,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill prohibits the use of AI to create deceptive advertisements in North Carolina. It targets misleading AI-generated content used in advertising, banning such practices to protect consumers from manipulation.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -10741,8 +12261,9 @@ const NA_ENTITIES: Entity[] = [
     name: "North Dakota",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "North Dakota has 7 relevant bills tracked in 2025–2026 — 2 on data-center policy and 5 on AI regulation. 5 have been enacted into law. 3 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "restrictive",
+    contextBlurb: "North Dakota is under discussion on data centers and leaning restrictive on AI. On data centers: HB1579 (enacted) — Directs a legislative study to examine how large energy consumers — such as data centers and AI facilities — affect North Dakota's electrical grid. On AI: SB2354 (enacted) — Regulates how students in North Dakota's K-12 and pre-K schools can use personal electronic devices like smartphones during the school day.",
     legislation: [
       {
         id: "nd-hb1427",
@@ -10751,6 +12272,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This North Dakota bill gives the state Public Service Commission authority to regulate where data centers can be built, including compatibility with surrounding land uses. It also establishes penalties for violations of these siting rules.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -10776,6 +12302,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires disclosure statements when artificial intelligence is used to create or alter content, particularly in the context of elections. It aims to ensure voters know when political materials have been generated or modified by AI.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "none",
+        },
         impactTags: [
           "algorithmic-transparency",
           "deepfake-regulation",
@@ -10867,6 +12397,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill regulates how students in North Dakota's K-12 and pre-K schools can use personal electronic devices like smartphones during the school day. It amends existing rules to set limits on student device use in educational settings.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-education",
           "child-safety",
@@ -11059,8 +12593,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Ohio",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Ohio has 10 relevant bills tracked in 2025–2026 — 6 on data-center policy and 4 on AI regulation. 4 impose active bans or moratoriums.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "Ohio is advancing regulation across both data centers and AI. On data centers: HB646 (on the floor) — Creates a commission to study data centers in Ohio and their impacts. On AI: HB807 (filed) — Bans government agencies and private companies from selling sensitive personal data to data brokers or other private entities for profit.",
     legislation: [
       {
         id: "oh-sb374",
@@ -11117,6 +12652,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Ohio bill updates existing persona protection laws and creates new prohibitions against making or distributing unauthorized deepfake recordings of real people. It establishes legal consequences for using AI-generated or manipulated media to impersonate individuals without their consent.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "data-privacy",
@@ -11162,6 +12701,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates a commission to study data centers in Ohio and their impacts. No restrictions or incentives are imposed — the commission will gather information and likely make future policy recommendations.",
         stage: "Floor",
         stance: "review",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "local-zoning",
           "grid-capacity",
@@ -11229,6 +12774,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Ohio bill would ban public funding or support for new data centers and place limits on their construction. It aims to restrict the growth of data center infrastructure across the state.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -11254,6 +12804,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill regulates how much water data centers can withdraw and consume in Ohio, establishing rules and oversight for data center water use. It creates new legal requirements and penalties related to water withdrawal by data centers.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "review",
+          community: "none",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -11279,6 +12834,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Ohio bill establishes minimum requirements and protections for customers who use data center services in the state. It creates a new chapter of law governing the relationship between data centers and their customers, likely covering data handling, access, and accountability standards.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -11303,6 +12862,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require data centers in Ohio to get approval from the Public Utilities Commission before connecting to the electrical grid. It adds regulatory oversight to how data centers access electricity infrastructure, potentially slowing or limiting large-scale connections.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "review",
+          "land-use": "none",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -11328,6 +12892,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in Ohio to report their water usage on a monthly and annual basis to state authorities. It also prevents data centers from using nondisclosure agreements to hide water consumption information from local governments.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -11392,8 +12960,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Oklahoma",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Oklahoma has 6 relevant bills tracked in 2025–2026 — 4 on data-center policy and 2 on AI regulation. 2 advance stricter regulation. 1 offers incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "review",
+    contextBlurb: "Oklahoma is under discussion across both data centers and AI. On data centers: HB2992 (in committee) — Creates consumer protection rules for data centers under Oklahoma's Corporation Commission, likely addressing how data centers interact with the energy grid and utility customers. On AI: SB1734 (in committee) — Requires the development of guidance for how artificial intelligence and other emerging technologies should be used in schools.",
     legislation: [
       {
         id: "ok-hb4194",
@@ -11402,6 +12971,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates rules requiring data centers in Oklahoma to be properly decommissioned when they shut down, overseen by the Oklahoma Corporation Commission. It also requires data center operators to provide financial assurance, meaning they must set aside funds to cover the costs of proper closure.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          community: "concerning",
+          "land-use": "review",
+        },
         impactTags: [
           "environmental-review",
           "local-zoning",
@@ -11424,6 +12998,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Oklahoma bill requires the development of guidance for how artificial intelligence and other emerging technologies should be used in schools. It establishes a framework for responsible AI use in educational settings without imposing strict bans or mandates.",
         stage: "Committee",
         stance: "review",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-public": "review",
+        },
         impactTags: [
           "ai-in-education",
           "algorithmic-transparency",
@@ -11548,6 +13126,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates consumer protection rules for data centers under Oklahoma's Corporation Commission, likely addressing how data centers interact with the energy grid and utility customers. It aims to protect regular electricity customers from costs or impacts associated with large data center energy demands.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "review",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -11689,8 +13271,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Oregon",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Oregon has 3 relevant bills tracked in 2025–2026 — 1 on data-center policy and 2 on AI regulation. 2 have been enacted into law. 2 advance stricter regulation.",
+    stanceDatacenter: "review",
+    stanceAI: "review",
+    contextBlurb: "Oregon is under discussion across both data centers and AI. On data centers: HB4084 (enacted) — Creates a fast-track permitting program for economic development projects while specifically restricting data centers from using the state's enterprise zone tax incentive program. On AI: SB1546 (enacted) — Requires companies that operate AI companion software to clearly disclose to users that they are interacting with AI and not a human, and to have safety protocols in place to detect and p…",
     legislation: [
       {
         id: "or-hb4053",
@@ -11720,6 +13303,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires companies that operate AI companion software to clearly disclose to users that they are interacting with AI and not a human, and to have safety protocols in place to detect and prevent content that could encourage suicidal or self-harm thoughts. It also includes special protections for minors and mandates annual public reports on safety referrals.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -11755,6 +13342,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "Oregon is creating a state commission on artificial intelligence to monitor how AI is used in government and advise lawmakers on policy. The state will also hire a dedicated officer to develop a strategic vision for privacy, data protection, and AI.",
         stage: "Dead",
         stance: "review",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "review",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -11887,6 +13478,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Oregon bill creates a fast-track permitting program for economic development projects while specifically restricting data centers from using the state's enterprise zone tax incentive program. It also adjusts job-creation tax credits and requires state agencies to publish lists of available permits.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "tax-incentives",
           "economic-development",
@@ -11961,8 +13556,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Pennsylvania",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Pennsylvania has 11 relevant bills tracked in 2025–2026 — 7 on data-center policy and 4 on AI regulation. 2 impose active bans or moratoriums. 2 offer incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "Pennsylvania is advancing regulation across both data centers and AI. On data centers: HB1834 (in committee) — Requires commercial data centers to meet clean energy standards, file contracts with state regulators, and follow rules on backup generation and grid management. On AI: HB1942 (in committee) — Bans 'surveillance pricing,' where businesses use personal data and algorithms to charge individual customers different prices based on their behavior or characteristics.",
     legislation: [
       {
         id: "pa-hb2198",
@@ -11995,6 +13591,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans 'surveillance pricing,' where businesses use personal data and algorithms to charge individual customers different prices based on their behavior or characteristics. It establishes penalties for companies that engage in this practice.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -12019,6 +13619,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Pennsylvania bill creates a new state office and a regulatory sandbox program to fast-track permits and reduce red tape for large data centers that generate their own power. It takes a pro-industry approach designed to attract AI and emerging technology investment to the state.",
         stage: "Committee",
         stance: "favorable",
+        dimensionStances: {
+          energy: "favorable",
+          community: "review",
+          "land-use": "favorable",
+          "ai-governance-dim": "favorable",
+        },
         impactTags: [
           "grid-capacity",
           "local-zoning",
@@ -12045,6 +13651,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill helps Pennsylvania municipalities develop local ordinances for regulating data centers by providing guidance and assistance. It aims to make it easier for local governments to establish rules around data center construction and operation in their communities.",
         stage: "Committee",
         stance: "favorable",
+        dimensionStances: {
+          community: "favorable",
+          "land-use": "favorable",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -12090,6 +13700,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Pennsylvania bill requires commercial data centers to meet clean energy standards, file contracts with state regulators, and follow rules on backup generation and grid management. It also creates special accounts to help low-income households with energy costs and funds energy independence efforts, with penalties for non-compliance.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          "ai-governance-dim": "none",
+        },
         impactTags: [
           "grid-capacity",
           "renewable-energy",
@@ -12117,6 +13732,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in Pennsylvania to submit annual reports on how much energy and water they use, with penalties for non-compliance. It increases transparency around data center resource consumption but does not impose caps or bans on usage.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -12143,6 +13762,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill adds data center water use regulations to Pennsylvania's state water planning framework, requiring covered data centers to comply with water resource rules. It establishes new oversight and likely reporting or permitting requirements for how data centers consume water.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -12169,6 +13794,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Pennsylvania bill creates a formal permitting process that data centers must go through before being built, with the state's environmental agency overseeing approvals. It adds regulatory hurdles to data center construction by requiring environmental review and compliance before siting can proceed.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          community: "review",
+          "land-use": "concerning",
+        },
         impactTags: [
           "environmental-review",
           "local-zoning",
@@ -12219,6 +13849,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Pennsylvania bill sets rules for how artificial intelligence can be used in mental health therapy services. It establishes enforcement mechanisms to ensure AI-based therapy tools are used appropriately and safely.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "ai-safety",
@@ -12315,8 +13950,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Rhode Island",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Rhode Island has 12 relevant bills tracked in 2025–2026 — 4 on data-center policy and 8 on AI regulation. 9 advance stricter regulation. 2 offer incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Rhode Island is under discussion on data centers and advancing regulation on AI. On data centers: S2776 (in committee) — Requires large data centers in Rhode Island to pay for the electrical infrastructure upgrades needed to support their high power demands. On AI: H7364 (in committee) — Requires warehouse employers in Rhode Island to give workers written notice of any performance quotas and the consequences of not meeting them when they are hired.",
     legislation: [
       {
         id: "ri-s2776",
@@ -12449,6 +14085,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires warehouse employers in Rhode Island to give workers written notice of any performance quotas and the consequences of not meeting them when they are hired. It aims to protect warehouse workers from being penalized by productivity tracking systems without clear, upfront disclosure.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-workforce": "concerning",
+        },
         impactTags: [
           "ai-in-employment",
           "algorithmic-transparency",
@@ -12473,6 +14113,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires health insurance companies to be open about how they use AI when deciding on coverage and handling claims. It sets rules to ensure AI-driven decisions are transparent and that insurers can be held accountable for how those systems affect patients.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-in-healthcare",
@@ -12498,6 +14143,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires health insurers in Rhode Island to be transparent and accountable when using AI systems to make decisions about coverage and claims. It aims to ensure patients and regulators can understand and challenge AI-driven insurance decisions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-in-healthcare",
@@ -12523,6 +14173,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates rules governing how artificial intelligence can be used in mental health care treatments in Rhode Island. It establishes oversight requirements to ensure AI tools used in mental health settings are subject to regulatory standards.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -12548,6 +14202,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Rhode Island bill establishes regulations governing how artificial intelligence can be used in mental health care treatments. It sets oversight requirements intended to ensure AI tools used in behavioral health settings meet safety and transparency standards.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -12573,6 +14231,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires AI companion apps to have safety features that detect and respond to users expressing suicidal thoughts, potential harm to others, or financial harm. It also mandates that these apps disclose to users that the AI does not have real human emotions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+          "ai-public": "none",
+        },
         impactTags: [
           "ai-safety",
           "child-safety",
@@ -12599,6 +14262,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires AI companion apps to include safety features that detect and respond to users expressing suicidal thoughts, potential harm to themselves or others, or financial harm. It also mandates that these apps clearly disclose to users that the AI does not have real human emotions.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "ai-safety",
           "child-safety",
@@ -12663,8 +14330,9 @@ const NA_ENTITIES: Entity[] = [
     name: "South Carolina",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "South Carolina has 10 relevant bills tracked in 2025–2026 — 6 on data-center policy and 4 on AI regulation. 1 has been enacted into law. 1 imposes active bans or moratoriums.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "South Carolina is advancing regulation across both data centers and AI. On data centers: H5484 (in committee) — This South Carolina bill sets new rules for commercial data centers, including requirements to report water usage, file decommissioning plans, and meet specific electric service terms, while also r… On AI: H3431 (enacted) — This South Carolina bill requires social media platforms to use reasonable care with minors' personal data, limits how much personal information can be collected from children, and mandates parenta…",
     legislation: [
       {
         id: "sc-s0867",
@@ -12673,6 +14341,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates a comprehensive permitting and oversight system for data centers in South Carolina, requiring siting permits, environmental impact assessments, water and energy efficiency standards, and noise/vibration controls before a data center can be built or operated. It also establishes a new government office and advisory committee to oversee data center development and sets rules for how utility costs are allocated.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "environmental-review",
           "water-consumption",
@@ -12700,6 +14374,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This South Carolina bill would create consumer protection rules around high-risk AI systems, specifically banning algorithmic discrimination that harms people based on protected characteristics. It establishes a comprehensive framework requiring businesses to prevent biased or unfair outcomes when using AI to make important decisions affecting consumers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -12740,6 +14418,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in South Carolina to obtain a certificate from the Public Service Commission before operating, with reviews covering energy efficiency, water use, environmental impact, infrastructure adequacy, and grid cost allocation. It establishes ongoing compliance standards and reporting requirements, creating a comprehensive regulatory framework for data center development in the state.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "water-consumption",
           "grid-capacity",
@@ -12765,6 +14449,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill regulates commercial data centers in South Carolina by requiring water usage reporting, mandating public comment periods for energy infrastructure permits, and limiting existing sales tax exemptions for data center equipment to companies that acted before May 30, 2025. It also adds new rules around electric service terms for data centers and strengthens landowner notice requirements when utilities plan construction that could involve eminent domain.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -12792,6 +14480,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires large commercial data centers in South Carolina that use 3 million or more gallons of water per month to report their water usage annually to the state Department of Environmental Services. Data centers that fail to comply with the reporting requirement would face penalties.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -12814,6 +14506,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This South Carolina bill sets new rules for commercial data centers, including requirements to report water usage, file decommissioning plans, and meet specific electric service terms, while also restricting certain sales tax exemptions for data centers after May 2026. It also strengthens public oversight of energy infrastructure projects, including mandatory public comment periods and landowner notification when eminent domain may be used.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -12859,6 +14555,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires online services to protect children's personal data, limit data collection on minors, and give parents tools to monitor and report harms. It also mandates that platforms publicly report their practices related to minors and provide kids with tools to control their time and data on the service.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "child-safety",
           "data-privacy",
@@ -12883,6 +14583,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes rules requiring data centers in South Carolina to operate responsibly and sustainably, likely including environmental and energy standards. It aims to prevent data centers from shifting their costs or burdens onto taxpayers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -12910,6 +14614,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This South Carolina bill requires social media platforms to use reasonable care with minors' personal data, limits how much personal information can be collected from children, and mandates parental controls. It also requires annual reporting and sets up enforcement mechanisms to ensure compliance.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "child-safety",
@@ -12935,6 +14643,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill regulates who can use automatic license plate reader systems in South Carolina and sets rules for how law enforcement can use the data collected. It also allows the state Department of Transportation to permit certain government cameras on non-interstate highways.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -12995,8 +14707,9 @@ const NA_ENTITIES: Entity[] = [
     name: "South Dakota",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "South Dakota has 12 relevant bills tracked in 2025–2026 — 7 on data-center policy and 5 on AI regulation. 2 have been enacted into law. 5 impose active bans or moratoriums. 1 offers incentives or deregulation.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "South Dakota is advancing regulation across both data centers and AI. On data centers: SB135 (enacted) — Aims to protect South Dakota residents from higher utility bills and power shortages that could result from data center electricity demand. On AI: SB168 (in committee) — Sets rules on how chatbots can be used by minors in South Dakota.",
     legislation: [
       {
         id: "sd-sb135",
@@ -13005,6 +14718,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill aims to protect South Dakota residents from higher utility bills and power shortages that could result from data center electricity demand. It also clarifies which government authorities have the power to regulate data centers and their utility usage.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          energy: "concerning",
+          community: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -13031,6 +14748,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires health insurance companies in South Dakota to follow specific rules when using AI systems to make decisions about covering or providing health care services. It aims to ensure AI-driven coverage determinations are fair, transparent, and accountable.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -13053,6 +14774,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill places a temporary ban on new data center construction in South Dakota while addressing the financial and grid strain that large data centers place on electricity systems. It aims to protect other electricity users from higher costs and reliability risks caused by the heavy power demands of data centers.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          environmental: "none",
+          energy: "restrictive",
+          community: "concerning",
+          "land-use": "none",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -13078,6 +14805,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This South Dakota bill aims to shield residents from higher utility bills and power shortages caused by data centers by giving regulators clearer authority to oversee them. It also updates rules around what goods and services data centers are allowed to purchase.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -13164,6 +14895,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans the use of artificial intelligence in providing therapy and psychotherapy services in South Dakota. Violations would result in a penalty, effectively preventing AI systems from delivering mental health counseling to patients.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "ai-safety",
@@ -13185,6 +14920,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules on how chatbots can be used by minors in South Dakota. It likely requires safeguards or restrictions to protect children interacting with AI-powered chat tools.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "child-safety",
           "algorithmic-transparency",
@@ -13206,6 +14945,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill places limits on nuisances created by data centers, such as noise and other disturbances that can affect nearby residents. It aims to regulate how data centers operate to reduce their negative impact on surrounding communities.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "noise-vibration",
           "residential-proximity",
@@ -13231,6 +14974,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill places a one-year ban on building or expanding large-scale data centers in South Dakota. During the pause, the state would have time to evaluate the impacts of hyperscale facilities before allowing new construction to proceed.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -13317,8 +15065,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Tennessee",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Tennessee has 12 relevant bills tracked in 2025–2026 — 7 on data-center policy and 5 on AI regulation. 4 impose active bans or moratoriums.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Tennessee is under discussion on data centers and advancing regulation on AI. On data centers: HB2392 (in committee) — Establishes a formal impact review process that data centers must go through before being built, examining effects on local infrastructure, utilities, and communities. On AI: HB2608 (in committee) — Creates rules to protect people's historical location data from police surveillance by limiting how law enforcement can access and use it.",
     legislation: [
       {
         id: "tn-sb2112",
@@ -13327,6 +15076,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires large data centers in Tennessee to register with the state and mandates that their fuel, electricity, and water suppliers report usage and rates to the government. The state would then compile and publish that information, increasing public transparency about data center resource consumption.",
         stage: "Filed",
         stance: "review",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -13369,6 +15122,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans the distribution of AI-generated fake media depicting candidates or political parties within 90 days of an election if the creator knows or should know it is deceptively fraudulent. Violators face civil penalties, with limited exceptions allowed.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -13390,6 +15147,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Tennessee bill bans the distribution of AI-generated fake depictions of candidates or political parties within 90 days of an election if the content is deceptively fraudulent. Violators face civil penalties, with some exceptions allowed.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "algorithmic-transparency",
@@ -13411,6 +15172,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes rules for how law enforcement can access and use historical location data, aiming to limit excessive police surveillance. It creates protections for people's location history and restricts when and how that data can be obtained or used.",
         stage: "Filed",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -13432,6 +15197,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates rules to protect people's historical location data from police surveillance by limiting how law enforcement can access and use it. It aims to prevent excessive government tracking of individuals' movements.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -13454,6 +15223,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires large data centers in Tennessee to register with the state's public utilities commission and mandates that electric and water utilities report usage data and rates for those facilities. The commission would then compile and publish that information, creating greater transparency around data center resource consumption.",
         stage: "Dead",
         stance: "review",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+        },
         impactTags: [
           "grid-capacity",
           "water-infrastructure",
@@ -13477,6 +15250,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Tennessee bill requires data center owners and operators to pay the full cost of any infrastructure needed to connect their facilities to the electric grid, preventing those costs from being spread to other utility customers. It aims to ensure that communities and existing ratepayers are not burdened with the infrastructure expenses generated by large data centers.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          energy: "concerning",
+          community: "favorable",
+          "land-use": "none",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -13502,6 +15280,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Tennessee bill establishes a formal impact review process that data centers must go through before being built, examining effects on local infrastructure, utilities, and communities. It creates new regulatory hurdles for data center development across multiple areas of state law.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "environmental-review",
           "local-zoning",
@@ -13526,6 +15310,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Tennessee bill establishes a formal impact review process for data centers, requiring assessment of their effects on local communities and infrastructure before they can be built or expanded. It introduces oversight mechanisms covering areas like energy, water, and land use to evaluate data center projects across the state.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+          community: "review",
+          "land-use": "review",
+        },
         impactTags: [
           "environmental-review",
           "local-zoning",
@@ -13551,6 +15341,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires large data centers in Tennessee to register with the state and mandates that their fuel, electricity, and water suppliers report usage and rates to the government. The state would then compile and publish this information, creating a public record of data center resource consumption.",
         stage: "Dead",
         stance: "review",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -13575,6 +15369,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires large data centers in Tennessee to register with the state public utilities commission and mandates that electric and water utilities report how much energy and water those data centers use and at what rates. The commission must then compile and publicly publish this usage and rate information.",
         stage: "Filed",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+          "ai-governance-dim": "none",
+        },
         impactTags: [
           "grid-capacity",
           "water-infrastructure",
@@ -13638,8 +15437,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Texas",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Texas has 8 relevant bills tracked in 2025–2026 — 2 on data-center policy and 6 on AI regulation. 3 have been enacted into law. 4 advance stricter regulation. 2 offer incentives or deregulation.",
+    stanceDatacenter: "none",
+    stanceAI: "concerning",
+    contextBlurb: "Texas is advancing regulation on AI, with no data-center legislation currently tracked. On AI: SB1343 (enacted) — Updates the rules for how data brokers must notify people about their data collection practices, including what information must be posted on their websites.",
     legislation: [
       {
         id: "tx-sb1343",
@@ -13648,6 +15448,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill updates the rules for how data brokers must notify people about their data collection practices, including what information must be posted on their websites. It strengthens transparency requirements for companies that collect and sell personal information.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -13707,6 +15511,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would create regulations for companies that collect and sell personal data about people, known as data brokers. It sets rules these businesses must follow when handling consumer information.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -13815,6 +15623,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how automatic license plate reader systems can be used in Texas, likely covering data collection, storage, and access by law enforcement. It addresses privacy and oversight concerns related to automated vehicle tracking technology.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -13836,6 +15648,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would require social media platforms to include provenance data — information about the origin and history of content — when material is shared online. The goal is to help users identify the source of digital content, including AI-generated or manipulated media.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-synthetic": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "deepfake-regulation",
@@ -13941,8 +15757,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Utah",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Utah has 6 relevant bills tracked in 2025–2026 — 2 on data-center policy and 4 on AI regulation. 5 have been enacted into law. 6 advance stricter regulation.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Utah is under discussion on data centers and advancing regulation on AI. On data centers: HB0076 (enacted) — Requires data centers in Utah to report on their water usage, increasing transparency around how much water these facilities consume. On AI: HB0273 (enacted) — Proposes changes to how technology is used in Utah classrooms, likely setting rules or restrictions around student use of devices and digital tools.",
     legislation: [
       {
         id: "ut-hb0076",
@@ -13951,6 +15768,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in Utah to report on their water usage, increasing transparency around how much water these facilities consume. It aims to give the public and regulators better insight into the environmental impact of data center operations on local water resources.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -13976,6 +15797,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill proposes changes to how technology is used in Utah classrooms, likely setting rules or restrictions around student use of devices and digital tools. It may address concerns about protecting children from harmful content or inappropriate technology use in schools.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-education",
           "child-safety",
@@ -14044,6 +15869,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill amends Utah's privacy and cybersecurity laws, likely adding new requirements for how organizations collect, store, or protect personal data. It may include provisions related to consumer data rights and transparency about how data is used.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -14085,6 +15914,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill makes changes to rules governing critical infrastructure, which likely includes data centers and related facilities in Utah. It may affect where and how such infrastructure can be built or operated.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          energy: "review",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -14248,8 +16082,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Vermont",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Vermont has 11 relevant bills tracked in 2025–2026 — 2 on data-center policy and 9 on AI regulation. 1 imposes active bans or moratoriums.",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
+    contextBlurb: "Vermont is under discussion on data centers and advancing regulation on AI. On data centers: S0205 (in committee) — Would temporarily ban the construction of new AI data centers in Vermont while the state studies their impacts. On AI: H0816 (in committee) — Sets rules for how artificial intelligence can be used when providing mental health services to patients.",
     legislation: [
       {
         id: "vt-h0727",
@@ -14258,6 +16093,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Vermont bill sets sustainability requirements for new data centers, addressing their environmental footprint including energy use, water consumption, and carbon emissions. It likely imposes mandatory reviews or standards that data center operators must meet before or during deployment.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "water-consumption",
           "carbon-emissions",
@@ -14281,6 +16120,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Vermont bill sets rules for how artificial intelligence can be used when providing mental health services to patients. It aims to ensure AI tools used in mental health care meet safety and transparency standards to protect patients.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -14305,6 +16148,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would temporarily ban the construction of new AI data centers in Vermont while the state studies their impacts. The moratorium pauses new projects until lawmakers can review effects on energy, water, and the environment.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          environmental: "restrictive",
+          energy: "restrictive",
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "environmental-review",
           "grid-capacity",
@@ -14332,6 +16181,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill focuses on how data is collected and managed within Vermont's criminal justice system. It likely establishes requirements or oversight for tracking criminal justice data, which could include how automated tools or algorithms interact with that data.",
         stage: "Committee",
         stance: "review",
+        dimensionStances: {
+          "ai-governance-dim": "review",
+          "ai-consumer": "review",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -14353,6 +16206,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Vermont bill establishes protections for people's neurological data and mental privacy, while regulating how AI can be used in health and human services decisions. It creates rights around brain data and imposes requirements on AI systems that affect health or social services.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "data-privacy",
@@ -14379,6 +16237,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill would establish oversight rules and safety requirements for companies that build or use AI systems deemed inherently dangerous. It places significant compliance obligations on AI developers and deployers operating in Vermont.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "ai-safety",
           "algorithmic-transparency",
@@ -14404,6 +16266,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Vermont bill establishes rules and oversight for the use of artificial intelligence, likely including transparency and safety requirements for AI systems. It aims to regulate how AI is developed or deployed to protect residents from potential harms.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -14453,6 +16319,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Vermont bill would establish rules for how social media platforms and AI systems must operate, likely including transparency requirements, safety standards, and protections for users. It represents a broad regulatory framework aimed at holding these technologies accountable to public standards.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -14477,6 +16347,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill regulates how artificial intelligence can be used by health insurers when making coverage decisions, such as approving or denying medical treatments. It likely requires transparency and human oversight to ensure AI tools don't unfairly deny patients the care they need.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -14581,8 +16455,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Virginia",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Virginia has 3 relevant bills tracked in 2025–2026 — 1 on data-center policy and 2 on AI regulation. 1 has been enacted into law. 2 advance stricter regulation.",
+    stanceDatacenter: "review",
+    stanceAI: "review",
+    contextBlurb: "Virginia is under discussion across both data centers and AI. On data centers: HB897 (in committee) — Ties Virginia's existing data center sales tax exemption to new clean energy requirements, including phased bans on carbon-emitting generators and mandates to source energy from clean res… On AI: HB797 (enacted) — Directs a Virginia legislative commission to study whether the state should create a framework for independent organizations that verify AI systems meet safety standards.",
     legislation: [
       {
         id: "va-sb85",
@@ -14591,6 +16466,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Virginia bill requires social media platforms and AI system operators to build open interfaces so users can move their personal connection data and AI-related data to other services. It places significant technical and compliance obligations on covered platforms, taking effect in 2027.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "favorable",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -14897,8 +16776,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Washington",
     region: "na",
     level: "state",
-    stance: "concerning",
-    contextBlurb: "Washington has 8 relevant bills tracked in 2025–2026 — 5 on data-center policy and 3 on AI regulation. 2 have been enacted into law. 6 advance stricter regulation. 1 offers incentives or deregulation.",
+    stanceDatacenter: "review",
+    stanceAI: "review",
+    contextBlurb: "Washington is under discussion across both data centers and AI. On data centers: HB2515 (in committee) — Establishes rules for large energy-consuming facilities, such as data centers, addressing how they connect to and impact the electrical grid. On AI: SB5395 (enacted) — Strengthens transparency and accountability requirements for the prior authorization process used by health insurers to approve or deny medical treatments.",
     legislation: [
       {
         id: "wa-sb6231",
@@ -14929,6 +16809,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Washington state bill establishes consumer protections related to artificial intelligence systems, likely requiring transparency and accountability from AI developers and deployers. It aims to safeguard residents from potential harms caused by AI-driven decisions affecting their lives.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -15068,6 +16952,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes rules for large energy-consuming facilities, such as data centers, addressing how they connect to and impact the electrical grid. It likely imposes review requirements and restrictions to manage the strain these facilities place on energy infrastructure and rates.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+          community: "concerning",
+          "land-use": "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -15134,6 +17024,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill strengthens transparency and accountability requirements for the prior authorization process used by health insurers to approve or deny medical treatments. It likely targets the use of automated or AI-driven systems that make coverage decisions, requiring greater oversight and fairness in those determinations.",
         stage: "Enacted",
         stance: "concerning",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "concerning",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -15218,8 +17112,9 @@ const NA_ENTITIES: Entity[] = [
     name: "West Virginia",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "West Virginia has 8 relevant bills tracked in 2025–2026 — 5 on data-center policy and 3 on AI regulation. 5 impose active bans or moratoriums.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "West Virginia is advancing regulation across both data centers and AI. On data centers: HB4948 (in committee) — Requires data centers in West Virginia to be built at least 500 feet away from any home, school, or house of worship. On AI: HB5034 (in committee) — Creates a West Virginia law protecting genetic and biometric data by requiring companies to tell consumers how their genetic information is collected and used, and banning the sale or tra…",
     legislation: [
       {
         id: "wv-hb4832",
@@ -15228,6 +17123,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires large data centers in West Virginia to report their water usage to the state environmental agency, which can then restrict or ban their water withdrawals if harm to water resources is detected. It also directs the agency to analyze the impact of high-impact data centers on the state's public waterways.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "review",
+          community: "none",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",
@@ -15254,6 +17154,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill limits how artificial intelligence can be used to deliver mental health care in West Virginia, allowing AI only for administrative tasks rather than direct patient care. It sets rules to ensure that mental health treatment decisions remain in the hands of licensed human professionals rather than AI systems.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-public": "restrictive",
+        },
         impactTags: [
           "ai-in-healthcare",
           "algorithmic-transparency",
@@ -15344,6 +17248,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires data centers in West Virginia to be built at least 500 feet away from any home, school, or house of worship. It creates a mandatory setback rule that would restrict where new data centers can be located.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "local-zoning",
           "residential-proximity",
@@ -15370,6 +17278,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill creates a West Virginia law protecting genetic and biometric data by requiring companies to tell consumers how their genetic information is collected and used, and banning the sale or transfer of that data to foreign adversaries. It also gives individuals the right to sue if their genetic privacy rights are violated.",
         stage: "Committee",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "none",
+          "ai-consumer": "concerning",
+        },
         impactTags: [
           "data-privacy",
           "algorithmic-transparency",
@@ -15455,6 +17367,12 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill sets rules for how data centers can be built or managed in West Virginia counties where the ground is mostly made of karst geology — a porous limestone terrain that is especially vulnerable to groundwater contamination and sinkholes. It appears to impose specific oversight or restrictions on data center siting in these environmentally sensitive areas.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "favorable",
+          community: "review",
+          "land-use": "concerning",
+        },
         impactTags: [
           "local-zoning",
           "environmental-review",
@@ -15479,6 +17397,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill gives counties and municipalities in West Virginia more say over where and how data centers and microgrid projects are built in their communities. It shifts oversight authority away from the state level and back to local governments.",
         stage: "Committee",
         stance: "concerning",
+        dimensionStances: {
+          community: "favorable",
+          "land-use": "favorable",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -15539,8 +17461,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Wisconsin",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Wisconsin has 12 relevant bills tracked in 2025–2026 — 6 on data-center policy and 6 on AI regulation. 5 impose active bans or moratoriums.",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
+    contextBlurb: "",
     legislation: [
       {
         id: "wi-ab722",
@@ -15621,6 +17544,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Wisconsin bill creates new legal penalties for the unauthorized creation or use of synthetic digital representations — such as AI-generated likenesses or voice clones — of real people. It amends existing privacy and racketeering statutes to cover these digital replicas and establishes criminal consequences for violations.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -15646,6 +17573,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Wisconsin bill creates new rules and penalties around synthetic digital representations — AI-generated or manipulated images, audio, or video of real people. It adds these protections to existing privacy and crime statutes, making unauthorized use of someone's synthetic likeness a punishable offense.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-consumer": "concerning",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "data-privacy",
@@ -15670,6 +17601,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans Wisconsin state agencies and local governments from using facial recognition technology or any data it produces. It is a broad prohibition that applies across all government uses, not just law enforcement.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -15694,6 +17629,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Wisconsin bill imposes new fees on large energy customers, creates a special utility rate class for very large users like data centers, establishes renewable energy tariff requirements, sets building standards for data centers, regulates their water usage, and requires prevailing wage pay rates on large-scale data center construction projects. It places significant new regulatory and financial obligations on data center operators in the state.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "energy-rates",
@@ -15721,6 +17660,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill places a moratorium on data centers in Wisconsin, temporarily halting new data center construction or establishment. It is a direct ban that restricts where and whether data centers can be built in the state.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -15745,6 +17688,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill establishes a moratorium on data centers in Wisconsin, temporarily halting new data center construction or operations. It directly restricts where and whether data centers can be built in the state.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          community: "restrictive",
+          "land-use": "restrictive",
+        },
         impactTags: [
           "local-zoning",
           "local-control",
@@ -15769,6 +17716,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Wisconsin bill establishes new requirements for data centers, likely covering energy use, grid impact, and water consumption reporting or standards. It creates new statutory sections addressing utility and environmental oversight of data center operations.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "water-consumption",
@@ -15795,6 +17746,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Wisconsin bill establishes specific requirements for data centers, likely covering energy use, grid impact, and water consumption reporting or standards. It creates new statutory provisions that impose obligations on data center operators related to utilities and environmental compliance.",
         stage: "Dead",
         stance: "concerning",
+        dimensionStances: {
+          environmental: "concerning",
+          energy: "concerning",
+        },
         impactTags: [
           "grid-capacity",
           "water-consumption",
@@ -15842,25 +17797,18 @@ const NA_ENTITIES: Entity[] = [
     keyFigures: [],
     news: [
       {
-        id: "wisconsin-0",
-        headline: "Wisconsin Assembly Passes AB 840 to Regulate AI Data Centers",
-        source: "WSAW / Wisconsin Public Radio",
-        date: "2026-01-21",
-        url: "https://www.wsaw.com/2026/01/21/wisconsin-assembly-passes-bill-regulate-ai-data-centers/",
+        id: "wi-anti-dc-referendum",
+        headline: "Wisconsin Town Passes Nation's First Anti-Data-Center Referendum",
+        source: "WVBO-FM",
+        date: "2026-04-11",
+        url: "https://www.1039wvbo.com/2026/04/11/nations-first-anti-data-center-referendum-passes-in-wisconsin/",
       },
       {
-        id: "wisconsin-1",
-        headline: "Democratic Lawmakers Propose Statewide Data Center Moratorium SB 1061",
-        source: "Wisconsin Examiner",
-        date: "2026-02-12",
-        url: "https://wisconsinexaminer.com/2026/02/12/democratic-lawmakers-propose-data-center-moratorium/",
-      },
-      {
-        id: "wisconsin-2",
-        headline: "Wisconsin Senate Holds Hearing on Data Center Bills AB 840 SB 843",
-        source: "Wisconsin Economic Development Association / Wisconsin Public Radio",
-        date: "2026-02-17",
-        url: "https://www.wpr.org/news/new-bill-ban-nondisclosure-agreements-wisconsin-data-centers-nda",
+        id: "wisconsin-4",
+        headline: "Port Washington Voters Pass Nation's First Anti-Data Center Referendum",
+        source: "Common Dreams / Planetizen",
+        date: "2026-04-08",
+        url: "https://www.commondreams.org/news/wisconsin-data-center-referendum",
       },
       {
         id: "wisconsin-3",
@@ -15870,11 +17818,25 @@ const NA_ENTITIES: Entity[] = [
         url: "https://www.dailycardinal.com/article/2026/03/republicans-split-on-ai-data-center-regulation",
       },
       {
-        id: "wisconsin-4",
-        headline: "Port Washington Voters Pass Nation's First Anti-Data Center Referendum",
-        source: "Common Dreams / Planetizen",
-        date: "2026-04-08",
-        url: "https://www.commondreams.org/news/wisconsin-data-center-referendum",
+        id: "wisconsin-2",
+        headline: "Wisconsin Senate Holds Hearing on Data Center Bills AB 840 SB 843",
+        source: "Wisconsin Economic Development Association / Wisconsin Public Radio",
+        date: "2026-02-17",
+        url: "https://www.wpr.org/news/new-bill-ban-nondisclosure-agreements-wisconsin-data-centers-nda",
+      },
+      {
+        id: "wisconsin-1",
+        headline: "Democratic Lawmakers Propose Statewide Data Center Moratorium SB 1061",
+        source: "Wisconsin Examiner",
+        date: "2026-02-12",
+        url: "https://wisconsinexaminer.com/2026/02/12/democratic-lawmakers-propose-data-center-moratorium/",
+      },
+      {
+        id: "wisconsin-0",
+        headline: "Wisconsin Assembly Passes AB 840 to Regulate AI Data Centers",
+        source: "WSAW / Wisconsin Public Radio",
+        date: "2026-01-21",
+        url: "https://www.wsaw.com/2026/01/21/wisconsin-assembly-passes-bill-regulate-ai-data-centers/",
       },
     ],
   },
@@ -15884,8 +17846,9 @@ const NA_ENTITIES: Entity[] = [
     name: "Wyoming",
     region: "na",
     level: "state",
-    stance: "restrictive",
-    contextBlurb: "Wyoming has 4 relevant bills tracked in 2025–2026 — 1 on data-center policy and 3 on AI regulation. 1 has been enacted into law. 3 impose active bans or moratoriums.",
+    stanceDatacenter: "review",
+    stanceAI: "restrictive",
+    contextBlurb: "Wyoming is leaning restrictive on AI, with no data-center legislation currently tracked. On AI: HB0102 (enacted) — Makes it a crime to use AI or synthetic media to create sexual content involving children, promote self-harm, or censor political speech.",
     legislation: [
       {
         id: "wy-hb0185",
@@ -15912,6 +17875,11 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Wyoming bill makes it a crime to use AI or synthetic media to create sexual content involving children, promote self-harm, or censor political speech. It also clarifies that using AI to commit a crime is not a legal defense, while providing some immunity for AI developers.",
         stage: "Enacted",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "concerning",
+          "ai-consumer": "restrictive",
+          "ai-synthetic": "restrictive",
+        },
         impactTags: [
           "deepfake-regulation",
           "child-safety",
@@ -15937,6 +17905,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This Wyoming bill bans government agencies from using biometric data (like facial recognition), geolocation tracking, and automatic license plate readers to identify people or vehicles. It also prohibits governments from hiring outside vendors to perform these functions and gives citizens the right to sue if the rules are violated.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "algorithmic-transparency",
           "data-privacy",
@@ -15999,6 +17971,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill bans Wyoming government agencies from using AI to assign social scores to individuals or to identify people through biometric data and image collection. It places hard prohibitions on these government AI uses, with some defined exceptions.",
         stage: "Dead",
         stance: "restrictive",
+        dimensionStances: {
+          "ai-governance-dim": "restrictive",
+          "ai-consumer": "restrictive",
+        },
         impactTags: [
           "algorithmic-transparency",
           "ai-safety",
@@ -16023,6 +17999,10 @@ const NA_ENTITIES: Entity[] = [
         summary: "This bill requires Wyoming's state engineer to study consumptive water use and submit a report on findings. It is likely aimed at understanding water demands from large water users, potentially including data centers, but takes no restrictive or regulatory action.",
         stage: "Dead",
         stance: "review",
+        dimensionStances: {
+          environmental: "review",
+          energy: "review",
+        },
         impactTags: [
           "water-consumption",
           "water-infrastructure",

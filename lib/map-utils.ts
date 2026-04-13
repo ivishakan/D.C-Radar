@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import type { StanceType } from "@/types";
+import type { Region, StanceType } from "@/types";
 
 export const STANCE_HEX: Record<StanceType, string> = {
   restrictive: "#D98080",
@@ -17,6 +17,9 @@ export interface TooltipState {
   x: number;
   y: number;
   label: string;
+  /** Set for entity hovers so MapShell can show a rich tooltip. */
+  geoId?: string;
+  region?: Region;
 }
 
 export type SetTooltip = Dispatch<SetStateAction<TooltipState | null>>;

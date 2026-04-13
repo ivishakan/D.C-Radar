@@ -4,7 +4,6 @@
   "name": "Singapore",
   "region": "asia",
   "level": "federal",
-  "stance": "favorable",
   "contextBlurb": "Singapore takes a pro-innovation, framework-driven approach — its Model AI Governance Framework and AI Verify testing toolkit set voluntary but widely adopted standards without binding AI law. A 2019 data center moratorium was lifted in 2022 under strict green conditions, and the December 2025 DC-CFA2 opened at least 200 MW of new capacity contingent on 50%+ green energy and a PUE of 1.25 at full load. Combined with a S$1 billion National AI Strategy, Singapore couples growth with sustainability.",
   "legislation": [
     {
@@ -118,5 +117,7 @@
       "date": "2025-12-01",
       "url": "https://www.datacenterdynamics.com/en/news/singapore-opens-call-to-develop-200mw-of-data-center-capacity/"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "review"
 }

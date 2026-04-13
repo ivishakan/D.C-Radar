@@ -18,7 +18,8 @@ const HAND_CURATED: Entity[] = [
     isOverview: true,
     // EU passed the world's most comprehensive AI law (the AI Act) plus
     // EnEfG-style data center mandates. Heaviest regulator on the planet.
-    stance: "restrictive",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
     contextBlurb:
       "The EU AI Act is the world's first comprehensive legal framework for AI — a risk-based regime that bans certain uses outright, forces conformity assessments on high-risk systems, and layers transparency duties on general-purpose models. Alongside it, the recast Energy Efficiency Directive imposes mandatory reporting, PUE disclosure, and waste-heat reuse on any data center above 500 kW.",
     legislation: [
@@ -106,7 +107,8 @@ const HAND_CURATED: Entity[] = [
     // Germany has the strictest data center energy law in Europe (EnEfG:
     // PUE ≤ 1.2, 100% renewables by 2027, mandatory waste-heat reuse).
     // Pro-tech in tone but the actual regulatory regime is restrictive.
-    stance: "concerning",
+    stanceDatacenter: "concerning",
+    stanceAI: "concerning",
     contextBlurb:
       "Germany is implementing the EU AI Act with extra national teeth — especially on AI in employment. Its binding data center efficiency law (EnEfG) requires all new facilities to run on 100% renewable power by 2027, the strictest grid standard among major EU economies.",
     legislation: [
@@ -195,7 +197,8 @@ const HAND_CURATED: Entity[] = [
     // Macron's all-in sovereign-AI-compute push, €2.5B France 2030 fund,
     // and the AI mega-site build-out make France one of the most
     // innovation-friendly EU members despite the bloc-level AI Act.
-    stance: "favorable",
+    stanceDatacenter: "favorable",
+    stanceAI: "concerning",
     contextBlurb:
       "France is pitching itself as Europe's AI capital — anchored by an AI sovereignty strategy and a hard push for domestic compute. On the flip side, CNIL (the data protection authority) has flagged data center water consumption as an urgent regulatory gap, signaling scrutiny of the hyperscale buildout alongside the welcome mat.",
     legislation: [
@@ -284,7 +287,8 @@ const HAND_CURATED: Entity[] = [
     // Post-Brexit UK deliberately chose a pro-innovation, principles-based
     // approach distinct from the EU AI Act. Bletchley Declaration host,
     // AI Growth Zones in planning, AI Bill delayed to keep options open.
-    stance: "favorable",
+    stanceDatacenter: "review",
+    stanceAI: "review",
     // (key figures populated below)
     contextBlurb:
       "Post-Brexit the UK has taken a pro-innovation, principles-based AI approach that's deliberately distinct from the EU AI Act. Surging data center demand has pressured the grid hard enough that National Grid is now running a formal load-zone review.",
@@ -374,7 +378,8 @@ const HAND_CURATED: Entity[] = [
     region: "asia",
     level: "bloc",
     isOverview: true,
-    stance: "review",
+    stanceDatacenter: "favorable",
+    stanceAI: "review",
     contextBlurb:
       "Asia is the world's compute and silicon center of gravity. China runs the largest national AI grid build-out anywhere and routes workloads west under its East-Data-West-Compute initiative, while Taiwan's TSMC fabricates over 90% of the world's most advanced chips — making the Strait the single biggest chokepoint in the global AI supply chain. Singapore has become the de-facto transshipment point for export-controlled GPUs bound for the mainland; its share of Nvidia revenue jumped from 9% to 22% in two years, and US prosecutors are now unwinding a $2.5B Super Micro indictment tied to it. Japan and South Korea sit Tier-1 on US chip export controls and have each passed dedicated AI laws — Japan's voluntary, Korea's high-impact-AI Basic Act.",
     legislation: [],
@@ -452,7 +457,8 @@ const HAND_CURATED: Entity[] = [
     name: "Japan",
     region: "asia",
     level: "federal",
-    stance: "favorable",
+    stanceDatacenter: "favorable",
+    stanceAI: "review",
     contextBlurb:
       "Japan has taken an innovation-first approach: METI's voluntary AI guidelines rather than binding rules. In parallel, the FSA and METI are jointly reviewing how data centers integrate with the grid as part of the GX (Green Transformation) initiative.",
     legislation: [
@@ -555,7 +561,8 @@ const HAND_CURATED: Entity[] = [
     // compute infrastructure (East Data West Compute, $8.2B AI fund,
     // 80–100% grid reserve margin). "concerning" captures the tension
     // better than the older "restrictive" tag.
-    stance: "concerning",
+    stanceDatacenter: "favorable",
+    stanceAI: "restrictive",
     contextBlurb:
       "China runs the world's most prescriptive AI regime. Generative AI services face mandatory pre-launch security reviews, content labeling is required, and strict data localization rules sit alongside enormous state compute investment.",
     legislation: [
@@ -671,7 +678,8 @@ const HAND_CURATED: Entity[] = [
     // framework with statutory high-impact-AI categories and reporting
     // obligations — that's heavier than Japan's voluntary regime, so
     // "review" / under-discussion fits better than "favorable".
-    stance: "review",
+    stanceDatacenter: "review",
+    stanceAI: "concerning",
     contextBlurb:
       "South Korea passed its AI Basic Act in 2024 — establishing a national oversight framework, a regulatory sandbox, and an AI safety institute. The Ministry of Trade is now studying how upcoming hyperscale projects will stress the grid.",
     legislation: [
@@ -772,7 +780,8 @@ const HAND_CURATED: Entity[] = [
     // The Mar 2026 National Expectations framework is non-binding and
     // operates as approval prioritization, not hard regulation — closer
     // to innovation-friendly than restrictive.
-    stance: "favorable",
+    stanceDatacenter: "review",
+    stanceAI: "review",
     contextBlurb:
       "Australia is betting on voluntary standards over AI legislation, relying on its October 2025 Guidance for AI Adoption and a forthcoming AI Safety Institute. In March 2026 the federal government issued its first national expectations for data center developers, tying regulatory priority to clean energy and water sustainability. Privacy reform is rolling out in tranches, and the eSafety Commissioner runs one of the world's most active online-safety enforcement regimes.",
     legislation: [

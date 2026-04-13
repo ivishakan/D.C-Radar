@@ -4,7 +4,6 @@
   "name": "Indonesia",
   "region": "asia",
   "level": "federal",
-  "stance": "review",
   "contextBlurb": "Indonesia is still building its AI and data center framework. The 2022 Personal Data Protection Law is now enforceable but its dedicated agency isn't operational until 2026, and binding AI rules remain at the draft stage. Meanwhile, Jakarta and Batam are booming as data center hubs — backed by tax incentives and 100% foreign ownership — but water and energy sustainability concerns are drawing regulators in.",
   "legislation": [
     {
@@ -114,5 +113,7 @@
       "date": "2025-09-19",
       "url": "https://en.tempo.co/amp/2050472/indonesia-expected-to-complete-ai-regulations-draft-this-month"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "review"
 }

@@ -1,4 +1,4 @@
-import type { Dimension, Entity, ImpactTag } from "@/types";
+import type { Dimension, DimensionLens, Entity, ImpactTag } from "@/types";
 import { STANCE_HEX } from "./map-utils";
 
 /**
@@ -139,8 +139,12 @@ function getDimensionScore(
 export function getEntityColorForDimension(
   entity: Entity,
   dimension: Dimension,
+  lens: DimensionLens = "datacenter",
 ): string {
-  if (dimension === "overall") return STANCE_HEX[entity.stance];
+  if (dimension === "overall") {
+    const stance = lens === "ai" ? entity.stanceAI : entity.stanceDatacenter;
+    return STANCE_HEX[stance];
+  }
   const score = getDimensionScore(entity, dimension);
   const grad = DIMENSION_GRADIENT[dimension];
   return lerpHex(grad.from, grad.to, score);

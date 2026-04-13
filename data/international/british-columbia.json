@@ -4,7 +4,6 @@
   "name": "British Columbia",
   "region": "na",
   "level": "state",
-  "stance": "concerning",
   "contextBlurb": "British Columbia is playing the brakes on data center growth. Bill 31 (Energy Statutes Amendment Act, 2025) caps AI and data center grid connections at a combined 400 MW every two years and replaces first-come-first-served with a competitive bid — while crypto mining is permanently banned from the BC Hydro grid. AI governance itself runs on a public-sector code of practice, not binding legislation.",
   "legislation": [
     {
@@ -117,5 +116,7 @@
       "date": "2026-02-04",
       "url": "https://techcouver.com/2026/02/04/province-ai-data-centres-energy-management/"
     }
-  ]
+  ],
+  "stanceDatacenter": "restrictive",
+  "stanceAI": "review"
 }

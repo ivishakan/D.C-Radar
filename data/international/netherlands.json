@@ -4,7 +4,6 @@
   "name": "Netherlands",
   "region": "eu",
   "level": "federal",
-  "stance": "restrictive",
   "contextBlurb": "The Netherlands has been tightening data center rules since 2019, culminating in a 2022 national ban on new hyperscale facilities across most of the country and an Amsterdam moratorium that now runs through 2030. Grid congestion is severe — data centers consume roughly 4.6% of national electricity. Despite the siting restrictions, the government still pursues AI ambition via a National AI Delta Plan and a 2025 Nvidia deal to build a national AI supercomputer.",
   "legislation": [
     {
@@ -115,5 +114,7 @@
       "date": "2025-12-15",
       "url": "https://nltimes.nl/2025/12/15/data-centers-netherlands-use-much-power-2-million-homes"
     }
-  ]
+  ],
+  "stanceDatacenter": "restrictive",
+  "stanceAI": "concerning"
 }

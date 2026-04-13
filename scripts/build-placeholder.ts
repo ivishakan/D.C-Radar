@@ -40,7 +40,8 @@ interface JsonLegFile {
   state: string;
   stateCode: string;
   region: string;
-  stance: string;
+  stanceDatacenter: string;
+  stanceAI: string;
   lastUpdated: string;
   contextBlurb: string;
   legislation: unknown[];
@@ -139,7 +140,8 @@ function buildFederalEntity() {
     level: "federal",
     isOverview: true,
     canDrillDown: true,
-    stance: leg.stance,
+    stanceDatacenter: leg.stanceDatacenter,
+    stanceAI: leg.stanceAI,
     contextBlurb: leg.contextBlurb,
     legislation: leg.legislation,
     keyFigures: figures,
@@ -161,7 +163,8 @@ function buildStateEntities() {
       name: stateName,
       region: "na",
       level: "state",
-      stance: leg.stance,
+      stanceDatacenter: leg.stanceDatacenter,
+      stanceAI: leg.stanceAI,
       contextBlurb: leg.contextBlurb,
       legislation: leg.legislation,
       keyFigures: figures,
@@ -180,7 +183,8 @@ function buildCanadaEntity() {
     name: "Canada",
     region: "na",
     level: "federal",
-    stance: "review",
+    stanceDatacenter: "review",
+    stanceAI: "review",
     contextBlurb:
       "Canada's AIDA (Artificial Intelligence and Data Act) died on the order paper in early 2025. The federal government is now pursuing AI regulation through privacy-law amendments and policy guidance rather than dedicated AI-specific legislation.",
     legislation: [],

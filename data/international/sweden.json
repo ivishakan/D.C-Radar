@@ -4,7 +4,6 @@
   "name": "Sweden",
   "region": "eu",
   "level": "federal",
-  "stance": "favorable",
   "contextBlurb": "Sweden wants a top-ten spot in global AI — adopting its first national AI Strategy in February 2026 and implementing the EU AI Act via complementary legislation targeted for August 2026. Cold-climate free-air cooling and Norrbotten hydropower have made it one of Europe's premier green data center destinations, anchored by Meta's Luleå hyperscale campus. A concurrent push to authorize AI facial recognition for police (Proposition 2025/26:150) is drawing civil-liberties scrutiny.",
   "legislation": [
     {
@@ -118,5 +117,7 @@
       "date": "2025-11-24",
       "url": "https://setterwalls.se/en/article/a-brief-update-on-swedens-adaptations-to-the-ai-act-sou-2025101-2/"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "concerning"
 }

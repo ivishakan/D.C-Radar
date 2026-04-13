@@ -4,7 +4,6 @@
   "name": "Poland",
   "region": "eu",
   "level": "federal",
-  "stance": "review",
   "contextBlurb": "Poland is implementing the EU AI Act via a draft national law that would create an entirely new dedicated regulator — one of the few EU states to spin up a purpose-built AI oversight body. Warsaw has become Central Europe's leading data center hub, absorbing over $6 billion in hyperscaler commitments in 2025 alone. The catch: the country's 53%-coal grid draws sustainability concerns and has triggered EU legal action, even as the Tusk government pushes a 1 billion złoty national AI plan and a sovereign Polish LLM.",
   "legislation": [
     {
@@ -116,5 +115,7 @@
       "date": "2025-11-10",
       "url": "https://www.datacenterdynamics.com/en/news/data4-launches-second-polish-data-center-outside-warsaw/"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "concerning"
 }

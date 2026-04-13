@@ -4,7 +4,6 @@
   "name": "Québec",
   "region": "na",
   "level": "state",
-  "stance": "review",
   "contextBlurb": "Québec sits in an unusual split: an AI innovation champion and a grid-constrained energy regulator at the same time. Clean hydropower and heavy Mila institute subsidies attracted Google, AWS, and OVHcloud to the Beauharnois corridor, while Bill 69 (2025) now restricts new 5+ MW industrial power connections and effectively pauses new data center buildouts. Law 25 — Canada's strictest provincial privacy regime — imposes GDPR-like automated decision-making rules backed by fines up to $25M or 4% of global revenue.",
   "legislation": [
     {
@@ -114,5 +113,7 @@
       "date": "2025-06-20",
       "url": "https://stikeman.com/en-ca/kh/canadian-energy-law/quebec-government-adopts-bill-69-to-modernize-energy-legislation"
     }
-  ]
+  ],
+  "stanceDatacenter": "restrictive",
+  "stanceAI": "concerning"
 }

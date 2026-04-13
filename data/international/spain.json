@@ -4,7 +4,6 @@
   "name": "Spain",
   "region": "eu",
   "level": "federal",
-  "stance": "review",
   "contextBlurb": "Spain is the EU's most proactive member on AI governance, having stood up AESIA — Europe's first dedicated national AI supervisory agency — in 2023. A draft national AI law is working through parliament to fully transpose the EU AI Act. On infrastructure, Madrid and Aragón are absorbing a hyperscale data center boom backed by tens of billions from Amazon, Microsoft, and Blackstone — but water scarcity and grid congestion in Aragón are raising serious environmental flags.",
   "legislation": [
     {
@@ -109,5 +108,7 @@
       "date": "2026-03-11",
       "url": "https://www.datacenterdynamics.com/en/news/amazon-invests-337-million-in-data-centers-in-aragon-for-ai/"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "concerning"
 }

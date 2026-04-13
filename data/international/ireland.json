@@ -4,7 +4,6 @@
   "name": "Ireland",
   "region": "eu",
   "level": "federal",
-  "stance": "review",
   "contextBlurb": "Dublin hosts Europe's second-largest data center cluster — already 22% of national electricity, projected to hit 31% by 2034. In December 2025 the CRU ended a de facto Dublin moratorium with a new policy requiring new data centers to bring their own dispatchable generation and source 80% of demand from new Irish renewables within six years. Ireland is also among the EU's most advanced AI Act implementers, standing up a statutory National AI Office by August 2026.",
   "legislation": [
     {
@@ -120,5 +119,7 @@
       "date": "2026-03-30",
       "url": "https://www.pv-magazine.com/2026/03/30/pv-and-storage-will-be-central-to-irelands-first-co-located-data-center-and-renewables-campus/"
     }
-  ]
+  ],
+  "stanceDatacenter": "concerning",
+  "stanceAI": "concerning"
 }

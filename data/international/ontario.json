@@ -4,7 +4,6 @@
   "name": "Ontario",
   "region": "na",
   "level": "state",
-  "stance": "favorable",
   "contextBlurb": "Ontario is positioning itself as Canada's leading AI and data center hub. Bill 40 (December 2025) lets the Energy Minister prioritize data center grid connections by economic benefit, replacing first-come-first-served. The province's Trustworthy AI Framework sets risk-based transparency rules for public-sector AI, and Bill 149 brought AI-in-hiring disclosure into effect in January 2026 — while the grid operator projects commercial data center demand to grow over 400% by 2050.",
   "legislation": [
     {
@@ -116,5 +115,7 @@
       "date": "2026-04-08",
       "url": "https://nowtoronto.com/news/ontario-is-getting-a-major-ai-boost-thanks-to-microsofts-19-billion-investment"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "review"
 }

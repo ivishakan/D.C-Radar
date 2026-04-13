@@ -4,7 +4,6 @@
   "name": "Finland",
   "region": "eu",
   "level": "federal",
-  "stance": "favorable",
   "contextBlurb": "Finland is implementing the EU AI Act with a deliberately light touch — minimal extra national rules on top. It hosts Google's Hamina and Microsoft's Helsinki-area hyperscale campuses, both pioneering waste-heat recovery into municipal district heating. Starting July 2026, data centers lose their preferential electricity tax rate, replaced by a new value-added incentive scheme.",
   "legislation": [
     {
@@ -115,5 +114,7 @@
       "date": "2025-06-24",
       "url": "https://valtioneuvosto.fi/en/-/finland-aims-to-host-a-european-ai-gigafactory-"
     }
-  ]
+  ],
+  "stanceDatacenter": "review",
+  "stanceAI": "concerning"
 }

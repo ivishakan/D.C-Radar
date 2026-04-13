@@ -4,7 +4,6 @@
   "name": "Italy",
   "region": "eu",
   "level": "federal",
-  "stance": "concerning",
   "contextBlurb": "Italy became the first EU member state to enact a comprehensive national AI law (October 2025), with the data protection authority Garante one of Europe's most aggressive AI enforcers — it banned DeepSeek outright in January 2025 and previously fined OpenAI €15M. Milan and Rome are meanwhile absorbing up to €10 billion in data center investment through 2026. Italy's 2024 G7 presidency also positioned it as a shaper of international AI governance norms.",
   "legislation": [
     {
@@ -114,5 +113,7 @@
       "date": "2026-03-24",
       "url": "https://www.datacenterdynamics.com/en/news/digital-realty-plans-milan-data-center-development/"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "concerning"
 }

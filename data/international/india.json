@@ -4,7 +4,6 @@
   "name": "India",
   "region": "asia",
   "level": "federal",
-  "stance": "favorable",
   "contextBlurb": "India is taking a deliberately innovation-first stance, anchored by the ₹10,371 crore IndiaAI Mission and non-binding AI guidelines instead of standalone legislation. February 2026 rules did add binding requirements for labeling synthetic media and taking down deepfakes within three hours. A tax holiday through 2047 and $67+ billion in cloud investment commitments are driving a hyperscale buildout across Mumbai, Chennai, and Hyderabad.",
   "legislation": [
     {
@@ -117,5 +116,7 @@
       "date": "2025-12-26",
       "url": "https://www.washingtonpost.com/world/2025/12/26/india-ai-google-microsoft-amazon/"
     }
-  ]
+  ],
+  "stanceDatacenter": "favorable",
+  "stanceAI": "review"
 }

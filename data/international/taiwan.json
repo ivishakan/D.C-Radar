@@ -4,7 +4,6 @@
   "name": "Taiwan",
   "region": "asia",
   "level": "federal",
-  "stance": "review",
   "contextBlurb": "Taiwan enacted its AI Basic Act in January 2026 — a principles-based framework closer to the US/Japan model than the EU's. The grid is under acute strain from surging AI demand: Taipower's January 2026 tariffs penalize inefficient operators and gigawatt-scale northern campuses are being discouraged outright. On semiconductors, Taiwan tightened national-security export controls through 2025, blacklisting Huawei and SMIC and securing its first criminal indictment for TSMC trade-secret theft.",
   "legislation": [
     {
@@ -109,5 +108,7 @@
       "date": "2026-04-10",
       "url": "https://taiwaninsight.org/2026/04/10/taiwans-energy-challenges-amid-shifting-geopolitical-realities-national-security-energy-transition-and-technological-ambitions-of-an-insular-democracy-under-pressure/"
     }
-  ]
+  ],
+  "stanceDatacenter": "concerning",
+  "stanceAI": "review"
 }

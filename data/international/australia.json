@@ -4,7 +4,6 @@
   "name": "Australia",
   "region": "asia",
   "level": "federal",
-  "stance": "review",
   "contextBlurb": "Australia is betting on voluntary standards over AI legislation, relying on its October 2025 Guidance for AI Adoption and a forthcoming AI Safety Institute. In March 2026 the federal government issued its first national expectations for data center developers, tying regulatory priority to clean energy and water sustainability. Privacy reform is rolling out in tranches, and the eSafety Commissioner runs one of the world's most active online-safety enforcement regimes.",
   "legislation": [
     {
@@ -117,5 +116,7 @@
       "date": "2026-01-08",
       "url": "https://www.esafety.gov.au/newsroom/media-releases/new-industry-codes-seek-to-take-on-ai-chatbots-that-encourage-suicide-and-engage-in-sexually-explicit-conversations-with-aussie-kids"
     }
-  ]
+  ],
+  "stanceDatacenter": "review",
+  "stanceAI": "review"
 }
