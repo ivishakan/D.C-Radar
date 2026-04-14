@@ -217,30 +217,14 @@ export default function Page() {
         <div className="max-w-5xl mx-auto px-8 py-10 flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
           <span>D.C Radar</span>
           <div className="flex gap-6">
-            <Link href="/about" className="hover:text-ink transition-colors">
-              About
-            </Link>
             <Link
               href="/methodology"
               className="hover:text-ink transition-colors"
             >
               Methodology
             </Link>
-            <Link href="/contact" className="hover:text-ink transition-colors">
-              Contact
-            </Link>
           </div>
-          <span>
-            Built by{" "}
-            <a
-              href="https://x.com/isareksopuro"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline decoration-muted/40 decoration-[0.5px] underline-offset-4 hover:decoration-ink hover:text-ink transition-colors"
-            >
-              @isareksopuro
-            </a>
-          </span>
+          <span>Built by Vishakan Umapathy</span>
         </div>
       </section>
     </>

@@ -16,9 +16,6 @@ export default function Header() {
         <Link href="/politicians" className="hover:text-ink transition-colors">
           Politicians
         </Link>
-        <Link href="/about" className="hover:text-ink transition-colors">
-          About
-        </Link>
       </nav>
     </header>
   );

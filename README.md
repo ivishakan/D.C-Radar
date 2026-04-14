@@ -1,4 +1,4 @@
-# Track Policy
+# D.C Radar
 
 A live map of where AI and data center policy is actually happening — across the US (federal + every state), the EU and major member states, and key Asia-Pacific jurisdictions.
 
@@ -10,3 +10,5 @@ The goal is simple: make it easy to see, at a glance, which governments are rest
 - **Tailwind CSS v4** for styling
 - **react-simple-maps** + **d3-geo** + **topojson-client** for the interactive maps
 - Legislation data sourced from **LegiScan**, news enriched via the **Anthropic API** with web search
+
+Built by **Vishakan Umapathy** — [github.com/ivishakan/D.C-Radar](https://github.com/ivishakan/D.C-Radar)

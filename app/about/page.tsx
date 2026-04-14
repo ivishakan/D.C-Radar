@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About · Track Policy",
+  title: "About · D.C Radar",
 };
 
 export default function AboutPage() {
@@ -25,91 +25,42 @@ export default function AboutPage() {
 
         <div className="text-base text-ink/80 leading-relaxed space-y-5">
           <p>
-            I built{" "}
-            <a
-              href="https://trackpolicy.org"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              trackpolicy.org
-            </a>{" "}
-            because I kept wanting a straightforward
-            answer to one question: where does this state or country stand
-            on AI and data centers? To actually answer it I had to check
-            legislature portals, read scattered news, and dig through
-            industry filings. Nobody was collecting it in one place, so
-            I did.
+            D.C Radar is a live map of the policy landscape around data center
+            development — across the US (federal and every state), the EU and
+            major member states, and key Asia-Pacific jurisdictions.
           </p>
           <p>
-            Policy is also the part of this that gets the least attention.
-            Most of the conversation around AI is about chips and models.
-            But where compute gets built, how much it costs the grid, and
-            what governments will allow AI to do in schools, courts, and
-            hospitals is being decided right now in state capitols and
-            agency filings. I wanted a map.
+            The goal is simple: make it easy to see, at a glance, which
+            governments are restricting data center growth, which are courting
+            it, which are still studying it, and which are doing nothing. Click
+            into any jurisdiction to read the bills currently moving, the
+            politicians driving them, and the latest news.
           </p>
           <p>
-            Every country, US state, and bloc on the site has a stance and
-            a set of impact tags based on the bills currently moving
-            through it. Click a region to see its legislation, who&rsquo;s
-            sponsoring what, recent news, and the data centers already on
-            the ground.
+            Policy is the part of this that gets the least attention. Most of
+            the conversation around AI is about chips and models. But where
+            compute gets built, how much it costs the grid, and what
+            governments will allow is being decided right now in state
+            capitols and agency filings. This is that map.
           </p>
           <p>
-            I was inspired by{" "}
-            <a
-              href="https://datacenterbans.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              datacenterbans.com
-            </a>
-            , which tracks US-state data center moratoriums. Track Policy
-            covers more jurisdictions and more kinds of policy: not only
-            bans, but also incentives, disclosure rules, and study bills.
-          </p>
-          <p>
-            One of the things that pushed me to build this is how often
-            the public debate around data centers and AI runs on
-            intuition rather than detail. A lot of lawmakers writing these
-            bills are doing their best, but tech moves faster than most
-            committee staff can keep up with, and the headlines they
-            read from aren&rsquo;t always accurate about load growth,
-            water use, or what these facilities actually do. That gap
-            produces policy that sometimes misses the real issue in
-            either direction, whether it&rsquo;s a blanket moratorium on
-            a site that wouldn&rsquo;t have strained the grid, or an
-            incentive package for a build that quietly locks ratepayers
-            into decades of higher bills.
-          </p>
-          <p>
-            Track Policy isn&rsquo;t trying to take a side on whether
-            any particular bill is good. It&rsquo;s trying to show you
-            what&rsquo;s actually being proposed, what stage it&rsquo;s
-            at, and what it would do if it passed, so the people affected
-            can make up their own minds with the real information in
-            front of them.
+            Every country, US state, and bloc on the site has a stance and a
+            set of impact tags based on the bills currently moving through it.
+            Click a region to see its legislation, who&rsquo;s sponsoring
+            what, recent news, and the data centers already on the ground.
           </p>
 
           <div className="pt-5 mt-5 border-t border-black/[.06]">
             <p className="text-muted">
-              This is still early. I&rsquo;m open to feedback and edits.
-              The repo is public at{" "}
+              Built by Vishakan Umapathy. The repo is public at{" "}
               <a
-                href="https://github.com/isabellereks/track-policy"
+                href="https://github.com/ivishakan/D.C-Radar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                github.com/isabellereks/track-policy
+                github.com/ivishakan/D.C-Radar
               </a>
-              , so you can open an issue or send a PR. You can also{" "}
-              <Link
-                href="/contact"
-                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-              >
-                email me
-              </Link>
               .
             </p>
           </div>
@@ -121,36 +72,26 @@ export default function AboutPage() {
           </div>
           <ul className="text-sm text-ink/80 leading-relaxed space-y-2">
             <li>
-              Inspired by{" "}
+              Frontier data center data from{" "}
               <a
-                href="https://datacenterbans.com"
+                href="https://epoch.ai"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                datacenterbans.com
-              </a>
+                Epoch AI
+              </a>{" "}
+              (CC-BY)
             </li>
             <li>
-              Icons by{" "}
+              Legislation data from{" "}
               <a
-                href="https://streamlinehq.com"
+                href="https://legiscan.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
               >
-                Streamline
-              </a>
-            </li>
-            <li>
-              Built by{" "}
-              <a
-                href="https://isabellereks.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-              >
-                Isabelle Reksopuro
+                LegiScan
               </a>
             </li>
             <li className="pt-2 text-muted">
@@ -169,4 +110,3 @@ export default function AboutPage() {
     </main>
   );
 }
-
