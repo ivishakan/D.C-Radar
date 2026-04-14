@@ -1,0 +1,51 @@
+{
+  "_version": "2024-01",
+  "_notes": "Approximate figures from annual sustainability reports. WUE = Water Usage Effectiveness (liters consumed per kWh of IT load; lower is better). PUE = Power Usage Effectiveness (total facility power ÷ IT equipment power; 1.0 is perfect). All figures are global fleet averages unless noted.",
+  "operators": {
+    "google": {
+      "matchTerms": ["google", "alphabet", "tuike"],
+      "wueLPerKwh": 1.10,
+      "pue": 1.10,
+      "renewablePct": 100,
+      "reportYear": 2022,
+      "source": "Google 2023 Environmental Report",
+      "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+    },
+    "microsoft": {
+      "matchTerms": ["microsoft", "azure"],
+      "wueLPerKwh": 0.34,
+      "pue": 1.12,
+      "renewablePct": 100,
+      "reportYear": 2022,
+      "source": "Microsoft FY2022 Environmental Sustainability Report",
+      "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+    },
+    "meta": {
+      "matchTerms": ["meta", "facebook"],
+      "wueLPerKwh": 0.26,
+      "pue": 1.10,
+      "renewablePct": 100,
+      "reportYear": 2022,
+      "source": "Meta 2022 Sustainability Report",
+      "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+    },
+    "amazon": {
+      "matchTerms": ["amazon", "aws"],
+      "wueLPerKwh": 0.18,
+      "pue": 1.15,
+      "renewablePct": 100,
+      "reportYear": 2022,
+      "source": "AWS 2022 Sustainability Report",
+      "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+    },
+    "apple": {
+      "matchTerms": ["apple"],
+      "wueLPerKwh": 0.25,
+      "pue": 1.09,
+      "renewablePct": 100,
+      "reportYear": 2022,
+      "source": "Apple Environmental Progress Report 2023",
+      "sourceUrl": "https://www.apple.com/environment/"
+    }
+  }
+}

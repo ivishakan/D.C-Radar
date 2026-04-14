@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import type { DataCenter, ImpactTag, MunicipalAction } from "@/types";
+import type { DataCenter, FacilityEnvMetrics, ImpactTag, MunicipalAction } from "@/types";
 import { IMPACT_TAG_LABEL } from "@/types";
 import { DC_COLOR } from "@/components/map/DataCenterDots";
 import { ProposalProgress } from "@/components/ui/ProposalProgress";
 import { findActionsForFacility } from "@/lib/action-facility-link";
 import { getMunicipalitiesByState } from "@/lib/municipal-data";
+import { getEnvMetrics } from "@/lib/env-metrics";
 import { STANCE_HEX } from "@/lib/map-utils";
 import type { StanceType } from "@/types";
 
@@ -75,11 +76,106 @@ function prettyConcern(tag: string): string {
   );
 }
 
+function EnvMetricsSection({ metrics }: { metrics: FacilityEnvMetrics }) {
+  const { sustainability: sus, epa } = metrics;
+  if (!sus && epa === undefined) return null;
+
+  return (
+    <section className="flex flex-col gap-4 py-4 border-t border-black/[.06]">
+      <h3 className="text-[11px] font-medium tracking-tight text-muted uppercase">
+        Environmental data
+      </h3>
+
+      {sus && (
+        <div className="flex flex-col gap-0">
+          <div className="text-[11px] text-muted mb-1.5">
+            Operator fleet averages · {sus.reportYear} sustainability report
+          </div>
+          <dl className="flex flex-col">
+            <div className="flex items-start justify-between gap-4 py-2.5 text-[13px]">
+              <dt className="text-muted flex-shrink-0 flex flex-col">
+                <span>WUE</span>
+                <span className="text-[10.5px] font-normal">Water Usage Effectiveness</span>
+              </dt>
+              <dd className="text-ink font-medium text-right tracking-tight">
+                {sus.wueLabel}
+                <span className="block text-[10.5px] font-normal text-muted">liters per kWh of IT load</span>
+              </dd>
+            </div>
+            <div className="flex items-start justify-between gap-4 py-2.5 text-[13px] border-t border-black/[.04]">
+              <dt className="text-muted flex-shrink-0 flex flex-col">
+                <span>PUE</span>
+                <span className="text-[10.5px] font-normal">Power Usage Effectiveness</span>
+              </dt>
+              <dd className="text-ink font-medium text-right tracking-tight">
+                {sus.pueLabel}
+                <span className="block text-[10.5px] font-normal text-muted">1.0 = perfectly efficient</span>
+              </dd>
+            </div>
+            <div className="flex items-start justify-between gap-4 py-2.5 text-[13px] border-t border-black/[.04]">
+              <dt className="text-muted flex-shrink-0">Renewable energy</dt>
+              <dd className="text-ink font-medium text-right tracking-tight">
+                {sus.renewablePct}% matched
+              </dd>
+            </div>
+          </dl>
+          <a
+            href={sus.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 text-[10.5px] text-muted/70 hover:text-ink transition-colors underline decoration-muted/30 underline-offset-2"
+          >
+            Source: {sus.source}
+          </a>
+        </div>
+      )}
+
+      {epa !== undefined && (
+        <div className="flex flex-col gap-1 pt-2 border-t border-black/[.04]">
+          <div className="text-[11px] text-muted mb-0.5">
+            EPA GHGRP — Greenhouse Gas Reporting Program
+          </div>
+          {epa ? (
+            <>
+              <div className="text-[12px] text-ink/80 leading-snug">
+                Nearest registered facility: <span className="font-medium text-ink">{epa.facilityName}</span>
+                <span className="text-muted"> ({epa.distanceMi} mi away · {epa.city}, {epa.state})</span>
+              </div>
+              {epa.parentCompany && (
+                <div className="text-[11px] text-muted">Parent: {epa.parentCompany}</div>
+              )}
+              <div className="text-[11px] text-muted">
+                FRS ID: {epa.frsId} · NAICS {epa.naicsCode} · {epa.year} report
+              </div>
+              <a
+                href={`https://ghgdata.epa.gov/ghgp/site.do#facility/${epa.frsId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-0.5 text-[10.5px] text-muted/70 hover:text-ink transition-colors underline decoration-muted/30 underline-offset-2"
+              >
+                View on EPA FLIGHT ↗
+              </a>
+            </>
+          ) : (
+            <p className="text-[11.5px] text-muted/70 leading-snug">
+              No direct-emission record found within 2 miles. Most data centers
+              report below the 25,000 MT/yr EPA threshold — their carbon
+              footprint is Scope 2 (from grid electricity), tracked at the
+              utility level.
+            </p>
+          )}
+        </div>
+      )}
+    </section>
+  );
+}
+
 export default function FacilityDetail({
   facility,
 }: FacilityDetailProps) {
   const [issuesOpen, setIssuesOpen] = useState(true);
   const operator = stripConfidence(facility.operator) ?? facility.operator;
+  const envMetrics = getEnvMetrics(facility.id);
   const user = stripConfidence(facility.primaryUser);
 
   // Reverse link: find county actions whose title/summary name this
@@ -261,6 +357,9 @@ export default function FacilityDetail({
                 )}
             </section>
           )}
+
+        {/* Environmental data — WUE, PUE, renewable, EPA GHGRP */}
+        {envMetrics && <EnvMetricsSection metrics={envMetrics} />}
 
         {/* Issues dropdown — collapsible list of concern tags */}
         {facility.concerns && facility.concerns.length > 0 && (

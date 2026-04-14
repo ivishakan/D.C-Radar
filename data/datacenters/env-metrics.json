@@ -1,0 +1,1147 @@
+{
+  "generatedAt": "2026-04-14T15:13:56.068Z",
+  "epaNote": "Most data centers fall below the EPA GHGRP 25,000 MT/year direct-emission threshold. Their carbon footprint is Scope 2 (from grid electricity), tracked at the utility level.",
+  "sustainabilityNote": "WUE and PUE figures are global fleet averages from published annual sustainability reports. Individual facility performance varies by climate, cooling type, and utilisation.",
+  "metrics": {
+    "epoch-microsoft-fairwater-wisconsin": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "epoch-microsoft-fairwater-atlanta": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "epoch-google-new-albany": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "epoch-microsoft-goodyear": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "epoch-meta-temple": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "epoch-google-council-bluffs-east": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "epoch-google-cedar-rapids": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "epoch-google-omaha": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "epoch-google-pryor-north": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "epoch-meta-hyperion": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "epoch-amazon-ridgeland": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "epoch-crusoe-abilene-expansion": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "researched-or-google-the-dalles-campus": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-or-google-the-dalles-dc5": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-or-meta-prineville-campus": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-or-aws-boardman-campus": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-or-aws-hermiston-expansion": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-or-aws-boardman-threemile-canyon": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-tx-meta-el-paso-campus": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-az-google-redhawk-mesa-az": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-ia-meta-altoona-ia": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-ia-microsoft-alluvion-west-des-moines-ia": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "researched-ia-apple-waukee-ia": {
+      "sustainability": {
+        "wueLPerKwh": 0.25,
+        "wueLabel": "0.25 L/kWh",
+        "pue": 1.09,
+        "pueLabel": "1.09",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Apple Environmental Progress Report 2023",
+        "sourceUrl": "https://www.apple.com/environment/"
+      }
+    },
+    "researched-ia-meta-davenport-ia": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-ia-google-cedar-rapids-ia": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-ia-google-palo-linn-county-ia": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-wa-microsoft-quincy-mwh": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "researched-wa-microsoft-malaga-wa": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "researched-wa-microsoft-east-wenatchee": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "researched-wa-amazon-aws-wallula-gap": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-nc-aws-richmond-county-nc": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-nc-microsoft-catawba-county-nc": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "researched-nc-apple-maiden-nc": {
+      "sustainability": {
+        "wueLPerKwh": 0.25,
+        "wueLabel": "0.25 L/kWh",
+        "pue": 1.09,
+        "pueLabel": "1.09",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Apple Environmental Progress Report 2023",
+        "sourceUrl": "https://www.apple.com/environment/"
+      }
+    },
+    "researched-nc-google-lenoir-nc": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-oh-aws-wilmington-oh": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-oh-meta-j5-piqua-oh": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-oh-meta-dbstu-mount-orab-oh": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-or-google-the-dalles-aluminum-site": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-la-meta-hyperion-richland-parish": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-in-aws-project-rainier-new-carlisle": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-ms-aws-madison-county-mega-site": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-pa-aws-cumulus-susquehanna": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "researched-sc-google-berkeley-county-moncks-corner": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-ga-google-douglas-county-douglasville": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-nv-google-henderson": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-tx-google-midlothian-ellis-county": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-tx-google-haskell-county-40b-buildout": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-mo-google-kansas-city": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-tn-google-clarksville-montgomery-county": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "researched-oh-meta-prometheus-new-albany": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "researched-ms-aws-ridgeland-rainier": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "intl-nl-microsoft-ams13-14-middenmeer": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-nl-microsoft-middenmeer-expansion": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-nl-google-eemshaven": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-nl-google-winschoten": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-nl-microsoft-amsterdam-hyperscale-leased": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-nl-google-middenmeer-agriport": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-nl-meta-zeewolde-cancelled": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "intl-ie-meta-clonee-campus": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "intl-ie-microsoft-grange-castle": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-ie-google-grange-castle": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-ie-aws-cruiserath-campus": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "intl-ie-google-grange-castle-expansion-refused": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-se-meta-lulea-campus": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "intl-fi-google-hamina": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-fi-microsoft-espoo-hepokorpi": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-fi-microsoft-kirkkonummi": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-fi-google-kajaani-muhos-proposed": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-de-google-hanau-cloud-dc": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-de-google-dietzenbach-dc": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-de-microsoft-bergheim-nrw": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-de-microsoft-elsdorf-nrw": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-fr-microsoft-petit-landau-mulhouse": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-gb-google-waltham-cross": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-gb-microsoft-park-royal": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-es-aws-villanueva-de-gallego": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "intl-es-microsoft-aragon-villamayor": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-es-microsoft-aragon-la-muela": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-es-meta-talavera-de-la-reina": {
+      "sustainability": {
+        "wueLPerKwh": 0.26,
+        "wueLabel": "0.26 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Meta 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.fb.com/report/2022-sustainability-report/"
+      }
+    },
+    "intl-jp-aws-tokyo-region": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "intl-jp-aws-osaka-region": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "intl-jp-azure-japan-east": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-jp-azure-japan-west": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-jp-google-inzai-chiba": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-in-microsoft-india-south-central-hyderabad": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-in-adaniconnex-google-visakhapatnam": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-au-aws-eastern-creek-syd51": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    },
+    "intl-au-microsoft-canberra-azure-central": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-au-microsoft-kemps-creek": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-cn-gcbd-guiyang": {
+      "sustainability": {
+        "wueLPerKwh": 0.25,
+        "wueLabel": "0.25 L/kWh",
+        "pue": 1.09,
+        "pueLabel": "1.09",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Apple Environmental Progress Report 2023",
+        "sourceUrl": "https://www.apple.com/environment/"
+      }
+    },
+    "intl-cn-21vianet-beijing": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-tw-google-changhua": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-tw-google-yunlin": {
+      "sustainability": {
+        "wueLPerKwh": 1.1,
+        "wueLabel": "1.1 L/kWh",
+        "pue": 1.1,
+        "pueLabel": "1.10",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Google 2023 Environmental Report",
+        "sourceUrl": "https://sustainability.google/reports/google-2023-environmental-report/"
+      }
+    },
+    "intl-tw-microsoft-taipei": {
+      "sustainability": {
+        "wueLPerKwh": 0.34,
+        "wueLabel": "0.34 L/kWh",
+        "pue": 1.12,
+        "pueLabel": "1.12",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "Microsoft FY2022 Environmental Sustainability Report",
+        "sourceUrl": "https://www.microsoft.com/en-us/corporate-responsibility/sustainability/report"
+      }
+    },
+    "intl-tw-aws-taipei": {
+      "sustainability": {
+        "wueLPerKwh": 0.18,
+        "wueLabel": "0.18 L/kWh",
+        "pue": 1.15,
+        "pueLabel": "1.15",
+        "renewablePct": 100,
+        "reportYear": 2022,
+        "source": "AWS 2022 Sustainability Report",
+        "sourceUrl": "https://sustainability.aboutamazon.com/2022-report"
+      }
+    }
+  }
+}

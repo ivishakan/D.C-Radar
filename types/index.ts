@@ -505,6 +505,36 @@ export interface DataCenter {
   proposal?: ProposalInfo;
 }
 
+/** Environmental metrics for a facility: sustainability report data + EPA GHGRP match. */
+export interface FacilityEnvMetrics {
+  /** Nearest EPA GHGRP facility within 2 miles, or null if none found. */
+  epa?: {
+    facilityName: string;
+    frsId: string;
+    city: string;
+    state: string;
+    naicsCode: string;
+    year: number;
+    parentCompany: string | null;
+    facilityTypes: string | null;
+    distanceMi: number;
+  } | null;
+  /** Operator fleet averages from published annual sustainability reports. */
+  sustainability?: {
+    /** Water Usage Effectiveness — liters of water consumed per kWh of IT load. */
+    wueLPerKwh: number;
+    wueLabel: string;
+    /** Power Usage Effectiveness — total facility power ÷ IT equipment power. */
+    pue: number;
+    pueLabel: string;
+    /** Percentage of energy matched to renewable sources. */
+    renewablePct: number;
+    reportYear: number;
+    source: string;
+    sourceUrl: string;
+  } | null;
+}
+
 /** Fuel type for a power plant, normalized from EIA energy_source_code. */
 export type FuelType =
   | "natural-gas"
