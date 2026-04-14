@@ -2,10 +2,11 @@
   "state": "South Dakota",
   "stateCode": "SD",
   "region": "na",
+  "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "lastUpdated": "2026-04-13",
-  "contextBlurb": "South Dakota has taken notable action to protect residents from data center strain on the grid, with SB135 and HB1038 both enacted to give regulators authority over data center energy costs and allow utilities to pass actual infrastructure costs back to large customers. Beyond those enacted measures, lawmakers are actively debating a broad range of additional proposals, including a one-year moratorium on hyperscale data center construction (SB232), sales tax incentives for data centers (HB1005), and restrictions on AI use in healthcare and therapy settings. The state's legislative activity is notably weighted toward consumer protection and grid stability rather than unfettered industry growth, making it one of the more cautious energy-focused environments for data center development in the region.",
+  "lastUpdated": "2026-04-14",
+  "contextBlurb": "South Dakota is advancing regulation across both data centers and AI. On data centers: SB135 (enacted) — Aims to protect South Dakota residents from higher utility bills and power shortages that could result from data center electricity demand. On AI: SB168 (in committee) — Sets rules on how chatbots can be used by minors in South Dakota.",
   "legislation": [
     {
       "id": "sd-sb135",
@@ -117,6 +118,24 @@
       "sourceUrl": "https://sdlegislature.gov/#/Session/Bill/27290",
       "legiscanUrl": "https://legiscan.com/SD/bill/SB235/2026",
       "legiscanId": 2107807,
+      "sponsors": [
+        "Casey Crabtree"
+      ]
+    },
+    {
+      "id": "sd-sb234",
+      "billCode": "SB234",
+      "title": "Modify provisions pertaining to the purchasing of goods and services related to data center operations.",
+      "summary": "Modify provisions pertaining to the purchasing of goods and services related to data center operations.",
+      "stage": "Committee",
+      "stance": "review",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2026-02-04",
+      "partyOrigin": "R",
+      "sourceUrl": "https://sdlegislature.gov/#/Session/Bill/27289",
+      "legiscanUrl": "https://legiscan.com/SD/bill/SB234/2026",
+      "legiscanId": 2107582,
       "sponsors": [
         "Casey Crabtree"
       ]

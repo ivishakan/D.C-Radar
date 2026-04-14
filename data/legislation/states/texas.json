@@ -2,10 +2,11 @@
   "state": "Texas",
   "stateCode": "TX",
   "region": "na",
+  "stance": "concerning",
   "stanceDatacenter": "none",
   "stanceAI": "concerning",
-  "lastUpdated": "2026-04-13",
-  "contextBlurb": "Texas has enacted data broker regulations (SB1343, SB2121) requiring registration and transparency, alongside a child-focused integrated data system (HB3963), establishing a baseline of data privacy protections. The state is also actively considering significant economic incentives for data center development, including sales tax exemptions and property tax relief tied to energy use. Pending measures on license plate readers, deepfake provenance, and expanded child data systems suggest Texas is expanding its AI and data policy footprint across public safety, media integrity, and education.",
+  "lastUpdated": "2026-04-14",
+  "contextBlurb": "Texas is advancing regulation on AI, with no data-center legislation currently tracked. On AI: SB1343 (enacted) — Updates the rules for how data brokers must notify people about their data collection practices, including what information must be posted on their websites.",
   "legislation": [
     {
       "id": "tx-sb1343",
@@ -35,6 +36,42 @@
       ]
     },
     {
+      "id": "tx-hr616",
+      "billCode": "HR616",
+      "title": "Honoring Donald K. Stephens for his work as the founder and president emeritus of Mercy Ships.",
+      "summary": "This bill is a ceremonial resolution honoring Donald K. Stephens for his humanitarian work with Mercy Ships. It has no relation to AI or data-center policy.",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-04-01",
+      "partyOrigin": "R",
+      "sourceUrl": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HR616",
+      "legiscanUrl": "https://legiscan.com/TX/bill/HR616/2025",
+      "legiscanId": 2011508,
+      "sponsors": [
+        "Cole Hefner"
+      ]
+    },
+    {
+      "id": "tx-hr1444",
+      "billCode": "HR1444",
+      "title": "Commemorating the 10th anniversary of the Día de Los Muertos performances by Round Rock Ballet Folklórico.",
+      "summary": "This bill commemorates the 10th anniversary of Día de Los Muertos performances by a dance group in Round Rock, Texas. It has no relevance to AI or data-center policy.",
+      "stage": "Enacted",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-governance",
+      "updatedDate": "2025-06-01",
+      "partyOrigin": "D",
+      "sourceUrl": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HR1444",
+      "legiscanUrl": "https://legiscan.com/TX/bill/HR1444/2025",
+      "legiscanId": 2034228,
+      "sponsors": [
+        "John Bucy"
+      ]
+    },
+    {
       "id": "tx-sb2121",
       "billCode": "SB2121",
       "title": "Relating to the regulation of certain business entities that act as data brokers.",
@@ -58,6 +95,27 @@
       "sponsors": [
         "Nathan Johnson",
         "Keith Bell"
+      ]
+    },
+    {
+      "id": "tx-hb5228",
+      "billCode": "HB5228",
+      "title": "Relating to the collection of certain incident-based data reported to the Texas Commission on Law Enforcement.",
+      "summary": "This bill deals with how incident-based data is collected and reported to the Texas law enforcement commission. It does not appear to involve AI, algorithms, or data-center policy.",
+      "stage": "Committee",
+      "stance": "none",
+      "impactTags": [],
+      "category": "ai-criminal-justice",
+      "updatedDate": "2025-05-15",
+      "partyOrigin": "B",
+      "sourceUrl": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB5228",
+      "legiscanUrl": "https://legiscan.com/TX/bill/HB5228/2025",
+      "legiscanId": 2007325,
+      "sponsors": [
+        "Charlene Ward Johnson",
+        "Ann Johnson",
+        "Jeff Leach",
+        "Lauren Ashley Simmons"
       ]
     },
     {
@@ -104,6 +162,25 @@
       "legiscanId": 2008115,
       "sponsors": [
         "Molly Cook"
+      ]
+    },
+    {
+      "id": "tx-hb636",
+      "billCode": "HB636",
+      "title": "Relating to the implementation of a statewide homeless data sharing network to share real-time data on homelessness.",
+      "summary": "This bill establishes a statewide network to share real-time data about homelessness across Texas. It is not related to AI regulation or data-center policy.",
+      "stage": "Committee",
+      "stance": "none",
+      "impactTags": [],
+      "category": "data-privacy",
+      "updatedDate": "2025-05-16",
+      "partyOrigin": "D",
+      "sourceUrl": "https://capitol.texas.gov/BillLookup/History.aspx?LegSess=89R&Bill=HB636",
+      "legiscanUrl": "https://legiscan.com/TX/bill/HB636/2025",
+      "legiscanId": 1891459,
+      "sponsors": [
+        "Armando Walle",
+        "Cassandra Garcia Hernandez"
       ]
     },
     {

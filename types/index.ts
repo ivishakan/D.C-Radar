@@ -441,6 +441,12 @@ export interface Entity {
   isOverview?: boolean;
   /** True if this entity has a state-level drill-down (currently only US). */
   canDrillDown?: boolean;
+  /** Lens-agnostic overall stance — max severity of stanceDatacenter
+   *  and stanceAI. Used for the sidebar headline badge so a state with
+   *  clear action on only one lens doesn't read as "No Action" when
+   *  viewed under the other lens. Optional because older serialized
+   *  entities may predate this field. */
+  stance?: StanceType;
   /** Lens-scoped stance: aggregated over bills relevant to the data-center lens. */
   stanceDatacenter: StanceType;
   /** Lens-scoped stance: aggregated over bills relevant to the AI-regulation lens. */

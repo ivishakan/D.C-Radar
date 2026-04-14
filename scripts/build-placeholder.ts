@@ -40,6 +40,8 @@ interface JsonLegFile {
   state: string;
   stateCode: string;
   region: string;
+  /** Lens-agnostic overall stance — max severity of DC + AI. */
+  stance?: string;
   stanceDatacenter: string;
   stanceAI: string;
   lastUpdated: string;
@@ -137,6 +139,7 @@ function buildFederalEntity() {
     level: "federal",
     isOverview: true,
     canDrillDown: true,
+    stance: leg.stance ?? leg.stanceDatacenter,
     stanceDatacenter: leg.stanceDatacenter,
     stanceAI: leg.stanceAI,
     contextBlurb: leg.contextBlurb,
@@ -160,6 +163,7 @@ function buildStateEntities() {
       name: stateName,
       region: "na",
       level: "state",
+      stance: leg.stance ?? leg.stanceDatacenter,
       stanceDatacenter: leg.stanceDatacenter,
       stanceAI: leg.stanceAI,
       contextBlurb: leg.contextBlurb,

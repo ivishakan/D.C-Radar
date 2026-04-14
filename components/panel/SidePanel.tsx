@@ -173,6 +173,7 @@ export default function SidePanel({
   const setPosition = (p: Position) => setExplicitPosition(p);
   const [preferredLayer, setPreferredLayer] = useState<Layer>("legislation");
   const tabRefs = useRef<Partial<Record<Layer, HTMLButtonElement | null>>>({});
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const [expandedSections, setExpandedSections] = useState<Set<Layer>>(new Set());
   const toggleExpand = (layer: Layer) =>
     setExpandedSections((prev) => {
@@ -215,6 +216,14 @@ export default function SidePanel({
     const btn = tabRefs.current[preferredLayer];
     if (btn) btn.scrollIntoView({ inline: "center", block: "nearest" });
   }, [preferredLayer]);
+
+  // Reset the panel's scroll container to the top whenever the selected
+  // entity changes. Without this, users landing on a new state/country
+  // inherit the previous entity's scroll position — which on mobile
+  // reads as "the sidebar opens mid-content" instead of at the top.
+  useEffect(() => {
+    if (scrollRef.current) scrollRef.current.scrollTop = 0;
+  }, [entity?.id]);
 
   const availableLayers: Layer[] = [];
   if (hasLegislation) availableLayers.push("legislation");
@@ -286,10 +295,12 @@ export default function SidePanel({
     if (size === "min") {
       return {
         width: "fit-content",
-        minWidth: "7rem",
-        maxWidth: "min(15rem, calc(100vw - 2rem))",
-        minHeight: "2.5rem",
-        maxHeight: "2.5rem",
+        minWidth: "8rem",
+        maxWidth: "min(17rem, calc(100vw - 2rem))",
+        // Explicit `height` (not just min/max) so h-full on children
+        // resolves correctly. Without it, `items-center` had no
+        // reference and the label rendered at the top of the pill.
+        height: "2.75rem",
       };
     }
     if (position === "bottom") {
@@ -322,6 +333,12 @@ export default function SidePanel({
 
   const onDragPointerDown = (e: React.PointerEvent) => {
     if ((e.target as HTMLElement).closest("button")) return;
+    // Prevent the tap from ALSO registering on whatever is behind the
+    // pill — on mobile the island sits over the top of Canada on the
+    // NA map, and without these the tap was bleeding through as a
+    // Canada click, which then silently changed the selected entity.
+    e.stopPropagation();
+    e.preventDefault();
     dragStartRef.current = { x: e.clientX, y: e.clientY };
     setDragOffset({ x: 0, y: 0 });
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
@@ -329,6 +346,7 @@ export default function SidePanel({
 
   const onDragPointerMove = (e: React.PointerEvent) => {
     if (!dragStartRef.current) return;
+    e.stopPropagation();
     setDragOffset({
       x: e.clientX - dragStartRef.current.x,
       y: e.clientY - dragStartRef.current.y,
@@ -337,6 +355,15 @@ export default function SidePanel({
 
   const onDragPointerUp = (e: React.PointerEvent) => {
     if (!dragStartRef.current) return;
+    e.stopPropagation();
+    // Prevent the browser from synthesizing a click from this pointer
+    // gesture. Without this, on mobile: tap pill → setSize(md) runs,
+    // pill animates away from the tap position, THEN the synthesized
+    // click retargets to whatever element is now where the finger
+    // lifted — which on NA view is Canada's geography (the pill sits
+    // over Canada). That click then fires onSelectEntity("124") and
+    // silently swaps the selected entity to Canada.
+    e.preventDefault();
     const totalDx = e.clientX - dragStartRef.current.x;
     const totalDy = e.clientY - dragStartRef.current.y;
     const totalDist = Math.sqrt(totalDx * totalDx + totalDy * totalDy);
@@ -368,6 +395,19 @@ export default function SidePanel({
       return;
     }
 
+    // Mobile: a clear upward drag from the island expands the panel.
+    // Complements the tap affordance so the gesture feels symmetric
+    // with swipe-to-dismiss.
+    if (
+      isMobileViewport &&
+      size === "min" &&
+      totalDy < -24 &&
+      Math.abs(totalDy) > Math.abs(totalDx)
+    ) {
+      setSize("md");
+      return;
+    }
+
     // Otherwise it's a drag — snap to the nearest anchor.
     const x = e.clientX;
     const y = e.clientY;
@@ -386,19 +426,56 @@ export default function SidePanel({
 
   // ─── Render branches by size ───────────────────────────────────────────
 
+  const islandPrimary = facility
+    ? facility.operator.replace(/\s*#\w+/g, "").trim() || "Data center"
+    : entity?.name ?? null;
+
   const renderMin = () => (
     <div
       onPointerDown={onDragPointerDown}
       onPointerMove={onDragPointerMove}
       onPointerUp={onDragPointerUp}
       onPointerCancel={onDragPointerUp}
-      className={`block w-full h-full px-6 text-center text-[14px] font-semibold text-ink tracking-tight whitespace-nowrap truncate select-none touch-none leading-[2.5rem] ${
+      className={`h-full flex items-center justify-center gap-1.5 px-5 text-[13px] font-semibold text-ink tracking-tight whitespace-nowrap select-none touch-none ${
         isDragging ? "cursor-grabbing" : "cursor-pointer"
       }`}
+      aria-label={
+        islandPrimary
+          ? `${islandPrimary} — tap to open`
+          : "Tap to explore the map"
+      }
     >
-      {facility
-        ? (facility.operator.replace(/\s*#\w+/g, "").trim() || "Data center")
-        : (entity?.name ?? "Select a region")}
+      {/* Invisible left-spacer that mirrors the chevron's visible
+          glyph (not its full 10px block — the chevron path is drawn
+          inset 3px from the left of its SVG viewBox, so a 10px spacer
+          was over-compensating and biasing the label ~2px right. 6px
+          matches the chevron's visible footprint + a hair of optical
+          weighting, so text+chevron reads as geometrically centered. */}
+      <span
+        aria-hidden
+        className="w-[6px] flex-shrink-0"
+      />
+      {islandPrimary ? (
+        <span className="truncate">{islandPrimary}</span>
+      ) : (
+        <span className="text-muted font-normal">Tap to explore</span>
+      )}
+      <svg
+        width="10"
+        height="10"
+        viewBox="0 0 10 10"
+        fill="none"
+        aria-hidden
+        className="text-muted flex-shrink-0"
+      >
+        <path
+          d="M3 2l3 3-3 3"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </div>
   );
 
@@ -433,14 +510,19 @@ export default function SidePanel({
           </p>
         </div>
       ) : (
-        <div className="flex-1 overflow-y-auto">
+        <div ref={scrollRef} className="flex-1 overflow-y-auto">
           <div className="px-6 pt-1 pb-5 border-b border-black/[.06]">
             <h2 className="text-2xl font-semibold text-ink tracking-tight">
               {entity.name}
             </h2>
             <div className="mt-2 flex items-center gap-3">
+              {/* Use the overall stance on the headline tag so a state
+                  like Texas — which has enacted AI/privacy bills but
+                  nothing data-center-specific — doesn't read as "No
+                  Action" when viewed under the data-center lens. The
+                  map coloring + SummaryBar still split by lens. */}
               <StanceBadge
-                stance={lens === "ai" ? entity.stanceAI : entity.stanceDatacenter}
+                stance={entity.stance ?? (lens === "ai" ? entity.stanceAI : entity.stanceDatacenter)}
                 size="md"
               />
               {LEVEL_LABEL[entity.level] && (
@@ -502,7 +584,16 @@ export default function SidePanel({
                   role="tablist"
                   aria-label="Sidebar sections"
                 >
-                  <div className="relative flex w-full items-center gap-0.5 p-1 rounded-full bg-black/[.04]">
+                  {/* Tab strip width strategy:
+                      • 2+ tabs  → fill the row and evenly share width
+                        via flex-1 on each button (tabs-share-width).
+                      • 1 tab    → size to content so a lone "News" pill
+                        doesn't stretch across the whole panel. */}
+                  <div
+                    className={`relative flex items-center gap-0.5 p-1 rounded-full bg-black/[.04] ${
+                      availableLayers.length === 1 ? "" : "w-full"
+                    }`}
+                  >
                   {availableLayers.map((layer) => {
                     const active = layer === activeLayer;
                     const label =

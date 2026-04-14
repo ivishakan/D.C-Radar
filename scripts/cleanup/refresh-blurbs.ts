@@ -13,6 +13,7 @@
  */
 
 import "../env.js";
+import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -100,6 +101,12 @@ async function main() {
       console.error(`  ${slug} failed:`, (err as Error).message);
     }
   }
+
+  // The map's side panel reads from lib/placeholder-data.ts (generated),
+  // not from the JSON sources we just wrote. Rebuild it so the refresh
+  // actually shows up at runtime — easy to forget otherwise.
+  console.log("\nRebuilding placeholder-data.ts…");
+  execSync("npx tsx scripts/build-placeholder.ts", { stdio: "inherit" });
 }
 
 main().catch((e) => {

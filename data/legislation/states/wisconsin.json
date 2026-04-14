@@ -2,10 +2,11 @@
   "state": "Wisconsin",
   "stateCode": "WI",
   "region": "na",
+  "stance": "concerning",
   "stanceDatacenter": "concerning",
   "stanceAI": "concerning",
-  "lastUpdated": "2026-04-13",
-  "contextBlurb": "Wisconsin has no significant AI or data-center legislation on the books.",
+  "lastUpdated": "2026-04-14",
+  "contextBlurb": "",
   "legislation": [
     {
       "id": "wi-ab722",

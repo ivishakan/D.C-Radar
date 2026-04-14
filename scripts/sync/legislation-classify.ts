@@ -96,11 +96,27 @@ interface OutFile {
   state: string;
   stateCode: string;
   region: "na";
+  /** Overall / lens-agnostic stance. Max severity of DC + AI so a state
+   *  that has clearly acted on AI doesn't read as "No Action" just
+   *  because its bills didn't touch data-center tags. */
+  stance: StanceType;
   stanceDatacenter: StanceType;
   stanceAI: StanceType;
   lastUpdated: string;
   contextBlurb: string;
   legislation: Legislation[];
+}
+
+const STANCE_SEVERITY: Record<StanceType, number> = {
+  restrictive: 4,
+  concerning: 3,
+  review: 2,
+  favorable: 1,
+  none: 0,
+};
+
+function overallStance(dc: StanceType, ai: StanceType): StanceType {
+  return STANCE_SEVERITY[dc] >= STANCE_SEVERITY[ai] ? dc : ai;
 }
 
 const STATE_NAMES: Record<string, string> = {
@@ -585,10 +601,12 @@ function main() {
     const stateFull = state === "US" ? "United States" : STATE_NAMES[state] ?? state;
     const stanceDatacenter = lensStance(legislation, "datacenter");
     const stanceAI = lensStance(legislation, "ai");
+    const stance = overallStance(stanceDatacenter, stanceAI);
     const out: OutFile = {
       state: stateFull,
       stateCode: state,
       region: "na",
+      stance,
       stanceDatacenter,
       stanceAI,
       lastUpdated: new Date().toISOString().slice(0, 10),
