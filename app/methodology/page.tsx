@@ -25,17 +25,6 @@ export default function MethodologyPage() {
         </h1>
 
         <div className="text-base text-ink/80 leading-relaxed space-y-5">
-          <p>
-            If you read something wrong,{" "}
-            <a
-              href="mailto:reksopuro.isabelle@gmail.com"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              please let me know
-            </a>
-            .
-          </p>
-
           <h2 className="text-xl font-semibold text-ink tracking-tight pt-4">
             Where the bills come from
           </h2>
@@ -93,15 +82,7 @@ export default function MethodologyPage() {
           </p>
           <p>
             Some of these calls will be wrong, or will age badly as bills
-            move. If you work in one of these jurisdictions and think the
-            read is off,{" "}
-            <Link
-              href="/contact"
-              className="text-ink underline underline-offset-2 hover:text-muted transition-colors"
-            >
-              please reach out
-            </Link>
-            .
+            move.
           </p>
 
           <h2 className="text-xl font-semibold text-ink tracking-tight pt-4">
