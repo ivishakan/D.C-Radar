@@ -1,0 +1,53 @@
+{
+  "_comment": "Curated RSS / Atom feeds polled by scripts/sync/news-rss.ts. Each feed declares a default `entity` (which entity bucket new items land in) and an optional `topicHint` (skipped if Haiku classifies otherwise). Add / remove freely; the script tolerates failed feeds.",
+  "feeds": [
+    {
+      "url": "https://www.npr.org/rss/rss.php?id=1019",
+      "name": "NPR Technology",
+      "entity": "United States",
+      "topicHint": "ai-policy"
+    },
+    {
+      "url": "https://apnews.com/hub/artificial-intelligence/feed",
+      "name": "AP — Artificial Intelligence",
+      "entity": "United States",
+      "topicHint": "ai-policy"
+    },
+    {
+      "url": "https://www.theverge.com/rss/policy/index.xml",
+      "name": "The Verge — Policy",
+      "entity": "United States",
+      "topicHint": "ai-policy"
+    },
+    {
+      "url": "https://feeds.arstechnica.com/arstechnica/tech-policy",
+      "name": "Ars Technica — Policy",
+      "entity": "United States",
+      "topicHint": "ai-policy"
+    },
+    {
+      "url": "https://mainemorningstar.com/feed/",
+      "name": "Maine Morning Star",
+      "entity": "Maine",
+      "topicHint": "data-centers"
+    },
+    {
+      "url": "https://planetdetroit.org/feed/",
+      "name": "Planet Detroit",
+      "entity": "Michigan",
+      "topicHint": "data-centers"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=%22data+center%22+moratorium&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — Data Center Moratoriums",
+      "entity": "United States",
+      "topicHint": "data-centers"
+    },
+    {
+      "url": "https://news.google.com/rss/search?q=anthropic+OR+%22ai+policy%22&hl=en-US&gl=US&ceid=US:en",
+      "name": "Google News — AI Policy",
+      "entity": "United States",
+      "topicHint": "ai-policy"
+    }
+  ]
+}
