@@ -108,8 +108,8 @@ export default function Hero({ progress, onRegionClick }: Props) {
         <p className="mt-3 text-sm sm:text-base md:text-lg text-muted font-normal tracking-tight max-w-md mx-auto leading-snug">
           The policy landscape for data center development, mapped in real time.
         </p>
-        <p className="mt-2 text-xs text-muted/60 tracking-wide">
-          Built by Vishakan Umapathy
+        <p className="mt-2 text-xs text-muted tracking-wide">
+          Built by <span className="font-medium text-ink">Vishakan Umapathy</span>
         </p>
       </div>
 
