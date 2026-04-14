@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Track Policy",
+  title: "D.C Radar",
   description:
-    "Interactive atlas of AI and data center policy across world, regional, and state governments.",
+    "The policy landscape for data center development, mapped in real time.",
 };
 
 export default function RootLayout({

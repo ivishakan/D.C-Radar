@@ -103,10 +103,14 @@ export default function Hero({ progress, onRegionClick }: Props) {
           />
         </svg>
         <h1 className="text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-[1.1] md:leading-[1.05]">
-          Tracking AI policies
-          <br />
-          in your hometown
+          D.C Radar
         </h1>
+        <p className="mt-3 text-sm sm:text-base md:text-lg text-muted font-normal tracking-tight max-w-md mx-auto leading-snug">
+          The policy landscape for data center development, mapped in real time.
+        </p>
+        <p className="mt-2 text-xs text-muted/60 tracking-wide">
+          Built by Vishakan Umapathy
+        </p>
       </div>
 
       <div

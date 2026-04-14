@@ -215,7 +215,7 @@ export default function Page() {
       {/* Footer */}
       <section className="relative z-10 bg-white border-t border-black/[.06]">
         <div className="max-w-5xl mx-auto px-8 py-10 flex flex-wrap items-center justify-between gap-4 text-xs text-muted">
-          <span>Track Policy</span>
+          <span>D.C Radar</span>
           <div className="flex gap-6">
             <Link href="/about" className="hover:text-ink transition-colors">
               About
