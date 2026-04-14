@@ -27,7 +27,20 @@ const CROSSWALK = join(ROOT, "data/crosswalk/fec-to-bioguide.json");
 const MODEL = "claude-sonnet-4-6";
 const FORCE = process.env.US_POLS_FORCE === "1";
 
-const PROMPT = `Survey the US Congress as of April 2026 and identify the 35–45 senators and representatives most active on AI and data-centre policy. Mix parties, chambers, and seniority — include the loud voices (Josh Hawley, Bernie Sanders, Alexandria Ocasio-Cortez, Ted Cruz, Elizabeth Warren, Ed Markey), the committee leaders, and the quieter workhorses who shaped major bills (Chuck Schumer's AI Roadmap, Maria Cantwell on the COPIED Act, Mark Warner on AI export controls, Richard Blumenthal on No FAKES, Todd Young on the Create AI Act, Anna Eshoo on AI disclosure, Ro Khanna on Silicon Valley, etc.).
+type Batch = { slug: "senate" | "house"; directive: string };
+
+const BATCHES: Batch[] = [
+  {
+    slug: "senate",
+    directive: `Focus on US SENATORS active on AI and data-centre policy. Target 20–25 senators. Loud voices: Josh Hawley, Bernie Sanders, Ted Cruz, Elizabeth Warren, Ed Markey, Richard Blumenthal, Mark Warner. Committee leaders: Chuck Schumer (AI Roadmap), Maria Cantwell (COPIED Act), Todd Young (Create AI Act), Martin Heinrich (AI Caucus), Mike Rounds (AI Working Group), John Thune (Majority Leader). Also include Chris Coons, Amy Klobuchar, Gary Peters, Marsha Blackburn, Mike Lee.`,
+  },
+  {
+    slug: "house",
+    directive: `Focus on US REPRESENTATIVES and House LEADERSHIP active on AI and data-centre policy. Target 15–20 members. Must include: Speaker Mike Johnson, AOC (AI Data Center Moratorium), Jay Obernolte (AI Task Force Chair), Ted Lieu (AI Task Force Co-Chair), Anna Eshoo (AI Caucus), Ro Khanna (Silicon Valley), Zoe Lofgren, Don Beyer, Yvette Clarke, Hakeem Jeffries, Nancy Mace, Ayanna Pressley, Michael McCaul, Darrell Issa.`,
+  },
+];
+
+const BASE_PROMPT = (directive: string) => `${directive}
 
 Return a SINGLE JSON object (no prose, no markdown fences):
 {
@@ -56,11 +69,10 @@ Return a SINGLE JSON object (no prose, no markdown fences):
 }
 
 RULES:
-- Every \`summary\` and \`keyPoints\` entry MUST cite a concrete fact (a named bill, a specific committee hearing, a dated statement, a specific amendment).
-- The \`bills\` array MUST list every bill mentioned in \`summary\` or \`keyPoints\`. Each entry needs the official code (S.123 / H.R.123 / S.RES.123 format), the official title, their role, year, and a one-sentence summary of what the bill does.
-- 3–6 bills per politician — the ones that best document their AI/DC position. Don't pad with bills they barely touched.
-- Use the official congress.gov bill code format with periods: "S.3682" not "SB3682"; "H.R.5764" not "HB5764".
-- If you can't verify a bill's official code, omit the entire bill entry rather than guessing.
+- CRITICAL: The \`bills\` array MUST list 3–6 bills per politician — every bill mentioned in \`summary\` or \`keyPoints\` must appear here. If you mention "the No FAKES Act" in summary, it must show up in bills. Under-citing is worse than skipping a politician entirely.
+- Each bill needs: official \`code\` (S.123 / H.R.123 / S.RES.123 format, with periods — "S.3682" not "SB3682"), full \`title\`, \`role\` (sponsor|cosponsor|vote-yea|vote-nay|champion), \`year\`, and a ONE-sentence \`summary\` of what the bill does.
+- Every \`summary\` and \`keyPoints\` entry MUST cite a concrete fact (a named bill + date, a specific hearing, a dated statement).
+- If you can't verify a bill's official code, omit that bill rather than guessing.
 - Prefer verifiable positions over speculation. If you aren't sure about a person, omit them.
 - bioguideId examples: Van Hollen = V000128, Hawley = H001089, AOC = O000172, Bernie = S000033, Cruz = C001098, Warren = W000817. If you don't know one, omit the field.`;
 
@@ -107,22 +119,30 @@ async function main() {
   }
 
   const anthropic = new Anthropic();
-  console.log("[us-pols] researching US AI-active members (streaming)…");
-  const stream = anthropic.messages.stream({
-    model: MODEL,
-    max_tokens: 32000,
-    tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 15 }],
-    messages: [{ role: "user", content: PROMPT }],
-  });
-  const msg = await stream.finalMessage();
-  if (msg.stop_reason === "max_tokens") {
-    console.warn("[us-pols] hit max_tokens — output may be truncated");
+  const allPols: CrosswalkOverlay["politicians"] = [];
+  for (const batch of BATCHES) {
+    console.log(`[us-pols] researching ${batch.slug} (streaming)…`);
+    const stream = anthropic.messages.stream({
+      model: MODEL,
+      max_tokens: 32000,
+      tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 10 }],
+      messages: [{ role: "user", content: BASE_PROMPT(batch.directive) }],
+    });
+    const msg = await stream.finalMessage();
+    if (msg.stop_reason === "max_tokens") {
+      console.warn(`[us-pols] ${batch.slug} hit max_tokens — output may be truncated`);
+    }
+    const data = parseJsonBlock(extractText(msg)) as {
+      politicians?: CrosswalkOverlay["politicians"];
+    };
+    const batchPols = data.politicians ?? [];
+    console.log(
+      `[us-pols] ${batch.slug}: ${batchPols.length} entries, avg ${(batchPols.reduce((n, p) => n + (p.bills?.length ?? 0), 0) / Math.max(1, batchPols.length)).toFixed(1)} bills each`,
+    );
+    allPols.push(...batchPols);
   }
-  const data = parseJsonBlock(extractText(msg)) as {
-    politicians?: CrosswalkOverlay["politicians"];
-  };
-  const pols = data.politicians ?? [];
-  console.log(`[us-pols] got ${pols.length} entries`);
+  const pols = allPols;
+  console.log(`[us-pols] total ${pols.length} entries`);
 
   // Sanity check: how many bioguide IDs resolve?
   const crosswalk: Record<string, string> = existsSync(CROSSWALK)
