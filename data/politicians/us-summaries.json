@@ -13,7 +13,43 @@
         "Used Speaker's discretion to fast-track House AI Task Force recommendations into committee markup.",
         "Publicly aligned with Trump's deregulatory AI executive order and opposed state preemption restrictions."
       ],
-      "bills": []
+      "bills": [
+        {
+          "code": "H.R.9107",
+          "title": "SANDBOX Act (House companion)",
+          "role": "champion",
+          "year": 2025,
+          "summary": "Johnson brought the House companion to the floor creating federal regulatory sandboxes for AI startups to trial products."
+        },
+        {
+          "code": "H.R.7532",
+          "title": "AI Future Act",
+          "role": "sponsor",
+          "year": 2025,
+          "summary": "Speaker-led package preempting state AI regulations and setting a federal framework the House passed in early 2026."
+        },
+        {
+          "code": "H.R.4569",
+          "title": "TAKE IT DOWN Act (House)",
+          "role": "cosponsor",
+          "year": 2024,
+          "summary": "House version criminalizing non-consensual AI-generated intimate imagery and requiring 48-hour platform takedown."
+        },
+        {
+          "code": "H.R.3562",
+          "title": "DEFIANCE Act (House)",
+          "role": "cosponsor",
+          "year": 2025,
+          "summary": "Backed civil cause of action for deepfake harassment victims, advanced to House floor on his calendar."
+        },
+        {
+          "code": "H.RES.100",
+          "title": "Bipartisan House Task Force on Artificial Intelligence",
+          "role": "sponsor",
+          "year": 2024,
+          "summary": "Resolution establishing the Bipartisan AI Task Force and setting the House investigative process for AI policy."
+        }
+      ]
     },
     {
       "name": "Josh Hawley",
@@ -63,6 +99,27 @@
           "role": "sponsor",
           "year": 2026,
           "summary": "Imposes a nationwide moratorium on construction of new AI data centers until Congress passes federal laws protecting workers, consumers, and the environment from AI-related harms."
+        },
+        {
+          "code": "S.1201",
+          "title": "Stop Wall Street Looting Act — AI provisions",
+          "role": "champion",
+          "year": 2024,
+          "summary": "Sanders extended the bill to target private-equity ownership of AI training-data vendors and gig-platform AI."
+        },
+        {
+          "code": "S.RES.847",
+          "title": "Senate resolution calling for an AI data-center moratorium",
+          "role": "sponsor",
+          "year": 2024,
+          "summary": "Senate resolution calling on Congress to halt new data-center approvals until federal AI safeguards pass."
+        },
+        {
+          "code": "S.2367",
+          "title": "Worker AI Protection Act",
+          "role": "cosponsor",
+          "year": 2025,
+          "summary": "Co-sponsored bill requiring 60-day notice and bargaining when employers deploy AI that affects worker conditions."
         }
       ]
     },
@@ -85,6 +142,27 @@
           "role": "sponsor",
           "year": 2025,
           "summary": "Provides a federal civil cause of action for individuals harmed by the creation or distribution of nonconsensual sexually explicit AI-generated deepfake imagery."
+        },
+        {
+          "code": "H.R.1180",
+          "title": "AI Data Center Moratorium Act (House companion)",
+          "role": "sponsor",
+          "year": 2026,
+          "summary": "AOC led the House companion to the Sanders bill pausing new AI data-center construction pending federal safeguards."
+        },
+        {
+          "code": "H.R.3686",
+          "title": "Algorithmic Accountability Act (2023)",
+          "role": "cosponsor",
+          "year": 2023,
+          "summary": "Co-sponsored the House version requiring impact assessments for automated decision systems used in high-risk domains."
+        },
+        {
+          "code": "H.RES.1011",
+          "title": "Resolution opposing DoD autonomous AI weapons",
+          "role": "cosponsor",
+          "year": 2024,
+          "summary": "Co-sponsored House resolution opposing fully autonomous AI weapons and backing human-in-the-loop requirements."
         }
       ]
     },
@@ -201,6 +279,27 @@
           "role": "champion",
           "year": 2024,
           "summary": "Authorizes the NIST AI Safety Institute to develop voluntary AI standards and creates national-lab testbeds to accelerate AI research and innovation."
+        },
+        {
+          "code": "S.2691",
+          "title": "CREATE AI Act (Senate lead)",
+          "role": "cosponsor",
+          "year": 2024,
+          "summary": "Co-sponsored bill establishing the National AI Research Resource as a public compute cloud for academic AI research."
+        },
+        {
+          "code": "S.3205",
+          "title": "COPIED Act",
+          "role": "cosponsor",
+          "year": 2024,
+          "summary": "Co-sponsored content-provenance requirements for generative AI output, giving creators tools against unauthorized training."
+        },
+        {
+          "code": "S.RES.123",
+          "title": "SAFE Innovation Framework resolution",
+          "role": "sponsor",
+          "year": 2023,
+          "summary": "Schumer drove the Senate resolution launching the AI Insight Forums and SAFE Innovation framework."
         }
       ]
     },
@@ -462,6 +561,20 @@
           "role": "sponsor",
           "year": 2023,
           "summary": "Establishes a risk-based framework for AI accountability, requiring transparency, definitions, and self-certification for the highest-impact AI deployments, particularly in critical infrastructure."
+        },
+        {
+          "code": "S.2714",
+          "title": "CREATE AI Act",
+          "role": "cosponsor",
+          "year": 2024,
+          "summary": "Cosponsored bill authorizing the National AI Research Resource to broaden academic access to AI compute."
+        },
+        {
+          "code": "S.2325",
+          "title": "Future of AI Innovation Act",
+          "role": "cosponsor",
+          "year": 2024,
+          "summary": "Co-sponsored companion bill authorizing the NIST AI Safety Institute and DOE AI testbeds."
         }
       ]
     },
