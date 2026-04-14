@@ -82,8 +82,8 @@ export default function PoliticiansClient({ all }: { all: Legislator[] }) {
   }, [focusedId, filtered, visible]);
 
   return (
-    <div className="grid grid-cols-[240px_minmax(0,1fr)] gap-10">
-      <aside className="sticky top-20 self-start flex flex-col gap-4 rounded-2xl bg-white/90 backdrop-blur-2xl border border-black/[.04] shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.06)] p-5">
+    <div className="flex flex-col gap-6 md:grid md:grid-cols-[240px_minmax(0,1fr)] md:gap-10">
+      <aside className="md:sticky md:top-20 md:self-start flex flex-col gap-4 rounded-2xl bg-white/90 backdrop-blur-2xl border border-black/[.04] shadow-[0_8px_32px_rgba(0,0,0,0.12),0_2px_8px_rgba(0,0,0,0.06)] p-5">
         {billFilter && (
           <div className="rounded-xl bg-stance-concerning/10 p-3 text-[11px] leading-snug">
             <div className="font-medium text-ink">Filtered by bill</div>
