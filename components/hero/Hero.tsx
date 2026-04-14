@@ -81,7 +81,7 @@ export default function Hero({ progress, onRegionClick }: Props) {
       />
 
       <div
-        className="absolute inset-x-0 top-[24vh] md:top-[18vh] z-0 px-6 text-center pointer-events-none"
+        className="absolute inset-x-0 top-[24vh] md:top-[18vh] z-20 px-6 text-center pointer-events-none"
         style={{
           opacity: headlineOpacity,
           transform: `translateY(${headlineY}px)`,
